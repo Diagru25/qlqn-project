@@ -2,8 +2,9 @@ import { lazy } from "react";
 import { adminRoute } from "../../constants/route.constant";
 const Dashboard = lazy(() => import("./index"));
 
-
-export default {
+const route = {
     path: adminRoute.DASHBOARD,
     element: Dashboard,
-};;
+};
+
+export default route

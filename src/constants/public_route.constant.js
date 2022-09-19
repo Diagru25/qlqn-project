@@ -1,5 +1,9 @@
+import homeRoute from "../pages/home/route";
 import loginRoute from "../pages/login/route";
 
-export default [
+const route = [
+    homeRoute,
     loginRoute
-]
+];
+
+export default route;

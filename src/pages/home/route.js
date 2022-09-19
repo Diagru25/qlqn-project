@@ -1,10 +1,10 @@
 import { lazy } from "react";
 import { clientRoute } from "../../constants/route.constant";
-const Login = lazy(() => import("./index"));
+const Home = lazy(() => import("./index"));
 
 const route = {
-    path: clientRoute.LOGIN,
-    element: Login,
+    path: clientRoute.DEFAULT,
+    element: Home,
 };
 
 export default route;

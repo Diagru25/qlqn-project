@@ -1,5 +1,7 @@
 import dashboardRoute from "../pages/dashboard/route";
 
-export default [
+const route = [
     dashboardRoute
-]
+];
+
+export default route;

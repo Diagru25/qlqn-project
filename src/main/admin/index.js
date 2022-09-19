@@ -1,7 +1,5 @@
 import React from "react";
-import { Outlet, Route } from "react-router-dom";
-import { Dashboard } from "../../pages/dashboard";
-import DashboardRoute from '../../pages/dashboard/route';
+import { Outlet } from "react-router-dom";
 
 export const AdminLayout = () => {
     return (

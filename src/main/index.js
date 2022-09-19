@@ -4,18 +4,23 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import { AdminLayout } from "./admin";
 import authRoute from "../constants/auth_route.constant";
 import publicRoute from "../constants/public_route.constant";
+
 export const App = () => {
     return (
         <ErrorBoundary>
             <Routes>
                 {
-                    publicRoute.map(({path, element}) => {
+                    publicRoute.map(({ path, element }) => {
                         const Element = element;
-                        return(
+                        return (
                             <Route
                                 key={path}
                                 path={path}
-                                element={<Element/>}
+                                element={
+                                    <Suspense fallback={null}>
+                                        <Element />
+                                    </Suspense>
+                                }
                             />
                         )
                     })
@@ -30,7 +35,7 @@ export const App = () => {
                                     path={path}
                                     element={
                                         <Suspense fallback={null}>
-                                            <Element/>
+                                            <Element />
                                         </Suspense>
                                     }
                                 />
@@ -46,8 +51,6 @@ export const App = () => {
                         </div>
                     }
                 />
-
-
             </Routes>
         </ErrorBoundary>
     )
