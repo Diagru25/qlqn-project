@@ -1,4 +1,5 @@
 .wrapper {
+<<<<<<< HEAD
     height: 100vh;
     padding: 64px 0;
   }
@@ -18,3 +19,24 @@
     margin: 0 auto;
     max-width: 350px;
   }
+=======
+  height: 100vh;
+  padding: 64px 0;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    font-size: 33px;
+    font-weight: 600;
+}
+.des {
+    max-width: 350px;
+    margin: 2rem auto;
+    text-align: center;
+    color: #00000073;
+}
+.form {
+  margin: 0 auto;
+  max-width: 350px;
+}
+>>>>>>> 86d01dc453f87d667954234c0e6c6353b8343175
