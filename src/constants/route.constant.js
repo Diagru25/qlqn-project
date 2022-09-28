@@ -6,5 +6,5 @@ export const clientRoute = {
 export const adminRoute = {
     DASHBOARD: '/admin/dashboard',
     INFO: '/admin/info-users',
-    ADD_INFO: '/admin/new-user',
+    ADD_MEMBER: '/admin/new-member',
 }
