@@ -32,10 +32,10 @@ const Login = () => {
 
     return <section className="wrapper">
         <div className="header">
-            Quản lý quân nhân
+            Quản lý thông tin quân nhân
         </div>
         <div className="des">
-            Dự án quản lý quân nhân ứng dụng công nghệ blockchain
+            Dự án quản lý thông tin quân nhân ứng dụng công nghệ blockchain
         </div>
         <div className="form">
             <Card>

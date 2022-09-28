@@ -14,7 +14,7 @@ import { adminRoute, clientRoute } from "../../../constants/route.constant";
 
 const { Sider } = Layout;
 
-const Sidebar = ({ collapsed, setCollapsed }) => {
+const Sidebar = ({ collapsed }) => {
   const navigate = useNavigate();
   return (
     <Sider
@@ -42,6 +42,9 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
             key: "Tổng quan",
             icon: <DashboardOutlined />,
             label: "Tổng quan",
+            onClick: () => {
+              navigate(adminRoute.DASHBOARD);
+            },
           },
           {
             key: "Managements",
@@ -65,6 +68,9 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
             key: "4",
             icon: <UserOutlined />,
             label: "Quản lý người dùng",
+            onClick: () => {
+              navigate(adminRoute.APPROVALS);
+            },
           },
         ]}
       />

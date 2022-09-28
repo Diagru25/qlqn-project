@@ -25,7 +25,7 @@ export const AdminLayout = () => {
             minHeight: 280,
           }}
         >
-          <Outlet />;
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

@@ -60,10 +60,10 @@ const AdminHeader = ({ setCollapsed }) => {
         <MenuOutlined className={styles["collapsed-btn"]} />
       </div>
       <Dropdown overlay={menu} arrow={false} className={styles["right-header"]}>
-        <a onClick={(e) => e.preventDefault()}>
+        <a className={styles["member-wrapper"]} onClick={(e) => e.preventDefault()}>
           <Space>
             <img className={styles["avatar"]} src={avatar} alt="Ảnh avatar" />
-            <span className={styles["fullname"]}>Phùng Minh Hiếu</span>
+            <span className={styles["fullname"]}>Nguyễn Văn A</span>
             <DownOutlined className={styles["arrowdown-btn"]} />
           </Space>
         </a>

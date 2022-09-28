@@ -1,0 +1,21 @@
+.action-btn {
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.action-btn.approve {
+    background-color: #dff2fb;
+}
+
+.action-btn.approve:hover {
+    background-color: #00afee;
+}
+
+.action-btn.remove {
+    background-color: #ffdfe1;
+}
+
+.action-btn.remove:hover {
+    background-color: #fb393a;
+}
