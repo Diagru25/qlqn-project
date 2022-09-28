@@ -1,0 +1,24 @@
+:root {
+  --default-bgcolor: #2f1b6c;
+  --hover-bgcolor: #0e042a;
+}
+
+.form-btn {
+  display: block;
+  min-width: 250px;
+  min-height: 50px;
+  padding: 15px;
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 12px;
+  background-color: var(--default-bgcolor);
+  text-align: center;
+  color: white;
+  border: 2px solid var(--default-bgcolor);
+  cursor: pointer;
+}
+
+.form-btn:hover {
+  background-color: var(--hover-bgcolor);
+}

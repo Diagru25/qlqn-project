@@ -1,0 +1,41 @@
+:root {
+  --main-color: #939393;
+}
+
+.left-header {
+    float: left;
+}
+
+.right-header {
+  display: flex;
+  float: right;
+  align-items: center;
+  justify-content: center;
+  margin-right: 50px;
+}
+
+.collapsed-btn {
+  color: var(--main-color);
+  font-size: 20px !important;
+  cursor: pointer !important;
+  margin-left: 20px !important;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.fullname {
+  color: black;
+  font-weight: 600;
+}
+
+.arrowdown-btn {
+  color: black ;
+  font-size: 10px;
+  font-weight: 800;
+}
+

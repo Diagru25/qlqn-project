@@ -1,0 +1,33 @@
+:root {
+  --default-sidebar-width: 65px;
+}
+
+.sider-wrapper {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 0 10px 0 10px;
+}
+
+.ant-menu {
+  border: none;
+}
+
+.ant-menu-item {
+  border-radius: 10px;
+}
+
+.ant-menu-item.ant-menu-item-active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.ant-menu-item-only-child {
+  border-radius: 0;
+}
+
+
+.logo {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+
