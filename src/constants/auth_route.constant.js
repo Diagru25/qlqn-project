@@ -1,11 +1,16 @@
 import approvalRoute from "../pages/approval_page/route";
 import dashboardRoute from "../pages/dashboard/route";
-import infoRoute from "../pages/info_page/route"
+import infoRoute from "../pages/info_page/route";
+import addMemberRoute from "../pages/add_member/route";
 
 const route = [
     dashboardRoute,
     infoRoute,
-    approvalRoute
+
+    approvalRoute,
+
+    addMemberRoute,
+
 ];
 
 export default route;

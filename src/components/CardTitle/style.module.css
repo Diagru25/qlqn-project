@@ -1,0 +1,14 @@
+.be-card-title {
+  margin-bottom: 16px;
+}
+
+.be-card-title__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.be-card-title__subtitle {
+  font-size: 12px;
+  color: #999;
+}

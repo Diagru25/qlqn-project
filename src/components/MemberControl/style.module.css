@@ -1,0 +1,10 @@
+.be-member-info {
+}
+
+.be-member-info .ant-affix .be-member-info__action {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.be-member-info__action {
+  background-color: #fff;
+  padding: 24px;
+}

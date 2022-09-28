@@ -20,7 +20,7 @@ export const AdminLayout = () => {
         <Content
           className="site-layout-background"
           style={{
-            margin: "24px 24px",
+            //margin: "24px 24px",
             padding: 24,
             minHeight: 280,
           }}
