@@ -1,5 +1,4 @@
 import {
-  HomeOutlined,
   DashboardOutlined,
   UserOutlined,
   ControlOutlined,
@@ -7,10 +6,9 @@ import {
 import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import "antd/dist/antd.min.css";
-import "./index.css";
-import logo from "../../../assets/images/icon.png";
-import { adminRoute, clientRoute } from "../../../constants/route.constant";
+import styles from "./style.module.css";
+import logo from "../../assets/images/icon.png";
+import { adminRoute } from "../../constants/route.constant";
 
 const { Sider } = Layout;
 
@@ -18,14 +16,14 @@ const Sidebar = ({ collapsed }) => {
   const navigate = useNavigate();
   return (
     <Sider
-      className="sider-wrapper"
+      className={styles["sider-wrapper"]}
       collapsible
       collapsed={collapsed}
       trigger={null}
       collapsedWidth={65}
       theme="light"
     >
-      <div className="logo">
+      <div className={styles["logo"]}>
         <img src={logo} alt="blockchain_icon" width={40} />
       </div>
       <Menu
@@ -33,11 +31,6 @@ const Sidebar = ({ collapsed }) => {
         theme="light"
         mode="inline"
         items={[
-          {
-            key: "Home",
-            icon: <HomeOutlined />,
-            label: "Home",
-          },
           {
             key: "Tổng quan",
             icon: <DashboardOutlined />,
@@ -54,12 +47,15 @@ const Sidebar = ({ collapsed }) => {
               {
                 label: "Danh sách QN",
                 onClick: () => {
-                  navigate(adminRoute.INFO);
+                  navigate(adminRoute.MEMBERS);
                 },
                 key: "Item 1",
               },
               {
                 label: "Thêm mới QN",
+                onClick: () => {
+                  navigate(adminRoute.ADD_MEMBER);
+                },
                 key: "item 2",
               },
             ],

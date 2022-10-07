@@ -3,7 +3,7 @@ import React from "react";
 import { Layout, Dropdown, Menu, Space } from "antd";
 
 import styles from "./index.module.css";
-import avatar from "../../../assets/images/1239288.png";
+import avatar from "../../assets/images/1239288.png";
 
 const { Header } = Layout;
 
@@ -43,35 +43,6 @@ const AdminHeader = ({ setCollapsed }) => {
         />
     );
 
-<<<<<<< HEAD
-  return (
-    <Header
-      className="site-layout-background"
-      style={{
-        padding: 0,
-      }}
-    >
-      <div
-        className={styles["left-header"]}
-        onClick={() => {
-          setCollapsed();
-        }}
-      >
-        <MenuOutlined className={styles["collapsed-btn"]} />
-      </div>
-      <Dropdown overlay={menu} arrow={false} className={styles["right-header"]}>
-        <a className={styles["member-wrapper"]} onClick={(e) => e.preventDefault()}>
-          <Space>
-            <img className={styles["avatar"]} src={avatar} alt="Ảnh avatar" />
-            <span className={styles["fullname"]}>Nguyễn Văn A</span>
-            <DownOutlined className={styles["arrowdown-btn"]} />
-          </Space>
-        </a>
-      </Dropdown>
-      <div></div>
-    </Header>
-  );
-=======
     return (
         <Header
             className="site-layout-background"
@@ -92,15 +63,15 @@ const AdminHeader = ({ setCollapsed }) => {
                 <a href="#" onClick={(e) => e.preventDefault()}>
                     <Space>
                         <img className={styles["avatar"]} src={avatar} alt="Ảnh avatar" />
-                        <span className={styles["fullname"]}>Phùng Minh Hiếu</span>
+                        <span className={styles["fullname"]}>Nguyễn Văn A</span>
                         <DownOutlined className={styles["arrowdown-btn"]} />
                     </Space>
                 </a>
             </Dropdown>
-            <div></div>
+        
         </Header>
     );
->>>>>>> 7cfe442e3117be14c894c437ebd1bbbc9b9eda1e
+
 };
 
 export default AdminHeader;

@@ -1,16 +1,16 @@
 import React from "react";
-import "./index.css";
+import styles from "./style.module.css";
 import { Button, Card, Checkbox, Form, Input } from "antd";
 import { useFormik } from "formik";
-
+import {validUsername} from "../../util/validate";
 const Login = () => {
 
     const validator = (values) => {
         const errors = {};
+        const usernamePattern = /^[a-zA-Z0-9]{8,50}[a-zA-Z0-9]$/i;
 
-        if (!values.username) {
-            errors.username = 'Trường này không được để trống';
-        }
+        errors.username = validUsername(values.username);
+        
         if (!values.password) {
             errors.password = 'Trường này không được để trống';
         }
@@ -30,14 +30,14 @@ const Login = () => {
         },
     });
 
-    return <section className="wrapper">
-        <div className="header">
+    return <section className={styles["wrapper"]}>
+        <div className={styles["header"]}>
             Quản lý thông tin quân nhân
         </div>
-        <div className="des">
+        <div className={styles["des"]}>
             Dự án quản lý thông tin quân nhân ứng dụng công nghệ blockchain
         </div>
-        <div className="form">
+        <div className={styles["form"]}>
             <Card>
                 <Form autoComplete="off">
                     <Form.Item

@@ -1,7 +1,7 @@
 import { Badge, Space, Table } from "antd";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
-import styles from "./index.module.css";
+import styles from "./style.module.css";
 
 const columns = [
   {

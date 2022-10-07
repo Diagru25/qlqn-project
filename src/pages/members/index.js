@@ -1,7 +1,9 @@
 import { Space, Table, Col, Row, Divider, Button, Tooltip } from "antd";
-import SearchInput from "./components/SearchInput";
+import { useNavigate } from "react-router-dom";
+import { adminRoute } from "../../constants/route.constant";
+import SearchInput from "../../components/SearchInput/SearchInput";
 
-import styles from "./index.module.css";
+import styles from "./style.module.css";
 
 const columns = [
   {
@@ -22,34 +24,32 @@ const columns = [
     title: "Họ và tên",
     dataIndex: "name",
     key: "name",
-    render: (name) => <a>{name}</a>,
+    //render: (name) => <a>{name}</a>,
+    width: 300
   },
   {
     title: "Chức vụ",
     dataIndex: "position",
     key: "position",
-    width: "200px",
   },
   {
     title: "Cấp bậc",
     dataIndex: "rank",
     key: "rank",
-    width: 200,
   },
   {
     title: "Đơn vị",
     dataIndex: "unit",
     key: "unit",
-    width: 350,
+
   },
   {
     title: "Action",
     key: "action",
-    width: 200,
     render: (_, record) => (
-      <Space size="middle">
-        <a>Sửa</a>
-        <a>Xóa</a>
+      <Space>
+        <Button type="link">Sửa</Button>
+        <Button type="link" danger>Xoa</Button>
       </Space>
     ),
   },
@@ -138,7 +138,8 @@ const data = [
   },
 ];
 
-const infoPage = () => {
+const Members = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Row>
@@ -148,7 +149,7 @@ const infoPage = () => {
         <Col span={12}>
           <div className={styles["right-control"]}>
             <Button type="primary" className={styles["export-btn"]}>Xuất file</Button>
-            <Button type="primary">Tạo mới</Button>
+            <Button type="primary" onClick={() => navigate(adminRoute.ADD_MEMBER)}>Tạo mới</Button>
           </div>
         </Col>
       </Row>
@@ -158,4 +159,4 @@ const infoPage = () => {
   );
 };
 
-export default infoPage;
+export default Members;
