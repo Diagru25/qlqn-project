@@ -10,8 +10,9 @@
   cursor: pointer;
   transition: color 0.3s;
 }
-
+/* 
 .site-layout .site-layout-background {
   background: #fff;
-}
+  padding: 0;
+} */
 
