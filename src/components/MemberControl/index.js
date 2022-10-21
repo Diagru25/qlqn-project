@@ -3,6 +3,7 @@ import React from "react";
 import MemberBasic from "./components/MemberBasic";
 import MemberCorporate from "./components/MemberCorporate";
 import MemberCyberWarfare from "./components/MemberCyberWarfare";
+import MemberOthers from "./components/MemberOthers";
 import MemberQualification from "./components/MemberQualification";
 import styles from "./style.module.css";
 
@@ -18,6 +19,7 @@ const MemberControl = ({
                 <MemberCorporate/>
                 <MemberQualification/>
                 <MemberCyberWarfare/>
+                <MemberOthers />
                 <Affix offsetBottom={0}>
                     <div className={styles["be-member-info__action"]}>
                         {renderActions(onSubmit)}

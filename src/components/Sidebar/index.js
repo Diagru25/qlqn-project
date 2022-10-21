@@ -1,5 +1,4 @@
 import {
-  HomeOutlined,
   DashboardOutlined,
   UserOutlined,
   ControlOutlined,
@@ -7,10 +6,10 @@ import {
 import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import "antd/dist/antd.min.css";
-import "./index.css";
-import logo from "../../../assets/images/icon.png";
-import { adminRoute, clientRoute } from "../../../constants/route.constant";
+import styles from "./style.module.css";
+import logo from "../../assets/images/icon.png";
+import { adminRoute } from "../../constants/route.constant";
+import { useDispatch } from "react-redux";
 
 const { Sider } = Layout;
 
@@ -18,32 +17,27 @@ const Sidebar = ({ collapsed }) => {
   const navigate = useNavigate();
   return (
     <Sider
-      className="sider-wrapper"
+      className={styles["sider-wrapper"]}
       collapsible
       collapsed={collapsed}
       trigger={null}
       collapsedWidth={65}
       theme="light"
     >
-      <div className="logo">
+      <div className={styles["logo"]}>
         <img src={logo} alt="blockchain_icon" width={40} />
       </div>
       <Menu
-        className="items"
+        className={styles["items"]}
         theme="light"
         mode="inline"
         items={[
-          {
-            key: "Home",
-            icon: <HomeOutlined />,
-            label: "Home",
-          },
           {
             key: "Tổng quan",
             icon: <DashboardOutlined />,
             label: "Tổng quan",
             onClick: () => {
-              navigate(adminRoute.DASHBOARD);
+              navigate(adminRoute.DASHBOARD) ;
             },
           },
           {
@@ -54,12 +48,17 @@ const Sidebar = ({ collapsed }) => {
               {
                 label: "Danh sách QN",
                 onClick: () => {
-                  navigate(adminRoute.INFO);
+                  
+                  navigate(adminRoute.MEMBERS);
                 },
                 key: "Item 1",
               },
               {
                 label: "Thêm mới QN",
+                onClick: () => {
+                  
+                  navigate(adminRoute.ADD_MEMBER);
+                },
                 key: "item 2",
               },
             ],
@@ -68,9 +67,31 @@ const Sidebar = ({ collapsed }) => {
             key: "4",
             icon: <UserOutlined />,
             label: "Quản lý người dùng",
-            onClick: () => {
-              navigate(adminRoute.APPROVALS);
-            },
+            children: [
+              {
+                label: "Yêu cầu QN",
+                onClick: () => {
+                  
+                  navigate(adminRoute.APPROVALS);
+                },
+                key: "approvals"
+              },
+              {
+                label: "Nhóm quyền QN",
+                onClick: () => {
+                  navigate(adminRoute.ROLES);
+                },
+                key: "permissionGroups"
+              },
+              {
+                label: "Phân quyền",
+                onClick: () => {
+                 
+                  navigate(adminRoute.PERMISSIONS);
+                },
+                key: "Permissions"
+              }
+            ]
           },
         ]}
       />

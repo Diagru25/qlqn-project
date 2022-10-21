@@ -1,11 +1,15 @@
 export const clientRoute = {
-    DEFAULT: '/',
-    LOGIN: '/login'
-}
+  DEFAULT: "/",
+  LOGIN: "/login",
+};
 
 export const adminRoute = {
-    DASHBOARD: '/admin/dashboard',
-    INFO: '/admin/info-users',
-    ADD_INFO: '/admin/new-user',
-    APPROVALS: '/admin/approvals',
-}
+  DASHBOARD: "/admin/dashboard",
+  MEMBERS: "/admin/members",
+  APPROVALS: "/admin/approvals",
+  ADD_MEMBER: "/admin/new-member",
+  ROLES: "/admin/roles",
+  PERMISSIONS: "/admin/permissions"
+};
+
+

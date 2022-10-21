@@ -1,12 +1,17 @@
-import approvalRoute from "../pages/approval_page/route";
+import requestRoute from "../pages/requests/route";
 import dashboardRoute from "../pages/dashboard/route";
-import infoRoute from "../pages/info_page/route";
-import addMemberRoute from "../pages/add_member/route";
+import memberRoute from "../pages/members/route";
+import addMemberRoute from "../pages/add_member/route"
+import permissionRoute from "../pages/permissions/route"
+import roleRoute from "../pages/roles/route"
 
 const route = [
     dashboardRoute,
-    infoRoute,
-    approvalRoute
+    memberRoute,
+    requestRoute,
+    addMemberRoute,
+    roleRoute,
+    permissionRoute
 ];
 
 export default route;

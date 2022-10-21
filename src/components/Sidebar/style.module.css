@@ -7,8 +7,10 @@
   padding: 0 10px 0 10px;
 }
 
-.ant-menu {
-  border: none;
+.items {
+  border-right: 0px !important;
+  outline: none;
+  
 }
 
 .ant-menu-item {
@@ -22,7 +24,6 @@
 .ant-menu-item-only-child {
   border-radius: 0;
 }
-
 
 .logo {
   text-align: center;

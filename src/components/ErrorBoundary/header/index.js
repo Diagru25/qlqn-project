@@ -43,33 +43,34 @@ const AdminHeader = ({ setCollapsed }) => {
         />
     );
 
-  return (
-    <Header
-      className="site-layout-background"
-      style={{
-        padding: 0,
-      }}
-    >
-      <div
-        className={styles["left-header"]}
-        onClick={() => {
-          setCollapsed();
-        }}
-      >
-        <MenuOutlined className={styles["collapsed-btn"]} />
-      </div>
-      <Dropdown overlay={menu} arrow={false} className={styles["right-header"]}>
-        <a className={styles["member-wrapper"]} onClick={(e) => e.preventDefault()}>
-          <Space>
-            <img className={styles["avatar"]} src={avatar} alt="Ảnh avatar" />
-            <span className={styles["fullname"]}>Nguyễn Văn A</span>
-            <DownOutlined className={styles["arrowdown-btn"]} />
-          </Space>
-        </a>
-      </Dropdown>
-      <div></div>
-    </Header>
-  );
+    return (
+        <Header
+            className="site-layout-background"
+            style={{
+                padding: 0,
+                backgroundColor: "#fff"
+            }}
+        >
+            <div
+                className={styles["left-header"]}
+                onClick={() => {
+                    setCollapsed();
+                }}
+            >
+                <MenuOutlined className={styles["collapsed-btn"]} />
+            </div>
+            <Dropdown overlay={menu} arrow={false} className={styles["right-header"]}>
+                <a href="#" onClick={(e) => e.preventDefault()}>
+                    <Space>
+                        <img className={styles["avatar"]} src={avatar} alt="Ảnh avatar" />
+                        <span className={styles["fullname"]}>Phùng Minh Hiếu</span>
+                        <DownOutlined className={styles["arrowdown-btn"]} />
+                    </Space>
+                </a>
+            </Dropdown>
+            <div></div>
+        </Header>
+    );
 };
 
 export default AdminHeader;

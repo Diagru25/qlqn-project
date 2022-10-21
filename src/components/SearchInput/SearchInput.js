@@ -1,6 +1,6 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import styles from "./SearchInput.module.css";
+import styles from "./style.module.css";
 
 const SearchInput = () => {
     const [enteredSearch, setEnteredSearch] = useState("");
