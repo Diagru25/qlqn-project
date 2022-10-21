@@ -44,7 +44,7 @@ const columns = [
 
   },
   {
-    title: "Action",
+    title: "Hành động",
     key: "action",
     render: (_, record) => (
       <Space>

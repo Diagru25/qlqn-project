@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./style.module.css";
 import logo from "../../assets/images/icon.png";
 import { adminRoute } from "../../constants/route.constant";
+import { useDispatch } from "react-redux";
 
 const { Sider } = Layout;
 
@@ -27,7 +28,7 @@ const Sidebar = ({ collapsed }) => {
         <img src={logo} alt="blockchain_icon" width={40} />
       </div>
       <Menu
-        className="items"
+        className={styles["items"]}
         theme="light"
         mode="inline"
         items={[
@@ -36,7 +37,7 @@ const Sidebar = ({ collapsed }) => {
             icon: <DashboardOutlined />,
             label: "Tổng quan",
             onClick: () => {
-              navigate(adminRoute.DASHBOARD);
+              navigate(adminRoute.DASHBOARD) ;
             },
           },
           {
@@ -47,6 +48,7 @@ const Sidebar = ({ collapsed }) => {
               {
                 label: "Danh sách QN",
                 onClick: () => {
+                  
                   navigate(adminRoute.MEMBERS);
                 },
                 key: "Item 1",
@@ -54,6 +56,7 @@ const Sidebar = ({ collapsed }) => {
               {
                 label: "Thêm mới QN",
                 onClick: () => {
+                  
                   navigate(adminRoute.ADD_MEMBER);
                 },
                 key: "item 2",
@@ -64,9 +67,31 @@ const Sidebar = ({ collapsed }) => {
             key: "4",
             icon: <UserOutlined />,
             label: "Quản lý người dùng",
-            onClick: () => {
-              navigate(adminRoute.APPROVALS);
-            },
+            children: [
+              {
+                label: "Yêu cầu QN",
+                onClick: () => {
+                  
+                  navigate(adminRoute.APPROVALS);
+                },
+                key: "approvals"
+              },
+              {
+                label: "Nhóm quyền QN",
+                onClick: () => {
+                  navigate(adminRoute.ROLES);
+                },
+                key: "permissionGroups"
+              },
+              {
+                label: "Phân quyền",
+                onClick: () => {
+                 
+                  navigate(adminRoute.PERMISSIONS);
+                },
+                key: "Permissions"
+              }
+            ]
           },
         ]}
       />

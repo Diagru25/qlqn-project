@@ -1,35 +1,49 @@
-const prefix = 'AUTH_';
+const prefix = "AUTH_";
 
 const types = {
-    LOGIN: prefix + 'LOGIN',
-    LOGOUT: prefix + 'LOGOUT',
-    UPDATE_STATE: prefix + 'UPDATE_STATE'
+  CHECK_SESSION: prefix + "CHECK_SESSION",
+  LOGIN: prefix + "LOGIN",
+  LOGOUT: prefix + "LOGOUT",
+  UPDATE_STATE: prefix + "UPDATE_STATE",
 };
 
 const actions = {
-    login: () => {
-        return {
-            type: types.LOGIN,
-            payload: {}
-        }
-    },
+  checkSession: () => {
+    
+    return {
+      type: types.CHECK_SESSION,
+      payload: {}
+    };
+  },
 
-    logout: () => {
-        return {
-            type: types.LOGOUT,
-            payload: {}
-        }
-    },
-    updateState: (state = {}) => {
-        return {
-            type: types.UPDATE_STATE,
-            payload: {state}
-        }
-    }
+  login: (username, password) => {
+    
+    return {
+      type: types.LOGIN,
+      payload: {
+        username,
+        password,
+      },
+    };
+  },
+
+  logout: () => {
+    return {
+      type: types.LOGOUT,
+      payload: {},
+    };
+  },
+  updateState: (state = {}) => {
+    return {
+      type: types.UPDATE_STATE,
+      payload: { state },
+    };
+  },
 };
 
 const authActions = {
-    types, actions
+  types,
+  actions,
 };
 
 export default authActions;

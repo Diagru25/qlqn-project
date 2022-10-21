@@ -1,5 +1,5 @@
 import { Badge, Space, Table } from "antd";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseOutlined, EditOutlined } from "@ant-design/icons";
 
 import styles from "./style.module.css";
 
@@ -34,6 +34,9 @@ const columns = [
     render: (_, record) => (
       <Space size="middle">
         <CheckOutlined
+          className={[styles["action-btn"], styles["approve"]].join(" ")}
+        />
+        <EditOutlined
           className={[styles["action-btn"], styles["approve"]].join(" ")}
         />
         <CloseOutlined
@@ -75,7 +78,7 @@ const data = [
     user: "Phùng Văn A",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
-      status: <Badge status="warning" text="Chờ xử lý" />,
+    status: <Badge status="warning" text="Chờ xử lý" />,
   },
   {
     key: "5",
