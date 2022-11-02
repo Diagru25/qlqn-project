@@ -4,8 +4,6 @@ import { Table, Button, Space, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { stringHandler } from "../../helper/StringHandler";
 
-import styles from "./style.module.css";
-
 const data = [
   {
     key: "1",

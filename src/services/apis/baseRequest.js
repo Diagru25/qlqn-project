@@ -1,6 +1,8 @@
 import axios from "axios";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/auth.constant";
-import { readLocalStorage, writeLocalStorage } from "../../helper/localStorage";
+import { Navigate } from "react-router-dom";
+import { ACCESS_TOKEN } from "../../constants/auth.constant";
+import { clientRoute } from "../../constants/route.constant";
+import { clearLocalStorage, readLocalStorage } from "../../helper/localStorage";
 
 let isRefreshing = false;
 let failedQueue = [];
@@ -31,6 +33,7 @@ instance.defaults.baseURL = process.env.REACT_APP_BASE_URL || "";
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
+
     return config;
   },
   function (error) {
@@ -44,60 +47,67 @@ instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+    console.log("Kiểm tra session thành công!");
     return response;
   },
-  /*function (error) {
+  function (error) {
     let originalRequest = error.config;
+    console.log(originalRequest);
     if (error.response.status === 401) {
-      if (isRefreshing) {
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        })
-          .then((token) => {
-            originalRequest.headers["Authorization"] = "Bearer " + token;
-            return instance(originalRequest);
-          })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
-      }
-
-      isRefreshing = true;
-
-      const refreshToken = readLocalStorage(REFRESH_TOKEN);
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            "/refresh-token",
-            {
-              refreshToken,
-            },
-            {
-              baseURL: process.env.REACT_APP_BASE_URL || "",
-            }
-          )
-          .then((res) => {
-            // TODO: khi nào có api refresh token thì chỉnh sửa lại
-            const accessToken = res.data.token;
-            writeLocalStorage(ACCESS_TOKEN, accessToken);
-
-            originalRequest.headers["Authorization"] = "Bearer " + accessToken;
-            processQueue(null, accessToken);
-            resolve(instance(originalRequest));
-          })
-          .catch((err) => {
-            processQueue(err, null);
-            reject(err);
-          })
-          .finally(() => {
-            isRefreshing = false;
-          });
-      });
+      return <Navigate to={clientRoute.LOGIN} />;
     }
+    if (error.response.status === 500) {
+      clearLocalStorage(ACCESS_TOKEN);
+    }
+    // if (isRefreshing) {
+    //   return new Promise((resolve, reject) => {
+    //     failedQueue.push({ resolve, reject });
+    //   })
+    //     .then((token) => {
+    //       originalRequest.headers["Authorization"] = "Bearer " + token;
+    //       return instance(originalRequest);
+    //     })
+    //     .catch((err) => {
+    //       return Promise.reject(err);
+    //     });
+    // }
+
+    // isRefreshing = true;
+
+    // const refreshToken = readLocalStorage(REFRESH_TOKEN);
+    //   return new Promise((resolve, reject) => {
+    //     axios
+    //       .post(
+    //         "/refresh-token",
+    //         {
+    //           refreshToken,
+    //         },
+    //         {
+    //           baseURL: process.env.REACT_APP_BASE_URL || "",
+    //         }
+    //       )
+    //       .then((res) => {
+    //         // TODO: khi nào có api refresh token thì chỉnh sửa lại
+    //         const accessToken = res.data.token;
+    //         writeLocalStorage(ACCESS_TOKEN, accessToken);
+
+    //         originalRequest.headers["Authorization"] = "Bearer " + accessToken;
+    //         processQueue(null, accessToken);
+    //         resolve(instance(originalRequest));
+    //       })
+    //       .catch((err) => {
+    //         processQueue(err, null);
+    //         reject(err);
+    //       })
+    //       .finally(() => {
+    //         isRefreshing = false;
+    //       });
+    //   });
+    // }
 
     return Promise.reject(error.response);
-  } */
-); 
+  }
+);
 
 const setRequestParams = (url, params) => {
   if (typeof params === "object" && params !== null) {
@@ -141,6 +151,7 @@ export const request = ({
         resolve(response.data);
       })
       .catch((err) => {
+        console.log("err request");
         reject(err);
       });
   });
