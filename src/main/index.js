@@ -4,6 +4,7 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import { AdminLayout } from "./admin";
 import authRoute from "../constants/auth_route.constant";
 import publicRoute from "../constants/public_route.constant";
+import NotFoundLayout from "../pages/404";
 
 export const App = () => {
     return (
@@ -45,11 +46,7 @@ export const App = () => {
                 </Route>
                 <Route
                     path="*"
-                    element={
-                        <div>
-                            404 NOT FOUND
-                        </div>
-                    }
+                    element={<NotFoundLayout />}
                 />
             </Routes>
         </ErrorBoundary>

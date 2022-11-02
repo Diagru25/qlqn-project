@@ -2,16 +2,16 @@ import { fork, all, takeEvery, put } from "redux-saga/effects";
 import { ACCESS_TOKEN } from "../../constants/auth.constant";
 import {
   clearLocalStorage,
-  readLocalStorage,
   writeLocalStorage,
 } from "../../helper/localStorage";
+import { showNotification } from "../../helper/showNotification";
 import authApi from "../../services/apis/authApi";
 import authActions from "./action";
 
 function* checkSesion_saga() {
   try {
     const res = yield authApi.checkSession();
-
+    console.log(res.message);
     if (res.statusCode !== 200) {
       yield put(
         authActions.actions.updateState({
@@ -29,6 +29,7 @@ function* checkSesion_saga() {
         sessionKey: null,
       })
     );
+    showNotification("error", "Lỗi xác thực người dùng!");
   }
 }
 
@@ -51,6 +52,7 @@ function* login_saga(action) {
           error: null,
         })
       );
+      showNotification("success", "Đăng nhập thành công")
       console.log("Đăng nhập thành công");
     }
   } catch (error) {
@@ -62,6 +64,7 @@ function* login_saga(action) {
         error: "Đăng nhập không thành công",
       })
     );
+    showNotification("error", "Đăng nhập không thành công", "Mời bạn nhập lại thông tin")
     //log('[AUTH SAGA][login_saga]', error);
   }
 }
@@ -79,6 +82,7 @@ function* logout_saga(action) {
         sessionKey: null,
       })
     );
+    showNotification("success", "Đăng xuất người dùng thành công");
   } catch (error) {
     console.log(error);
     //log('[AUTH SAGA][login_saga]', error);

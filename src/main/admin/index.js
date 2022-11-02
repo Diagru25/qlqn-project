@@ -13,10 +13,10 @@ const { Content } = Layout;
 
 export const AdminLayout = () => {
   const dispatch = useDispatch();
-
+  console.log("check session admin layout!");
   useEffect(() => {
     dispatch(authActions.actions.checkSession());
-  }, []);
+  }, [dispatch]);
 
   const { isLoggedIn } = useSelector((state) => state.authReducer);
 

@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 import styles from "./style.module.css";
 import logo from "../../assets/images/icon.png";
 import { adminRoute } from "../../constants/route.constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import authActions from "../../redux/auth/action";
 
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <Sider
       className={styles["sider-wrapper"]}
@@ -31,6 +33,9 @@ const Sidebar = ({ collapsed }) => {
         className={styles["items"]}
         theme="light"
         mode="inline"
+        onSelect={() => {
+          dispatch(authActions.actions.checkSession());
+        }}
         items={[
           {
             key: "Tổng quan",
@@ -51,7 +56,7 @@ const Sidebar = ({ collapsed }) => {
                   
                   navigate(adminRoute.MEMBERS);
                 },
-                key: "Item 1",
+                key: "list-user",
               },
               {
                 label: "Thêm mới QN",
@@ -59,7 +64,7 @@ const Sidebar = ({ collapsed }) => {
                   
                   navigate(adminRoute.ADD_MEMBER);
                 },
-                key: "item 2",
+                key: "new-user",
               },
             ],
           },
@@ -86,10 +91,9 @@ const Sidebar = ({ collapsed }) => {
               {
                 label: "Phân quyền",
                 onClick: () => {
-                 
                   navigate(adminRoute.PERMISSIONS);
                 },
-                key: "Permissions"
+                key: "permissions"
               }
             ]
           },
