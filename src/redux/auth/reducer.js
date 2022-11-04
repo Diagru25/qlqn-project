@@ -4,7 +4,7 @@ import authActions from "./action";
 
 const _getSessionKey = () => {
   const sessionKey = readLocalStorage(ACCESS_TOKEN);
-  console.log(sessionKey);
+  //console.log(sessionKey);
   return sessionKey ? sessionKey : null;
 };
 
@@ -21,7 +21,6 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case authActions.types.CHECK_SESSION:
-      console.log("Check session")
       return state;
 
     case authActions.types.LOGIN:

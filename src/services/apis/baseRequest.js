@@ -47,7 +47,7 @@ instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    console.log("Kiểm tra session thành công!");
+    //console.log("Kiểm tra session thành công!");
     return response;
   },
   function (error) {

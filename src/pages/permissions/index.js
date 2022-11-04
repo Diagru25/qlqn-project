@@ -1,6 +1,6 @@
 import { Row } from "antd";
 import UserPermissions from "./components/UserPermissions";
-import UserRoles from "./components/UserRoles";
+import Module from "./components/Module";
 
 
 import styles from "./style.module.css";
@@ -8,7 +8,7 @@ import styles from "./style.module.css";
 const PermissionsManagement = () => {
   return (
     <Row className={styles["user-controls"]}>
-      <UserRoles />
+      <Module />
       <UserPermissions />
     </Row>
   );

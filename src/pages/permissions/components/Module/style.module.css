@@ -1,0 +1,23 @@
+.module_list {
+    padding: 10px 20px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.list_item {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+}
+
+.list_item:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+    color: #1890ff;
+}
+
+.list_item_active {
+    background-color: #e6f7ff;
+    border-right: 2px solid #1890ff;
+    color: #1890ff;
+}
+

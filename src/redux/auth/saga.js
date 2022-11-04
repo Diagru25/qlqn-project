@@ -11,7 +11,6 @@ import authActions from "./action";
 function* checkSesion_saga() {
   try {
     const res = yield authApi.checkSession();
-    console.log(res.message);
     if (res.statusCode !== 200) {
       yield put(
         authActions.actions.updateState({

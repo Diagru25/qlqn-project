@@ -1,58 +1,68 @@
 import { Col, Table, Checkbox } from "antd";
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useActions from "../../../../redux/useActions";
 
 import styles from "./style.module.css";
 
 const UserPermissions = () => {
-  const onChange = (e) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
+    const dispatch = useDispatch();
+    const { permissionActions } = useActions();
 
-  const columns = [
-    {
-      title: "Xem thông tin",
-      dataIndex: "read",
-      key: "read",
-      width: "20%"
-    },
-    {
-      title: "Thêm mới",
-      dataIndex: "add",
-      key: "add",
-      width: "20%"
-    },
-    {
-      title: "Sửa đổi",
-      dataIndex: "modify",
-      key: "modify",
-      width: "20%"
-    },
-    {
-      title: "Xóa bản ghi",
-      dataIndex: "delete",
-      key: "delete",
-      width: "20%"
-    },
-    {
-      title: "Phê duyệt",
-      dataIndex: "approve",
-      key: "approve",
-    },
-  ];
+    const currentModule = useSelector(state => state.permissionReducer.currentModule);
+    const permissionList = useSelector(state => state.permissionReducer.permissionList);
 
-  const datasource = [
-    {
-      key: "1",
-      read: <Checkbox onChange={onChange} />,
-      add: <Checkbox onChange={onChange} />,
-      modify: <Checkbox onChange={onChange} />,
-      delete: <Checkbox onChange={onChange} />,
-      approve: <Checkbox onChange={onChange} />
-    }
-  ]
+    useEffect(() => {
+        if (currentModule.Id) {
+            dispatch(permissionActions.actions.getPermissionList(currentModule.Id))
+        }
+    }, [currentModule.Id, dispatch, permissionActions])
 
-  return <Col className={styles["user-permissions__table"]} flex="auto">
-    <Table dataSource={datasource} columns={columns} pagination={false} />
-  </Col>;
+    const handleCheckboxChange = (e, recordUpdate) => {
+        //const checkValue = e.target.checked;
+        dispatch(permissionActions.actions.updatePermission(currentModule.Id, recordUpdate));
+    };
+
+    const columns = [
+        {
+            title: "Chức vụ",
+            dataIndex: "Chucvu",
+            key: "Chucvu",
+            render: (_, record) => record.Chucvu.Ten
+        },
+        {
+            title: "Xem bản ghi",
+            dataIndex: "AllowView",
+            key: "AllowView",
+            width: "20%",
+            render: (value, record) => <Checkbox checked={value} onClick={(e) => handleCheckboxChange(e, { ...record, AllowView: e.target.checked })} />
+        },
+        {
+            title: "Sửa đổi",
+            dataIndex: "AllowEdit",
+            key: "AllowEdit",
+            width: "20%",
+            render: (value) => <Checkbox checked={value} />
+        },
+        {
+            title: "Xóa bản ghi",
+            dataIndex: "AllowDelete",
+            key: "AllowDelete",
+            width: "20%",
+            render: (value) => <Checkbox checked={value} />
+        },
+        {
+            title: "Phê duyệt",
+            dataIndex: "AllowDuyet",
+            key: "AllowDuyet",
+            width: "20%",
+            render: (value) => <Checkbox checked={value} />
+        },
+    ];
+
+    return <Col className={styles["user-permissions__table"]} flex="auto">
+        <Table dataSource={permissionList.items.map((item, index) => ({ ...item, key: index }))} columns={columns} pagination={false} />
+    </Col>;
 };
 
 export default UserPermissions;

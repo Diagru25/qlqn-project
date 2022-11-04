@@ -5,7 +5,6 @@ import { MenuOutlined, DownOutlined } from "@ant-design/icons";
 import { Layout, Dropdown, Menu, Space } from "antd";
 
 import styles from "./index.module.css";
-import authReducer from "../../redux/auth/reducer";
 import avatar from "../../assets/images/1239288.png";
 import authActions from "../../redux/auth/action";
 import { clientRoute } from "../../constants/route.constant";
@@ -21,7 +20,6 @@ const userActions = {
 
 const AdminHeader = ({ setCollapsed }) => {
   const { isLoggedIn } = useSelector((state) => state.authReducer);
-  console.log(isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClick = ({ key }) => {
