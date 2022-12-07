@@ -7,14 +7,14 @@ import { Layout, Dropdown, Menu, Space } from "antd";
 import styles from "./index.module.css";
 import avatar from "../../assets/images/1239288.png";
 import authActions from "../../redux/auth/action";
-import { clientRoute } from "../../constants/route.constant";
+import { adminRoute, clientRoute } from "../../constants/route.constant";
 import { replace } from "formik";
 
 const { Header } = Layout;
 
 const userActions = {
   USER_INFO: "user-info",
-  CHANGE_PASSWD: "new-passwd",
+  USER_LOG: "user-log",
   LOGOUT: "logout",
 };
 
@@ -25,17 +25,16 @@ const AdminHeader = ({ setCollapsed }) => {
   const onClick = ({ key }) => {
     switch (key) {
       case userActions.USER_INFO:
-        alert("1");
+        navigate(adminRoute.USER_PROFILE);
         break;
-      case userActions.CHANGE_PASSWD:
-        alert("2");
+      case userActions.USER_LOG:
+        navigate(adminRoute.USER_LOG);
         break;
       case userActions.LOGOUT:
         dispatch(authActions.actions.logout());
         console.log(isLoggedIn);
         if (!isLoggedIn) {
-            
-            navigate(clientRoute.LOGIN, replace);
+          navigate(clientRoute.LOGIN, replace);
         }
         break;
       default:
@@ -51,8 +50,8 @@ const AdminHeader = ({ setCollapsed }) => {
           key: userActions.USER_INFO,
         },
         {
-          label: "Đổi mật khẩu",
-          key: userActions.CHANGE_PASSWD,
+          label: "Nhật ký người dùng",
+          key: userActions.USER_LOG,
         },
         {
           label: "Đăng xuất",
@@ -64,10 +63,10 @@ const AdminHeader = ({ setCollapsed }) => {
 
   return (
     <Header
-      className="site-layout-background"
       style={{
         padding: 0,
         backgroundColor: "#fff",
+        borderBottom: "2px solid #f0f0f0"
       }}
     >
       <div

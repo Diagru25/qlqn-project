@@ -1,0 +1,13 @@
+:global(.ant-popover-arrow) {
+    display: none !important;
+}
+
+.filter-btn_popup {
+    width: 300px;
+}
+
+.filter-btn {
+    width: 70px;
+    height: 45px;
+    border-radius: 4px;
+}

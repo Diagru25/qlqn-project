@@ -52,12 +52,10 @@ instance.interceptors.response.use(
   },
   function (error) {
     let originalRequest = error.config;
-    console.log(originalRequest);
     if (error.response.status === 401) {
       return <Navigate to={clientRoute.LOGIN} />;
     }
     if (error.response.status === 500) {
-      clearLocalStorage(ACCESS_TOKEN);
     }
     // if (isRefreshing) {
     //   return new Promise((resolve, reject) => {
@@ -114,8 +112,10 @@ const setRequestParams = (url, params) => {
     const keyParams = Object.keys(params);
     const arrayParams = [];
     for (const key of keyParams) {
-      const param = key + "=" + params[key];
-      arrayParams.push(param);
+      if (params[key]) {
+        const param = key + "=" + params[key];
+        arrayParams.push(param);
+      }
     }
     if (Array.isArray(arrayParams) && arrayParams.length) {
       url = url + "?" + arrayParams.join("&");
@@ -151,7 +151,6 @@ export const request = ({
         resolve(response.data);
       })
       .catch((err) => {
-        console.log("err request");
         reject(err);
       });
   });

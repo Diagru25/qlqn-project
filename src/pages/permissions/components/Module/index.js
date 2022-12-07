@@ -22,7 +22,7 @@ const Module = () => {
         }));
     }, [dispatch, permissionActions]);
 
-    const isACtivated = useCallback((firstId, secondId) => {
+    const isActivated = useCallback((firstId, secondId) => {
         return firstId === secondId ? true : false;
     }, []);
 
@@ -32,7 +32,7 @@ const Module = () => {
             {
                 moduleList.items.map((item, index) => <div
                     key={index}
-                    className={` ${styles["list_item"]} ${isACtivated(item.Id, currentModule.Id) && styles["list_item_active"]}`}
+                    className={` ${styles["list_item"]} ${isActivated(item.Id, currentModule.Id) && styles["list_item_active"]}`}
                     onClick={() => handleSelectModule(item)}
                 >
                     {item.name}</div>)

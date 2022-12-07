@@ -116,10 +116,13 @@ const RolesManagement = () => {
         }}
       />
     ),
-    onFilter: (value, record) =>{
-        const handleRecord = stringHandler.searchHandler(record[dataIndex].toString().toLowerCase());
-        const enteredValue = stringHandler.searchHandler(value.toLowerCase())
-        return handleRecord.includes(enteredValue);
+    onFilter: (value, record) => {
+      console.log("Data Index", record[dataIndex]);
+      const handleRecord = stringHandler.searchHandler(
+        record[dataIndex].toString().toLowerCase()
+      );
+      const enteredValue = stringHandler.searchHandler(value.toLowerCase());
+      return handleRecord.includes(enteredValue);
     },
     onFilterDropdownOpenChange: (visible) => {
       if (visible) {
@@ -158,6 +161,7 @@ const RolesManagement = () => {
       title: "Nhóm quyền",
       dataIndex: "permissionGroup",
       key: "permissionGroup",
+      ...getColumnSearchProps("permissionGroup"),
     },
   ];
 

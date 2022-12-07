@@ -4,11 +4,14 @@ import { RollbackOutlined } from "@ant-design/icons";
 import styles from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 import { clientRoute } from "../../constants/route.constant";
+import { clearLocalStorage } from "../../helper/localStorage";
+import { ACCESS_TOKEN } from "../../constants/auth.constant";
 
 const NotFoundLayout = () => {
   const navigate = useNavigate();
 
   const backLoginHandler = () => {
+    clearLocalStorage(ACCESS_TOKEN);
     navigate(clientRoute.LOGIN);
   }
 

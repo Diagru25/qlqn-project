@@ -1,14 +1,14 @@
 :root {
-    --default-bgcolor: #f0f2f5;
+    --default-bgcolor: white;
     --default-height-input: 45px;
-    --button-bgcolor: #c5c7c9;
+    --button-bgcolor: #f0f2f5;
 }
 
-.search-box {
+.search-container {
     position: relative;
     display: flex;
     align-items: center;
-    width: 40%;
+    width: 55%;
     height: 50px;
 }
 
@@ -16,18 +16,19 @@
     width: 100%;
     height: var(--default-height-input);
     background-color: var(--default-bgcolor);
-    border-radius: 50px;
+    border-radius: 4px;
     border: none;
     outline: none;
-    padding-left: 20px;
+    padding-left: 50px;
 }
 
-.search-btn {
+.search-icon {
     position: absolute;
-    right: 5px;
+    left: 5px;
     width: 35px;
     height: 35px;
-    background-color: var(--button-bgcolor);
+    color: black;
+    background-color: var(--default-bgcolor);
     border-radius: 50%;
     border: none;
     cursor: pointer;

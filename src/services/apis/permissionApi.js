@@ -7,7 +7,7 @@ const permissionApi = {
             method: "GET",
             params: {
                 page_size: page_size,
-                "page-index": page_index
+                page_index: page_index
             },
             isAuthRequest: true,
         });

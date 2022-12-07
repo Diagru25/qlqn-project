@@ -1,160 +1,219 @@
-import { Space, Table, Col, Row, Divider, Button, Tooltip } from "antd";
+import { Space, Table, Col, Row, Button, Input, Popover } from "antd";
+import { HistoryOutlined, EyeOutlined } from "@ant-design/icons";
+
 import { useNavigate } from "react-router-dom";
 import { adminRoute } from "../../constants/route.constant";
-import SearchInput from "../../components/SearchInput/SearchInput";
 
 import styles from "./style.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import useActions from "../../redux/useActions";
+import SearchField from "../../components/SearchFilter";
+import handleExport from "../../helper/exportFile";
+// import { saveAs } from "file-saver";
+// import axios from "axios";
 
-const columns = [
-  {
-    title: "HashID",
-    dataIndex: "hashID",
-    key: "hashID",
-    width: 400,
-    ellipsis: {
-      showTitle: false,
-    },
-    render: (hashID) => (
-      <Tooltip placement="topLeft" title={hashID}>
-        {hashID}
-      </Tooltip>
-    ),
-  },
-  {
-    title: "Họ và tên",
-    dataIndex: "name",
-    key: "name",
-    //render: (name) => <a>{name}</a>,
-    width: 300
-  },
-  {
-    title: "Chức vụ",
-    dataIndex: "position",
-    key: "position",
-  },
-  {
-    title: "Cấp bậc",
-    dataIndex: "rank",
-    key: "rank",
-  },
-  {
-    title: "Đơn vị",
-    dataIndex: "unit",
-    key: "unit",
+// import { readLocalStorage } from "../../helper/localStorage";
+// import { ACCESS_TOKEN } from "../../constants/auth.constant";
 
-  },
-  {
-    title: "Hành động",
-    key: "action",
-    render: (_, record) => (
-      <Space>
-        <Button type="link">Sửa</Button>
-        <Button type="link" danger>Xoa</Button>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: "1",
-    hashID:
-      "0xb4bc263278d3f77a652a8d73a6bfd8ec0ba1a63923bbb4f38147fb8a943da26d",
-    name: "Nguyễn Quý Khang",
-    position: "Trưởng phòng",
-    unit: "Viện 10 - BTL 86",
-    rank: "Thượng tá",
-  },
-  {
-    key: "2",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Lê Thị Anh",
-    position: "Phó trưởng phòng",
-    unit: "Viện 10 - BTL 86",
-    rank: "Thiếu tá",
-  },
-  {
-    key: "3",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Vũ Tuấn Sơn",
-    position: "Nghiên cứu viên",
-    unit: "Viện 10 - BTL 86",
-    rank: "Thượng úy",
-  },
-  {
-    key: "4",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Nguyễn Anh Tú",
-    position: "Phó trưởng phòng",
-    unit: "Viện 10 - BTL 86",
-    rank: "Đại úy",
-  },
-  {
-    key: "5",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Phùng Minh Hiếu",
-    position: "Nghiên cứu viên",
-    unit: "Lữ đoàn 1 - BTL 86",
-    rank: "Thiếu úy",
-  },
-  {
-    key: "6",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Phạm Thanh Tùng",
-    position: "Sỹ quan hành động",
-    unit: "Lữ đoàn 3 - BTL 86",
-    rank: "Trung úy",
-  },
-  {
-    key: "7",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Nguyễn Hoàng Huấn",
-    position: "Nghiên cứu viên",
-    unit: "Viện 10 - BTL 86",
-    rank: "Thượng úy",
-  },
-  {
-    key: "8",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Nguyễn Thanh Long",
-    position: "Nhân viên",
-    unit: "Lữ đoàn 2 - BTL 86",
-    rank: "Trung úy CN",
-  },
-  {
-    key: "9",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Phan Trọng Duy",
-    position: "Nghiên cứu viên",
-    unit: "Viện 10 - BTL 86",
-    rank: "Thượng úy",
-  },
-  {
-    key: "10",
-    hashID: "a1062db53e416d8fa109f23b7094a21e5b2645e16c5cf532fc90e4d8fbf5d48d",
-    name: "Lưu Đức Anh",
-    position: "Nghiên cứu viên",
-    unit: "Viện 10 - BTL 86",
-    rank: "Thượng úy",
-  },
-];
+const initialSearchVal = {
+  DonVi: "",
+  HoVaTen: "",
+  NganhNgheDaoTao: "",
+  NguyenQuan: "",
+};
+
+
 
 const Members = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [searchVal, setSearchVal] = useState(initialSearchVal);
+  const { memberActions } = useActions();
+
+  const [openSearch, setOpenSearch] = useState(false);
+  const [pagination, setPagination] = useState({
+    pageSize: 0,
+    total: 0,
+    current: 1,
+  });
+
+  const handleOpenSearchChange = (newOpen) => {
+    setOpenSearch(newOpen);
+  };
+
+  const memberList = useSelector((state) => state.memberListReducer.memberList);
+
+  useEffect(() => {
+    dispatch(
+      memberActions.actions.getMemberList(
+        searchVal.DonVi,
+        searchVal.HoVaTen,
+        searchVal.NganhNgheDaoTao,
+        searchVal.NguyenQuan,
+        pagination.current,
+        10
+      )
+    );
+  }, [dispatch, memberActions, searchVal, pagination]);
+
+  useEffect(() => {
+    setPagination({
+      ...pagination,
+      total: memberList.total,
+      pageSize: memberList.limit,
+    });
+  }, [memberList.total, memberList.limit]);
+
+  console.log(memberList);
+
+  const data = memberList.message.map((item, index) => {
+    return { ...item.Record, key: item.Key, index: index };
+  });
+
+  const columns = [
+    {
+      title: "STT",
+      dataIndex: "index",
+      key: "index",
+      //render: (name) => <a>{name}</a>,
+      render: (_, record) => {
+        return (memberList.page - 1) * memberList.limit + record.index;
+      },
+      width: 20,
+    },
+    {
+      title: "Họ và tên",
+      dataIndex: "HoVaTen",
+      key: "HoVaTen",
+      render: (_, record) => record.HoVaTen,
+      width: 300,
+    },
+    {
+      title: "Chức vụ",
+      dataIndex: "ChucVu",
+      key: "ChucVu",
+      render: (_, record) => record.ChucVu,
+    },
+    {
+      title: "Cấp bậc",
+      dataIndex: "Capbac",
+      key: "Capbac",
+      render: (_, record) => {
+        return record.CapBac;
+      },
+    },
+    {
+      title: "Đơn vị",
+      dataIndex: "Donvi",
+      key: "DonVi",
+      render: (_, record) => record.DonVi,
+    },
+    {
+      title: "Hành động",
+      key: "action",
+      render: (_, record) => {
+        console.log("Record", record);
+        return (
+          <Space size="middle">
+            <Button
+              onClick={() => {
+                navigate(adminRoute.MEMBER_DETAIL, { state: record.user_id });
+              }}
+              type="link"
+            >
+              <EyeOutlined />
+            </Button>
+            <Button
+              onClick={() => {
+                navigate(adminRoute.MEMBER_UPDATED_LOG, {
+                  state: record.user_id,
+                });
+              }}
+              type="link"
+            >
+              <HistoryOutlined />
+            </Button>
+          </Space>
+        );
+      },
+    },
+  ];
+
+  const searchHandler = (value = {}) => {
+    setSearchVal((state) => {
+      return {
+        ...state,
+        ...value,
+      };
+    });
+  };
+
+  const handleTableChange = (page) => {
+    setPagination({
+      ...pagination,
+      current: page.current,
+    });
+  };
+
   return (
     <>
-      <Row>
-        <Col span={12}>
-          <SearchInput />
+      {/* <Row>
+        <Input
+          placeholder="search"
+          value={memberList.filter.search}
+          onChange={(e) => handleUpdateFilter({ search: e.target.value })}
+        />
+        locj theo ngay vao dang
+        <Input
+          value={memberList.filter.capbac}
+          onChange={(e) => handleUpdateFilter({ capbac: e.target.value })}
+        />
+        <Button onClick={() => dispatch(memberActions.actions.getMemberList())}>
+          Loc
+        </Button>
+      </Row> */}
+      <Row style={{ marginBottom: "15px" }}>
+        <Col span={12} className={styles["right-row__actions"]}>
+          <Space>
+            <Popover
+              content={<SearchField onSubmit={searchHandler} />}
+              placement={"bottomLeft"}
+              trigger="click"
+              open={openSearch}
+              onOpenChange={handleOpenSearchChange}
+            >
+              <Button type="primary">Tìm kiếm</Button>
+            </Popover>
+          </Space>
         </Col>
         <Col span={12}>
           <div className={styles["right-control"]}>
-            <Button type="primary" className={styles["export-btn"]}>Xuất file</Button>
-            <Button type="primary" onClick={() => navigate(adminRoute.ADD_MEMBER)}>Tạo mới</Button>
+            <Button
+              type="primary"
+              className={styles["export-btn"]}
+              onClick={handleExport}
+            >
+              Xuất file
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => navigate(adminRoute.ADD_MEMBER)}
+            >
+              Tạo mới
+            </Button>
           </div>
         </Col>
       </Row>
-      <Divider />
-      <Table columns={columns} dataSource={data} />
+      <Table
+        bordered={true}
+        rowClassName={styles["member-info__row"]}
+        columns={columns}
+        dataSource={data}
+        pagination={pagination}
+        loading={memberList.isLoading}
+        onChange={handleTableChange}
+      />
     </>
   );
 };

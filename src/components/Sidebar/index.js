@@ -2,6 +2,8 @@ import {
   DashboardOutlined,
   UserOutlined,
   ControlOutlined,
+  HistoryOutlined,
+  DeploymentUnitOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -9,97 +11,110 @@ import { useNavigate } from "react-router-dom";
 import styles from "./style.module.css";
 import logo from "../../assets/images/icon.png";
 import { adminRoute } from "../../constants/route.constant";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import authActions from "../../redux/auth/action";
+import { useState } from "react";
+import UnitDrawer from "../UnitDrawer";
 
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [openUnit, setOpenUnit] = useState(false);
+  const [sizeUnit, setSizeUnit] = useState();
+
+  const showDrawer = () => {
+    setSizeUnit("large");
+    setOpenUnit(true);
+  };
+  const onClose = () => {
+    setOpenUnit(false);
+  };
   return (
-    <Sider
-      className={styles["sider-wrapper"]}
-      collapsible
-      collapsed={collapsed}
-      trigger={null}
-      collapsedWidth={65}
-      theme="light"
-    >
-      <div className={styles["logo"]}>
-        <img src={logo} alt="blockchain_icon" width={40} />
-      </div>
-      <Menu
-        className={styles["items"]}
+    <>
+      <Sider
+        className={styles["sider-wrapper"]}
+        collapsible
+        collapsed={collapsed}
+        trigger={null}
+        collapsedWidth={65}
         theme="light"
-        mode="inline"
-        onSelect={() => {
-          dispatch(authActions.actions.checkSession());
-        }}
-        items={[
-          {
-            key: "Tổng quan",
-            icon: <DashboardOutlined />,
-            label: "Tổng quan",
-            onClick: () => {
-              navigate(adminRoute.DASHBOARD) ;
+        style={{ border: "1px" }}
+      >
+        <div className={styles["logo"]}>
+          <img src={logo} alt="blockchain_icon" width={40} />
+        </div>
+        <Menu
+          className={styles["items"]}
+          theme="light"
+          mode="inline"
+          onSelect={() => {
+            dispatch(authActions.actions.checkSession());
+          }}
+          items={[
+            {
+              key: "Tongquan",
+              icon: <DashboardOutlined />,
+              label: "Tổng quan",
+              onClick: () => {
+                navigate(adminRoute.DASHBOARD);
+              },
             },
-          },
-          {
-            key: "Managements",
-            icon: <ControlOutlined />,
-            label: "Quản lý thông tin",
-            children: [
-              {
-                label: "Danh sách QN",
-                onClick: () => {
-                  
-                  navigate(adminRoute.MEMBERS);
+            {
+              key: "Quanlythongtin",
+              icon: <ControlOutlined />,
+              label: "Quản lý thông tin",
+              children: [
+                {
+                  label: "Danh sách QN",
+                  onClick: () => {
+                    navigate(adminRoute.MEMBERS);
+                  },
+                  key: "list-user",
                 },
-                key: "list-user",
+                {
+                  label: "Thêm mới QN",
+                  onClick: () => {
+                    navigate(adminRoute.ADD_MEMBER);
+                  },
+                  key: "new-user",
+                },
+              ],
+            },
+            {
+              key: "phanquyen",
+              icon: <UserOutlined />,
+              label: "Phân quyền",
+              onClick: () => {
+                navigate(adminRoute.PERMISSIONS);
               },
-              {
-                label: "Thêm mới QN",
-                onClick: () => {
-                  
-                  navigate(adminRoute.ADD_MEMBER);
-                },
-                key: "new-user",
+            },
+            {
+              key: "Quanlylog",
+              icon: <HistoryOutlined />,
+              label: "Quản lý log",
+              onClick: () => navigate(adminRoute.MANAGE_LOG),
+            },
+            {
+              key: "Quanlydonvi",
+              icon: <DeploymentUnitOutlined />,
+              label: "Quản lý đơn vị",
+              onClick: () => {
+                showDrawer();
               },
-            ],
-          },
-          {
-            key: "4",
-            icon: <UserOutlined />,
-            label: "Quản lý người dùng",
-            children: [
-              {
-                label: "Yêu cầu QN",
-                onClick: () => {
-                  
-                  navigate(adminRoute.APPROVALS);
-                },
-                key: "approvals"
-              },
-              {
-                label: "Nhóm quyền QN",
-                onClick: () => {
-                  navigate(adminRoute.ROLES);
-                },
-                key: "permissionGroups"
-              },
-              {
-                label: "Phân quyền",
-                onClick: () => {
-                  navigate(adminRoute.PERMISSIONS);
-                },
-                key: "permissions"
-              }
-            ]
-          },
-        ]}
+            },
+          ]}
+        />
+      </Sider>
+      <UnitDrawer
+        onClose={onClose}
+        size={sizeUnit}
+        open={openUnit}
+        title="Quản lý danh sách đơn vị"
       />
-    </Sider>
+    </>
   );
 };
 

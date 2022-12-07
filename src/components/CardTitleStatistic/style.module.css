@@ -1,0 +1,14 @@
+.be-card-title-statistic {
+  margin-bottom: 16px;
+}
+
+.be-card-title-statistic__title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.be-card-title-statistic__subtitle {
+  font-size: 30px;
+  color: black;
+}

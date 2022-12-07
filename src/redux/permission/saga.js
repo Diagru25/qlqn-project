@@ -10,8 +10,11 @@ function* getModuleList_saga(action) {
 
         const pageSize = params.page_size ? params.page_size : moduleList.page_size;
         const pageIndex = params.page_index ? params.page_index : moduleList.page_index;
+        console.log("param index", pageIndex);
+        console.log("param size", pageSize);
 
         const res = yield permissionApi.getModuleList(pageIndex, pageSize);
+        console.log(res);
         const { page_index, page_size, items } = res.result;
 
         yield put(permissionActions.actions.updateState({
@@ -75,9 +78,10 @@ function* updatePermission_saga(action) {
     try {
         const { moduleId, data } = action.payload;
         const permissionList = yield select(state => state.permissionReducer.permissionList);
-
         const _list = [...permissionList.items];
         let foundIndex = _list.findIndex(el => el.Id === data.Id);
+        console.log(_list[foundIndex]);
+        console.log(data);
         if (foundIndex !== -1 && moduleId) {
             const updatedObj = { ..._list[foundIndex], ...data };
             const updatedList = [

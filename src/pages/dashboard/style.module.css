@@ -1,0 +1,25 @@
+.dashboard-filter__title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.dashboard-filter__action {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.dashboard-filter__header {
+  margin-bottom: 25px;
+}
+
+.dashboard-carousel {
+  width: 100%;
+}
+
+.dashboard-carousel__card {
+  width: 250px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}

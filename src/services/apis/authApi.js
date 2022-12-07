@@ -29,6 +29,18 @@ const authApi = {
     });
   },
 
+  getSystemLog: (page_index, page_size) => {
+    return request({
+      url: "/admin/v1/logs",
+      method: "GET",
+      params: {
+        page_index: page_index,
+        page_size: page_size
+      },
+      isAuthRequest: true
+    })
+  },
+
   changePassword: (password, newPassword, confirmPassword) => {
     return request({
       url: "/auth/v1/change_password",
@@ -88,6 +100,8 @@ const authApi = {
       isAuthRequest: true,
     });
   },
+
+  
 };
 
 export default authApi;

@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 const memberBasicSchema = Yup.object().shape({
-  full_name: Yup.string().trim().required("Yêu cầu nhập thông tin!"),
+  hoTen: Yup.string().trim().required("Yêu cầu nhập thông tin!"),
   birth_name: Yup.string()
     .trim()
     .required("Yêu cầu nhập thông tin!")

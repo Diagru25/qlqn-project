@@ -9,7 +9,11 @@ export const adminRoute = {
   APPROVALS: "/admin/approvals",
   ADD_MEMBER: "/admin/new-member",
   ROLES: "/admin/roles",
-  PERMISSIONS: "/admin/permissions"
+  PERMISSIONS: "/admin/permissions",
+  EDIT_MEMBER: "/admin/edit-member",
+  USER_PROFILE: "/admin/user-profile",
+  USER_LOG: "/admin/user-log",
+  MANAGE_LOG: "admin/manage-log",
+  MEMBER_DETAIL: "/admin/member-detail",
+  MEMBER_UPDATED_LOG: "/admin/updated-log",
 };
-
-

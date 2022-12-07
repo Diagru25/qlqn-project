@@ -8,6 +8,12 @@
     gap: 20px;
 }
 
+.right-row__actions {
+    display: flex;
+    align-items: center;
+}
+
 .export-btn {
     background-color: green;
 }
+
