@@ -8,7 +8,6 @@ export const adminRoute = {
   MEMBERS: "/admin/members",
   APPROVALS: "/admin/approvals",
   ADD_MEMBER: "/admin/new-member",
-  ROLES: "/admin/roles",
   PERMISSIONS: "/admin/permissions",
   EDIT_MEMBER: "/admin/edit-member",
   USER_PROFILE: "/admin/user-profile",

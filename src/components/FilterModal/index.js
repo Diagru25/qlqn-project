@@ -24,8 +24,6 @@ const FilterModal = () => {
   const dispatch = useDispatch();
   const { memberActions } = useActions();
 
-  const memberList = useSelector((state) => state.memberListReducer.memberList);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -89,7 +87,7 @@ const FilterModal = () => {
 
   return (
     <>
-      <Button type="primary" size="large" onClick={showModal}>
+      <Button type="primary" onClick={showModal}>
         <FilterOutlined /> Thống kê
       </Button>
       <Modal

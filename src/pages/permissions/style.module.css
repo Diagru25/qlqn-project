@@ -1,7 +1,7 @@
 .user-controls {
     display: flex;
     gap: 15px;
-    height: 100%;  
+    min-height: 70vh;  
     overflow: hidden;
     overscroll-behavior: none;
 }

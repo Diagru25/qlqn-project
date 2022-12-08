@@ -488,24 +488,15 @@ const MemberBasic = ({
                   style={{ width: "100%" }}
                 />
               </Form.Item>
-              <Form.Item
-                label="Ngày xuất ngũ"
-                validateStatus={
-                  errors?.userBasicFormValue?.NgayXuatNgu ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.NgayXuatNgu &&
-                  errors?.userBasicFormValue?.NgayXuatNgu
-                }
-                required
-              >
+              <Form.Item label="Ngày xuất ngũ">
                 <DatePicker
                   placeholder="Ngày xuất ngũ"
                   name="NgayXuatNgu"
                   value={
+                    userBasicFormValue.NgayXuatNgu !== "NaN" &&
                     userBasicFormValue.NgayXuatNgu
                       ? moment(+userBasicFormValue.NgayXuatNgu)
-                      : undefined
+                      : ""
                   }
                   format={DATE_FORMAT}
                   onChange={(date) => {
@@ -513,39 +504,31 @@ const MemberBasic = ({
                       const time = moment(date).valueOf().toString();
                       handleChangeValue({ NgayXuatNgu: time });
                     } else {
-                      handleChangeValue({ NgayXuatNgu: moment() });
+                      handleChangeValue({ NgayXuatNgu: "" });
                     }
                   }}
                   disabled={disabled}
                   style={{ width: "100%" }}
                 />
               </Form.Item>
-              <Form.Item
-                label="Ngày tái ngũ"
-                validateStatus={
-                  errors?.userBasicFormValue?.NgayTaiNgu ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.NgayTaiNgu &&
-                  errors?.userBasicFormValue?.NgayTaiNgu
-                }
-                required
-              >
+              <Form.Item label="Ngày tái ngũ">
                 <DatePicker
                   placeholder="Ngày tái ngũ"
                   name="NgayTaiNgu"
                   value={
+                    userBasicFormValue.NgayTaiNgu !== "NaN" &&
                     userBasicFormValue.NgayTaiNgu
                       ? moment(+userBasicFormValue.NgayTaiNgu)
-                      : undefined
+                      : ""
                   }
                   format={DATE_FORMAT}
                   onChange={(date) => {
+                    console.log(date);
                     if (date) {
                       const time = moment(date).valueOf().toString();
                       handleChangeValue({ NgayTaiNgu: time });
                     } else {
-                      handleChangeValue({ NgayTaiNgu: moment() });
+                      handleChangeValue({ NgayTaiNgu: "" });
                     }
                   }}
                   disabled={disabled}

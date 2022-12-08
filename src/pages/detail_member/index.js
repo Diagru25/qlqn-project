@@ -1,5 +1,7 @@
+import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Breadcrumb from "../../components/Breadcrumb";
 import MemberControl from "../../components/MemberControl";
 import memberApi from "../../services/apis/memberAPI";
 
@@ -25,9 +27,13 @@ const DetailMember = () => {
     }
   };
 
-
   return (
     <>
+      <Row gutter={24} style={{ marginBottom: "15px" }}>
+        <Col span={12}>
+          <Breadcrumb title="Chi tiết hồ sơ" />
+        </Col>
+      </Row>
       <div>
         <MemberControl
           flag="member-detail"

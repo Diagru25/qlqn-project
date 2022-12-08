@@ -1,32 +1,33 @@
 import { all, fork, put, takeEvery } from "redux-saga/effects";
-import { ACCESS_TOKEN } from "../../constants/auth.constant";
-import { clearLocalStorage } from "../../helper/localStorage";
 import userAPI from "../../services/apis/userAPI";
 import userActions from "./action";
+import { showNotification } from "../../helper/showNotification";
 
 function* getUserInfo_saga(action) {
   try {
     const res = yield userAPI.getUserProfile();
     const userInfo = res.result.Record;
-    console.log(userInfo)
-    if (userInfo) {
-      yield put(
-        userActions.actions.updateState({
+    console.log("abcd", userInfo);
+
+    yield put(
+      userActions.actions.updateState({
+        userProfile: {
           userInfo: userInfo,
           isLoading: false,
-        })
-      );
-    } else {
-      yield put(
-        userActions.actions.updateState({
-          userInfo: null,
-          isLoading: false,
-        })
-      );
-      clearLocalStorage(ACCESS_TOKEN);
-    }
+        },
+      })
+    );
+    
   } catch (error) {
-    console.log(error);
+    yield put(
+      userActions.actions.updateState({
+        userProfile: {
+          userInfo: {},
+          isLoading: false,
+        },
+      })
+    );
+    
   }
 }
 
@@ -35,25 +36,29 @@ function* getUserLogs_saga(action) {
     const payload = action.payload;
     const res = yield userAPI.getUserLogs(payload.page_index);
     const { items, page_index, page_size, total } = res.result;
-    yield put(userActions.actions.updateState({
-      userLogs: {
-        items,
-        page_index,
-        page_size,
-        total,
-        isLoading: false
-      }
-    }))
+    yield put(
+      userActions.actions.updateState({
+        userLogs: {
+          items,
+          page_index,
+          page_size,
+          total,
+          isLoading: false,
+        },
+      })
+    );
   } catch (error) {
-    yield put(userActions.actions.updateState({
-      userLogs: {
-        items: [],
-        page_index: 1,
-        page_size: 100,
-        total: 0,
-        isLoading: false
-      }
-    }))
+    yield put(
+      userActions.actions.updateState({
+        userLogs: {
+          items: [],
+          page_index: 1,
+          page_size: 100,
+          total: 0,
+          isLoading: false,
+        },
+      })
+    );
   }
 }
 

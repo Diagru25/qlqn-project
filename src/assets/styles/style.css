@@ -1,12 +1,19 @@
 body::-webkit-scrollbar {
-    width: 6px;
-  }
-   
-  body::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  }
-   
-  body::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    
-  }
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
+
+.ant-card-bordered {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.ant-table {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

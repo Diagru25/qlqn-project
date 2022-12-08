@@ -1,10 +1,11 @@
-import { Button, Space } from "antd";
+import { Button, Col, Row, Space } from "antd";
 import { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MemberControl from "../../components/MemberControl";
 import { adminRoute } from "../../constants/route.constant";
 import { showNotification } from "../../helper/showNotification";
 import userAPI from "../../services/apis/userAPI";
+import Breadcrumb from "../../components/Breadcrumb";
 
 const UserInfo = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const UserInfo = () => {
       const res = await userAPI.getUserProfile();
       const userRecord = res.result.Record;
       setUserInfo({ ...userRecord });
+      showNotification("success", "Cập nhập hồ sơ thông tin quân nhân thành công!")
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +28,6 @@ const UserInfo = () => {
 
   const handleSubmitEditMember = async (memberData) => {
     try {
-      console.log("Member Data", memberData);
       const {
         userBasicFormValue,
         userCorporateFormValue,
@@ -85,10 +86,8 @@ const UserInfo = () => {
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
         user_id: memberData.user_id,
       };
-      console.log("data", data);
       await userAPI.updateUserProfile({ ...data });
-      console.log("abc");
-      showNotification("success", "Update thành công!");
+      showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {
       console.log(error);
     }
@@ -104,8 +103,14 @@ const UserInfo = () => {
       </Space>
     );
   };
+
   return (
     <>
+      <Row gutter={24} style={{ marginBottom: "15px" }}>
+        <Col span={12}>
+          <Breadcrumb title="Hồ sơ người dùng" />
+        </Col>
+      </Row>
       <div>
         <MemberControl
           flag="user-profile"

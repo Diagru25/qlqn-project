@@ -1,8 +1,9 @@
-import { Table } from "antd";
+import { Col, Row, Table } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useActions from "../../redux/useActions";
+import Breadcrumb from "../../components/Breadcrumb";
 
 const UserLog = () => {
   const dispatch = useDispatch();
@@ -81,6 +82,11 @@ const UserLog = () => {
   if (userLogs.total !== 0) {
     return (
       <>
+        <Row gutter={24} style={{ marginBottom: "15px" }}>
+          <Col span={12}>
+            <Breadcrumb title="Nhật ký người dùng" />
+          </Col>
+        </Row>
         <Table
           columns={columns}
           dataSource={data}

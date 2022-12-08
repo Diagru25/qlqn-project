@@ -1,6 +1,7 @@
 import { Card, Carousel, Col, Row, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Breadcrumb from "../../components/Breadcrumb";
 import CardTitleStatistic from "../../components/CardTitleStatistic";
 import FilterModal from "../../components/FilterModal";
 import useActions from "../../redux/useActions";
@@ -25,7 +26,7 @@ const Dashboard = () => {
     <>
       <Row gutter={24} className={styles["dashboard-filter__header"]}>
         <Col span={12}>
-          <span className={styles["dashboard-filter__title"]}>Trang chủ</span>
+          <Breadcrumb title="Trang chủ" />
         </Col>
         <Col span={12} className={styles["dashboard-filter__action"]}>
           <FilterModal />

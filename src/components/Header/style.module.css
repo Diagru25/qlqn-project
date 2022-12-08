@@ -1,0 +1,14 @@
+:root {
+  --main-color: #939393;
+}
+
+.left-header {
+  float: left;
+}
+
+.collapsed-btn {
+  color: var(--main-color);
+  font-size: 20px !important;
+  cursor: pointer !important;
+  margin-left: 20px !important;
+}

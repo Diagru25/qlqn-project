@@ -1,8 +1,9 @@
-import { Table } from "antd";
+import { Col, Row, Table } from "antd";
 import moment from "moment";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Breadcrumb from "../../components/Breadcrumb";
 import useActions from "../../redux/useActions";
 
 const MemberUpdatedLog = () => {
@@ -30,7 +31,7 @@ const MemberUpdatedLog = () => {
       key: "index",
       //render: (name) => <a>{name}</a>,
       render: (_, record) => {
-        console.log(record)
+        console.log(record);
         return record.key + 1;
       },
       width: 20,
@@ -43,7 +44,7 @@ const MemberUpdatedLog = () => {
       render: (_, record) => {
         return moment(+record.updateTime).format("DD-MM-YYYY hh:mm a");
       },
-      width: 250,
+      width: 700,
     },
     {
       title: "Số hiệu quân nhân",
@@ -59,6 +60,11 @@ const MemberUpdatedLog = () => {
 
   return (
     <>
+      <Row gutter={24} style={{ marginBottom: "15px" }}>
+        <Col span={12}>
+          <Breadcrumb title="Nhật ký cập nhật" />
+        </Col>
+      </Row>
       <Table
         columns={columns}
         dataSource={data}

@@ -2,7 +2,7 @@ import userActions from "./action";
 
 const initialState = {
   userProfile: {
-    userInfo: null,
+    userInfo: {},
     isLoading: false,
   },
   userLogs: {
@@ -10,7 +10,7 @@ const initialState = {
     page_index: 1,
     page_size: 40,
     isLoading: false,
-    total: 200
+    total: 200,
   },
 };
 
@@ -21,7 +21,10 @@ const reducer = (state = initialState, action) => {
     case userActions.types.GET_USER_INFO:
       return {
         ...state,
-        isLoading: true,
+        userProfile: {
+          ...state.userProfile,
+          isLoading: true,
+        },
       };
     case userActions.types.GET_USER_LOGS:
       return {

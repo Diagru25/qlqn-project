@@ -1,4 +1,4 @@
-import { Space, Table, Col, Row, Button, Input, Popover } from "antd";
+import { Table, Col, Row, Button, Popover, Tooltip } from "antd";
 import { HistoryOutlined, EyeOutlined } from "@ant-design/icons";
 
 import { useNavigate } from "react-router-dom";
@@ -10,11 +10,8 @@ import { useEffect, useState } from "react";
 import useActions from "../../redux/useActions";
 import SearchField from "../../components/SearchFilter";
 import handleExport from "../../helper/exportFile";
-// import { saveAs } from "file-saver";
-// import axios from "axios";
+import BreadCrumb from "../../components/Breadcrumb"
 
-// import { readLocalStorage } from "../../helper/localStorage";
-// import { ACCESS_TOKEN } from "../../constants/auth.constant";
 
 const initialSearchVal = {
   DonVi: "",
@@ -22,8 +19,6 @@ const initialSearchVal = {
   NganhNgheDaoTao: "",
   NguyenQuan: "",
 };
-
-
 
 const Members = () => {
   const navigate = useNavigate();
@@ -64,8 +59,6 @@ const Members = () => {
       pageSize: memberList.limit,
     });
   }, [memberList.total, memberList.limit]);
-
-  console.log(memberList);
 
   const data = memberList.message.map((item, index) => {
     return { ...item.Record, key: item.Key, index: index };
@@ -113,30 +106,36 @@ const Members = () => {
       title: "Hành động",
       key: "action",
       render: (_, record) => {
-        console.log("Record", record);
         return (
-          <Space size="middle">
-            <Button
-              onClick={() => {
-                navigate(adminRoute.MEMBER_DETAIL, { state: record.user_id });
-              }}
-              type="link"
-            >
-              <EyeOutlined />
-            </Button>
-            <Button
-              onClick={() => {
-                navigate(adminRoute.MEMBER_UPDATED_LOG, {
-                  state: record.user_id,
-                });
-              }}
-              type="link"
-            >
-              <HistoryOutlined />
-            </Button>
-          </Space>
+          <>
+            <Tooltip title="Chi tiết" color="cyan" key="cyan">
+              <Button
+                shape="circle"
+                onClick={() => {
+                  navigate(adminRoute.MEMBER_DETAIL, { state: record.user_id });
+                }}
+                type="link"
+              >
+                <EyeOutlined style={{ fontSize: 16 }} />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Nhật ký cập nhật" color="purple" key="purple">
+              <Button
+                shape="circle"
+                onClick={() => {
+                  navigate(adminRoute.MEMBER_UPDATED_LOG, {
+                    state: record.user_id,
+                  });
+                }}
+                type="link"
+              >
+                <HistoryOutlined style={{ fontSize: 16 }} />
+              </Button>
+            </Tooltip>
+          </>
         );
       },
+      width: 200,
     },
   ];
 
@@ -173,35 +172,25 @@ const Members = () => {
           Loc
         </Button>
       </Row> */}
-      <Row style={{ marginBottom: "15px" }}>
-        <Col span={12} className={styles["right-row__actions"]}>
-          <Space>
+      <Row gutter={24} style={{ marginBottom: "15px" }}>
+        <Col span={12}>
+          <BreadCrumb title="Danh sách quân nhân" />
+        </Col>
+        <Col span={12}>
+          <div className={styles["right-control"]}>
+            <Button onClick={handleExport}>Xuất file</Button>
+            <Button onClick={() => navigate(adminRoute.ADD_MEMBER)}>
+              Tạo mới
+            </Button>
             <Popover
               content={<SearchField onSubmit={searchHandler} />}
-              placement={"bottomLeft"}
+              placement={"bottomRight"}
               trigger="click"
               open={openSearch}
               onOpenChange={handleOpenSearchChange}
             >
               <Button type="primary">Tìm kiếm</Button>
             </Popover>
-          </Space>
-        </Col>
-        <Col span={12}>
-          <div className={styles["right-control"]}>
-            <Button
-              type="primary"
-              className={styles["export-btn"]}
-              onClick={handleExport}
-            >
-              Xuất file
-            </Button>
-            <Button
-              type="primary"
-              onClick={() => navigate(adminRoute.ADD_MEMBER)}
-            >
-              Tạo mới
-            </Button>
           </div>
         </Col>
       </Row>

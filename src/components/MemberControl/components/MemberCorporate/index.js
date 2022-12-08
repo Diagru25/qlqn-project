@@ -33,24 +33,15 @@ const MemberCorporate = ({
         >
           <Row gutter={24}>
             <Col span={12}>
-              <Form.Item
-                label="Ngày vào đảng"
-                validateStatus={
-                  errors?.userCorporateFormValue?.NgayVaoDang ? "error" : ""
-                }
-                help={
-                  errors?.userCorporateFormValue?.NgayVaoDang &&
-                  errors?.userCorporateFormValue?.NgayVaoDang
-                }
-                required
-              >
+              <Form.Item label="Ngày vào đảng">
                 <DatePicker
                   placeholder="Ngày vào đảng"
                   name="NgayVaoDang"
                   value={
+                    userCorporateFormValue.NgayVaoDang !== "NaN" &&
                     userCorporateFormValue.NgayVaoDang
                       ? moment(+userCorporateFormValue.NgayVaoDang)
-                      : undefined
+                      : ""
                   }
                   disabled={disabled}
                   format={DATE_FORMAT}
@@ -59,7 +50,7 @@ const MemberCorporate = ({
                       const time = moment(date).valueOf().toString();
                       handleChangeValue({ NgayVaoDang: time });
                     } else {
-                      handleChangeValue({ NgayVaoDang: moment() });
+                      handleChangeValue({ NgayVaoDang: "" });
                     }
                   }}
                   style={{ width: "100%" }}
@@ -67,14 +58,6 @@ const MemberCorporate = ({
               </Form.Item>
               <Form.Item
                 label="Nơi vào đảng"
-                validateStatus={
-                  errors?.userCorporateFormValue?.NoiVaoDang ? "error" : ""
-                }
-                help={
-                  errors?.userCorporateFormValue?.NoiVaoDang &&
-                  errors?.userCorporateFormValue?.NoiVaoDang
-                }
-                required
                 //validateStatus={errors.name ? "error" : ""}
                 //help={errors.name}
               >
@@ -92,26 +75,15 @@ const MemberCorporate = ({
                 />
               </Form.Item>
 
-              <Form.Item
-                label="Ngày vào đảng chính thức"
-                validateStatus={
-                  errors?.userCorporateFormValue?.NgayVaoDangChinhThuc
-                    ? "error"
-                    : ""
-                }
-                help={
-                  errors?.userCorporateFormValue?.NgayVaoDangChinhThuc &&
-                  errors?.userCorporateFormValue?.NgayVaoDangChinhThuc
-                }
-                required
-              >
+              <Form.Item label="Ngày vào đảng chính thức">
                 <DatePicker
                   placeholder="Ngày vào đảng chính thức"
                   name="NgayVaoDangChinhThuc"
                   value={
+                    userCorporateFormValue.NgayVaoDangChinhThuc !== "NaN" &&
                     userCorporateFormValue.NgayVaoDangChinhThuc
                       ? moment(+userCorporateFormValue.NgayVaoDangChinhThuc)
-                      : undefined
+                      : ""
                   }
                   disabled={disabled}
                   format={DATE_FORMAT}
@@ -120,7 +92,7 @@ const MemberCorporate = ({
                       const time = moment(date).valueOf().toString();
                       handleChangeValue({ NgayVaoDangChinhThuc: time });
                     } else {
-                      handleChangeValue({ NgayVaoDangChinhThuc: moment() });
+                      handleChangeValue({ NgayVaoDangChinhThuc: "" });
                     }
                   }}
                   style={{ width: "100%" }}
@@ -128,24 +100,15 @@ const MemberCorporate = ({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                label="Ngày vào đoàn"
-                validateStatus={
-                  errors?.userCorporateFormValue?.NgayVaoDoan ? "error" : ""
-                }
-                help={
-                  errors?.userCorporateFormValue?.NgayVaoDoan &&
-                  errors?.userCorporateFormValue?.NgayVaoDoan
-                }
-                required
-              >
+              <Form.Item label="Ngày vào đoàn">
                 <DatePicker
                   placeholder="Ngày vào đoàn"
                   name="NgayVaoDoan"
                   value={
+                    userCorporateFormValue.NgayVaoDoan !== "NaN" &&
                     userCorporateFormValue.NgayVaoDoan
                       ? moment(+userCorporateFormValue.NgayVaoDoan)
-                      : undefined
+                      : ""
                   }
                   format={DATE_FORMAT}
                   onChange={(date) => {
@@ -153,7 +116,7 @@ const MemberCorporate = ({
                       const time = moment(date).valueOf().toString();
                       handleChangeValue({ NgayVaoDoan: time });
                     } else {
-                      handleChangeValue({ NgayVaoDoan: moment() });
+                      handleChangeValue({ NgayVaoDoan: "" });
                     }
                   }}
                   disabled={disabled}
