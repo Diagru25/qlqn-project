@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import useActions from "../../redux/useActions";
 import SearchField from "../../components/SearchFilter";
 import handleExport from "../../helper/exportFile";
-import BreadCrumb from "../../components/Breadcrumb"
-
+import BreadCrumb from "../../components/Breadcrumb";
+import { usePermission } from "../../hooks/usePermission";
 
 const initialSearchVal = {
   DonVi: "",
@@ -21,10 +21,14 @@ const initialSearchVal = {
 };
 
 const Members = () => {
+  let columns = [];
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const { memberActions } = useActions();
+  const isAdmin = usePermission();
 
   const [openSearch, setOpenSearch] = useState(false);
   const [pagination, setPagination] = useState({
@@ -64,80 +68,124 @@ const Members = () => {
     return { ...item.Record, key: item.Key, index: index };
   });
 
-  const columns = [
-    {
-      title: "STT",
-      dataIndex: "index",
-      key: "index",
-      //render: (name) => <a>{name}</a>,
-      render: (_, record) => {
-        return (memberList.page - 1) * memberList.limit + record.index;
+  if (isAdmin) {
+    columns = [
+      {
+        title: "STT",
+        dataIndex: "index",
+        key: "index",
+        //render: (name) => <a>{name}</a>,
+        render: (_, record) => {
+          return (memberList.page - 1) * memberList.limit + record.index;
+        },
+        width: 20,
       },
-      width: 20,
-    },
-    {
-      title: "Họ và tên",
-      dataIndex: "HoVaTen",
-      key: "HoVaTen",
-      render: (_, record) => record.HoVaTen,
-      width: 300,
-    },
-    {
-      title: "Chức vụ",
-      dataIndex: "ChucVu",
-      key: "ChucVu",
-      render: (_, record) => record.ChucVu,
-    },
-    {
-      title: "Cấp bậc",
-      dataIndex: "Capbac",
-      key: "Capbac",
-      render: (_, record) => {
-        return record.CapBac;
+      {
+        title: "Họ và tên",
+        dataIndex: "HoVaTen",
+        key: "HoVaTen",
+        render: (_, record) => record.HoVaTen,
+        width: 300,
       },
-    },
-    {
-      title: "Đơn vị",
-      dataIndex: "Donvi",
-      key: "DonVi",
-      render: (_, record) => record.DonVi,
-    },
-    {
-      title: "Hành động",
-      key: "action",
-      render: (_, record) => {
-        return (
-          <>
-            <Tooltip title="Chi tiết" color="cyan" key="cyan">
-              <Button
-                shape="circle"
-                onClick={() => {
-                  navigate(adminRoute.MEMBER_DETAIL, { state: record.user_id });
-                }}
-                type="link"
-              >
-                <EyeOutlined style={{ fontSize: 16 }} />
-              </Button>
-            </Tooltip>
-            <Tooltip title="Nhật ký cập nhật" color="purple" key="purple">
-              <Button
-                shape="circle"
-                onClick={() => {
-                  navigate(adminRoute.MEMBER_UPDATED_LOG, {
-                    state: record.user_id,
-                  });
-                }}
-                type="link"
-              >
-                <HistoryOutlined style={{ fontSize: 16 }} />
-              </Button>
-            </Tooltip>
-          </>
-        );
+      {
+        title: "Chức vụ",
+        dataIndex: "ChucVu",
+        key: "ChucVu",
+        render: (_, record) => record.ChucVu,
       },
-      width: 200,
-    },
-  ];
+      {
+        title: "Cấp bậc",
+        dataIndex: "Capbac",
+        key: "Capbac",
+        render: (_, record) => {
+          return record.CapBac;
+        },
+      },
+      {
+        title: "Đơn vị",
+        dataIndex: "Donvi",
+        key: "DonVi",
+        render: (_, record) => record.DonVi,
+      },
+      {
+        title: "Hành động",
+        key: "action",
+        render: (_, record) => {
+          return (
+            <>
+              <Tooltip title="Chi tiết" color="cyan" key="cyan">
+                <Button
+                  shape="circle"
+                  onClick={() => {
+                    navigate(adminRoute.MEMBER_DETAIL, {
+                      state: record.user_id,
+                    });
+                  }}
+                  type="link"
+                >
+                  <EyeOutlined style={{ fontSize: 16 }} />
+                </Button>
+              </Tooltip>
+              <Tooltip title="Nhật ký cập nhật" color="purple" key="purple">
+                <Button
+                  shape="circle"
+                  onClick={() => {
+                    navigate(adminRoute.MEMBER_UPDATED_LOG, {
+                      state: record.user_id,
+                    });
+                  }}
+                  type="link"
+                >
+                  <HistoryOutlined style={{ fontSize: 16 }} />
+                </Button>
+              </Tooltip>
+            </>
+          );
+        },
+        width: 200,
+      },
+    ];
+  } else {
+    columns = [
+      {
+        title: "STT",
+        dataIndex: "index",
+        key: "index",
+        //render: (name) => <a>{name}</a>,
+        render: (_, record) => {
+          return (memberList.page - 1) * memberList.limit + record.index;
+        },
+        width: 20,
+      },
+      {
+        title: "Họ và tên",
+        dataIndex: "HoVaTen",
+        key: "HoVaTen",
+        render: (_, record) => record.HoVaTen,
+        width: 300,
+      },
+      {
+        title: "Chức vụ",
+        dataIndex: "ChucVu",
+        key: "ChucVu",
+        render: (_, record) => record.ChucVu,
+      },
+      {
+        title: "Cấp bậc",
+        dataIndex: "Capbac",
+        key: "Capbac",
+        render: (_, record) => {
+          return record.CapBac;
+        },
+      },
+      {
+        title: "Đơn vị",
+        dataIndex: "Donvi",
+        key: "DonVi",
+        render: (_, record) => record.DonVi,
+      },
+    ];
+  }
 
   const searchHandler = (value = {}) => {
     setSearchVal((state) => {

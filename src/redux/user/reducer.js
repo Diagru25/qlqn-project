@@ -2,7 +2,7 @@ import userActions from "./action";
 
 const initialState = {
   userProfile: {
-    userInfo: {},
+    userProfile: {},
     isLoading: false,
   },
   userLogs: {
@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
   const payload = action.payload;
 
   switch (action.type) {
-    case userActions.types.GET_USER_INFO:
+    case userActions.types.GET_USER_PROFILE:
       return {
         ...state,
         userProfile: {

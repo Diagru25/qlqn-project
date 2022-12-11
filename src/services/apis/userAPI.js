@@ -20,7 +20,7 @@ const userAPI = {
         })
     },
     updateUserProfile: (data = {}) => {
-        console.log("body", data);
+        console.log("data API", data);
         return request({
             url: "/admin/v1/users",
             method: "PUT",

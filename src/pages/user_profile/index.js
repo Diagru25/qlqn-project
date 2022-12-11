@@ -6,25 +6,23 @@ import { adminRoute } from "../../constants/route.constant";
 import { showNotification } from "../../helper/showNotification";
 import userAPI from "../../services/apis/userAPI";
 import Breadcrumb from "../../components/Breadcrumb";
+import { useDispatch, useSelector } from "react-redux";
+import useActions from "../../redux/useActions";
+import Loading from "../../components/Loading";
 
 const UserInfo = () => {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({});
+  const dispatch = useDispatch();
+  const { userActions } = useActions();
+
+  const userProfile = useSelector((state) => state.userReducer.userProfile);
+  const userData = userProfile.userProfile;
+
+  console.log("abcd", userProfile);
 
   useEffect(() => {
-    getUserInfo();
-  }, []);
-
-  const getUserInfo = async () => {
-    try {
-      const res = await userAPI.getUserProfile();
-      const userRecord = res.result.Record;
-      setUserInfo({ ...userRecord });
-      showNotification("success", "Cập nhập hồ sơ thông tin quân nhân thành công!")
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    dispatch(userActions.actions.getUserProfile());
+  }, [dispatch, userActions]);
 
   const handleSubmitEditMember = async (memberData) => {
     try {
@@ -84,8 +82,8 @@ const UserInfo = () => {
         SoBHXH: userOthersFormValue.SoBHXH,
         TinhTrangHonNhan: userOthersFormValue.TinhTrangHonNhan,
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
-        user_id: memberData.user_id,
       };
+      console.log("Data", data)
       await userAPI.updateUserProfile({ ...data });
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {
@@ -111,14 +109,18 @@ const UserInfo = () => {
           <Breadcrumb title="Hồ sơ người dùng" />
         </Col>
       </Row>
-      <div>
-        <MemberControl
-          flag="user-profile"
-          renderActions={renderActions}
-          onSubmit={handleSubmitEditMember}
-          initialMember={userInfo}
-        />
-      </div>
+      {userProfile.isLoading ? (
+        <Loading />
+      ) : (
+        <div>
+          <MemberControl
+            flag="user-profile"
+            renderActions={renderActions}
+            onSubmit={handleSubmitEditMember}
+            initialMember={userData}
+          />
+        </div>
+      )}
     </>
   );
 };

@@ -523,7 +523,6 @@ const MemberBasic = ({
                   }
                   format={DATE_FORMAT}
                   onChange={(date) => {
-                    console.log(date);
                     if (date) {
                       const time = moment(date).valueOf().toString();
                       handleChangeValue({ NgayTaiNgu: time });

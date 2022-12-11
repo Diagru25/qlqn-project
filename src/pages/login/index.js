@@ -45,6 +45,12 @@ const Login = () => {
     return <Navigate to={adminRoute.DASHBOARD} replace={true} />;
   }
 
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter") {
+      formik.handleSubmit();
+    }
+  } 
+
   return (
     <section className={styles["wrapper"]}>
       <div className={styles["header"]}>Quản lý thông tin quân nhân</div>
@@ -63,6 +69,7 @@ const Login = () => {
                 placeholder="Tên đăng nhập"
                 value={formik.values.username}
                 onChange={formik.handleChange}
+                onKeyDown={handleEnterKey}
               />
             </Form.Item>
             <Form.Item
@@ -74,6 +81,7 @@ const Login = () => {
                 placeholder="Mật khẩu"
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                onKeyDown={handleEnterKey}
               />
             </Form.Item>
             <Form.Item>

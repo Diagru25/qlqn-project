@@ -1,15 +1,15 @@
 const prefix = "USER_"
 
 const types = {
-    GET_USER_INFO: prefix + "GET_USER_INFO",
+    GET_USER_PROFILE: prefix + "GET_USER_PROFILE",
     GET_USER_LOGS: prefix + "GET_USER_LOGS",
     UPDATE_STATE: prefix + "UPDATE_STATE",
 }
 
 const actions = {
-    getUserInfo: () => {
+    getUserProfile: () => {
         return {
-            type: types.GET_USER_INFO,
+            type: types.GET_USER_PROFILE,
             payload: {}
         }
     },

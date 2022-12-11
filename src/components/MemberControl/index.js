@@ -1,5 +1,5 @@
 import { Affix, Space } from "antd";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo } from "react";
 import MemberBasic from "./components/MemberBasic";
 import MemberCorporate from "./components/MemberCorporate";
 import MemberCyberWarfare from "./components/MemberCyberWarfare";
@@ -19,6 +19,7 @@ const MemberControl = ({ flag, renderActions, onSubmit, initialMember }) => {
     userFormError,
     handleUserFormChange,
   } = useMemberControl(onSubmit, initialMember);
+
 
   if (flag === "member-detail") {
     disabled = true;

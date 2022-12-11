@@ -18,6 +18,9 @@ const DropdownMenu = () => {
   // const userProfile = useSelector((state) => state.userReducer.userProfile);
   const { authActions, userActions } = useActions();
 
+  const userProfile = useSelector((state) => state.userReducer.userProfile);
+  const { HoVaTen } = userProfile.userProfile;
+
   // useEffect(() => {
   //   dispatch(userActions.actions.getUserInfo())
   // }, [dispatch, userActions])
@@ -75,7 +78,7 @@ const DropdownMenu = () => {
         >
           <Space>
             <img className={styles["avatar"]} src={avatar} alt="Ảnh avatar" />
-            <span className={styles["fullname"]}>Nguyễn Văn A</span>
+            <span className={styles["fullname"]}>{HoVaTen}</span>
             <DownOutlined className={styles["arrowdown-btn"]} />
           </Space>
         </div>
