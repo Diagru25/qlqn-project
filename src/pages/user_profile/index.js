@@ -83,7 +83,7 @@ const UserInfo = () => {
         TinhTrangHonNhan: userOthersFormValue.TinhTrangHonNhan,
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
       };
-      console.log("Data", data)
+      console.log("Data", data);
       await userAPI.updateUserProfile({ ...data });
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {

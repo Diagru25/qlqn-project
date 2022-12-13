@@ -143,6 +143,7 @@ const useMemberControl = (onSubmit, initialMember) => {
   useEffect(() => {
     if (initialMember) {
       console.log("initital userID", initialMember.user_id);
+      console.log("initial member", initialMember);
       userFormik.setValues({
         userBasicFormValue: {
           HoVaTen: initialMember.HoVaTen,

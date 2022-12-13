@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import CardTitleStatistic from "../../components/CardTitleStatistic";
 import FilterModal from "../../components/FilterModal";
+import { usePermissionControl } from "../../hooks/usePermissionControl";
 import useActions from "../../redux/useActions";
 import BarChartDashboard from "./components/BarChart";
 import PieChartDashboard from "./components/PieChart";
@@ -12,6 +13,8 @@ import styles from "./style.module.css";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+
+  usePermissionControl();
 
   const memberListStatistic = useSelector(
     (state) => state.memberListReducer.memberListStatistic

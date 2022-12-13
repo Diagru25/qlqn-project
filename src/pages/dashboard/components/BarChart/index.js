@@ -61,7 +61,7 @@ const data = [
   {
     name: "11/2022",
     uv: 95,
-    colorgit: "#ADC6FF",
+    color: "#ADC6FF",
   },
   {
     name: "12/2022",

@@ -24,7 +24,6 @@ const UserPermissions = () => {
 
   const handleCheckboxChange = (e, recordUpdate) => {
     //const checkValue = e.target.checked;
-    console.log("Record update", recordUpdate);
     dispatch(
       permissionActions.actions.updatePermission(currentModule.Id, recordUpdate)
     );

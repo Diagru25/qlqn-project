@@ -18,6 +18,15 @@ const memberApi = {
       isAuthRequest: true,
     });
   },
+  updateMemberList: (memberId, data = {}) => {
+    console.log("data update", data);
+    return request({
+      url: `/admin/v1/canbo/${memberId}`,
+      method: "PUT",
+      data: data,
+      isAuthRequest: true,
+    });
+  },
   getMemberPosition: (page_index, page_size, text) => {
     return request({
       url: "/admin/v1/chucvu",

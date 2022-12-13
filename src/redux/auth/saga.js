@@ -37,7 +37,6 @@ function* login_saga(action) {
     const { username, password } = action.payload;
 
     const res = yield authApi.login(username, password);
-    console.log(res);
 
     if (res.statusCode === 200) {
       const sessionKey = res.result.token;

@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import authActions from "../../redux/auth/action";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { clientRoute } from "../../constants/route.constant";
+import userAPI from "../../services/apis/userAPI";
+import { writeLocalStorage } from "../../helper/localStorage";
+import { FULL_NAME } from "../../constants/auth.constant";
 
 const { Content } = Layout;
 
@@ -20,6 +23,8 @@ export const AdminLayout = () => {
   const { isLoggedIn } = useSelector((state) => state.authReducer);
 
   const [collapsed, setCollapsed] = useState(true);
+
+
   if (!isLoggedIn) {
     return <Navigate to={clientRoute.LOGIN} replace={true} />;
   } else {

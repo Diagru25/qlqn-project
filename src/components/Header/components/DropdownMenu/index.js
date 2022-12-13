@@ -1,31 +1,42 @@
 import { Dropdown, Menu, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { adminRoute, clientRoute } from "../../../../constants/route.constant";
+
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { adminRoute, clientRoute } from "../../../../constants/route.constant";
 import useActions from "../../../../redux/useActions";
 import { replace } from "formik";
-import avatar from "../../../../assets/images/1239288.png";
 
+import avatar from "../../../../assets/images/1239288.png";
 import styles from "./style.module.css";
-import { useEffect } from "react";
+import {  writeLocalStorage } from "../../../../helper/localStorage";
+import { FULL_NAME } from "../../../../constants/auth.constant";
+import userAPI from "../../../../services/apis/userAPI";
 
 const DropdownMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const { isLoggedIn } = useSelector((state) => state.authReducer);
+  const [hoTen, setHoTen] = useState("");
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
+  const getUserProfile = async () => {
+    try {
+      const res = await userAPI.getUserProfile();
+      const { HoVaTen } = res.result.Record;
+      setHoTen(HoVaTen);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // const userProfile = useSelector((state) => state.userReducer.userProfile);
-  const { authActions, userActions } = useActions();
-
-  const userProfile = useSelector((state) => state.userReducer.userProfile);
-  const { HoVaTen } = userProfile.userProfile;
-
-  // useEffect(() => {
-  //   dispatch(userActions.actions.getUserInfo())
-  // }, [dispatch, userActions])
-
-  // console.log("userProl", userProfile);
+  const { authActions } = useActions();
 
   const actions = {
     USER_INFO: "user-info",
@@ -78,7 +89,7 @@ const DropdownMenu = () => {
         >
           <Space>
             <img className={styles["avatar"]} src={avatar} alt="Ảnh avatar" />
-            <span className={styles["fullname"]}>{HoVaTen}</span>
+            <span className={styles["fullname"]}>{hoTen}</span>
             <DownOutlined className={styles["arrowdown-btn"]} />
           </Space>
         </div>

@@ -9,63 +9,52 @@ import styles from "./style.module.css";
 import useMemberControl from "./hooks/useMemberControl";
 
 const MemberControl = ({ flag, renderActions, onSubmit, initialMember }) => {
-  let disabled = false;
-  const {
-    //userBasicFormValue,
-    //userCorporateFormValue,
-    //userQualificationFormValue,
-    handleSubmit,
-    memberState,
-    userFormError,
-    handleUserFormChange,
-  } = useMemberControl(onSubmit, initialMember);
+  // let disabled = false;
+  const { handleSubmit, memberState, userFormError, handleUserFormChange } =
+    useMemberControl(onSubmit, initialMember);
 
-
-  if (flag === "member-detail") {
-    disabled = true;
-  }
+  // if (flag === "member-detail") {
+  //   disabled = true;
+  // }
   return (
     <div className={styles["be-member-info"]}>
       <Space direction="vertical" style={{ width: "100%" }}>
         <MemberBasic
-          disabled={disabled}
+          // disabled={disabled}
           userBasicFormValue={memberState.userBasicFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberCorporate
-          disabled={disabled}
+          // disabled={disabled}
           userCorporateFormValue={memberState.userCorporateFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberQualification
-          disabled={disabled}
+          // disabled={disabled}
           userQualificationFormValue={memberState.userQualificationFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberCyberWarfare
-          disabled={disabled}
+          // disabled={disabled}
           userCyberWarfareFormValue={memberState.userCyberWarfareFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberOthers
-          disabled={disabled}
+          // disabled={disabled}
           userOthersFormValue={memberState.userOthersFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
-        {flag === "member-detail" ? (
-          <div style={{ display: "none" }}></div>
-        ) : (
-          <Affix offsetBottom={0}>
-            <div className={styles["be-member-info__action"]}>
-              {renderActions(handleSubmit)}
-            </div>
-          </Affix>
-        )}
+
+        <Affix offsetBottom={0}>
+          <div className={styles["be-member-info__action"]}>
+            {renderActions(handleSubmit)}
+          </div>
+        </Affix>
       </Space>
     </div>
   );

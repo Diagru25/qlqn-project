@@ -5,7 +5,7 @@ import { Button, Card, Checkbox, Form, Input } from "antd";
 import { useFormik } from "formik";
 
 import authActions from "../../redux/auth/action";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { adminRoute } from "../../constants/route.constant";
 
 const Login = () => {
