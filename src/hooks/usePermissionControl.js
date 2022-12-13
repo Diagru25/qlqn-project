@@ -14,7 +14,6 @@ export const usePermissionControl = () => {
         (state) => state.permissionReducer.currentModule
       );
 
-      console.log("qwer",currentModule);
 
       const getUserProfile = await userAPI.getUserProfile();
     } catch (error) {}

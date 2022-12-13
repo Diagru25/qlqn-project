@@ -37,7 +37,6 @@ function* getUserLogs_saga(action) {
   try {
     const payload = action.payload;
     const res = yield userAPI.getUserLogs(payload.page_index);
-    console.log("user log", res)
     const { items, page_index, page_size, total } = res.result;
     yield put(
       userActions.actions.updateState({

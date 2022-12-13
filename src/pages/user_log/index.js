@@ -18,7 +18,6 @@ const UserLog = () => {
   const { userActions } = useActions();
 
   useEffect(() => {
-    console.log("useEffect 1", pagination);
     dispatch(userActions.actions.getUserLogs(pagination.current));
   }, [dispatch, userActions, pagination]);
 

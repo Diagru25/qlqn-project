@@ -72,9 +72,7 @@ const DetailMember = () => {
         TinhTrangHonNhan: userOthersFormValue.TinhTrangHonNhan,
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
       };
-      console.log("Data", data);
 
-      console.log("state", state);
       await memberApi.updateMemberList(state, { ...data });
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {

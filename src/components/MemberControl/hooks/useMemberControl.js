@@ -142,8 +142,6 @@ const userValidSchema = Yup.object().shape({
 const useMemberControl = (onSubmit, initialMember) => {
   useEffect(() => {
     if (initialMember) {
-      console.log("initital userID", initialMember.user_id);
-      console.log("initial member", initialMember);
       userFormik.setValues({
         userBasicFormValue: {
           HoVaTen: initialMember.HoVaTen,
@@ -226,7 +224,6 @@ const useMemberControl = (onSubmit, initialMember) => {
   }, []);
   //const handleUserFormChange = useCallback();
 
-  //console.log(userFormik);
 
   return {
     // userBasicFormValue: userFormik.values.userBasicFormValue,

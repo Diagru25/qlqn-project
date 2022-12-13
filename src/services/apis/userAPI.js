@@ -2,7 +2,6 @@ import { request } from "./baseRequest";
 
 const userAPI = {
     getUserProfile: () => {
-        console.log("abc")
         return request({
             url: "/admin/v1/users",
             method: "GET",
@@ -20,7 +19,6 @@ const userAPI = {
         })
     },
     updateUserProfile: (data = {}) => {
-        console.log("data API", data);
         return request({
             url: "/admin/v1/users",
             method: "PUT",

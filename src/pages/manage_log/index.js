@@ -95,7 +95,6 @@ const ManageLog = () => {
     return { ...item, key: index };
   });
 
-  console.log(systemLog);
 
   return (
     <>

@@ -4,19 +4,15 @@ const { Search } = Input;
 
 const SearchField = ({ onSubmit }) => {
   const handleSearchHoTen = (value) => {
-    console.log("Hoten", value);
     onSubmit({ HoVaTen: value });
   };
   const handleSearchDonVi = (value) => {
-    console.log("DonVi", value);
     onSubmit({ DonVi: value });
   };
   const handleSearchNganhNghe = (value) => {
-    console.log("Nganh nghe", value);
     onSubmit({ NganhNgheDaoTao: value });
   };
   const handleSearchDiaLy = (value) => {
-    console.log("Dia ly", value);
     onSubmit({ NguyenQuan: value });
   };
 

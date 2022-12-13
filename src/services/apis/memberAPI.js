@@ -19,7 +19,6 @@ const memberApi = {
     });
   },
   updateMemberList: (memberId, data = {}) => {
-    console.log("data update", data);
     return request({
       url: `/admin/v1/canbo/${memberId}`,
       method: "PUT",

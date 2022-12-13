@@ -8,7 +8,6 @@ const AddMember = () => {
   const navigate = useNavigate();
 
   const handleSubmitAddMember = async (memberData) => {
-    console.log("äbc: ", memberData);
   };
 
   const renderActions = (onSubmit) => {

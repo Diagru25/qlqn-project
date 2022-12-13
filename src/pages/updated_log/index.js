@@ -12,8 +12,6 @@ const MemberUpdatedLog = () => {
 
   const { state } = useLocation();
 
-  console.log(state);
-
   const memberUpdatedLogs = useSelector(
     (state) => state.memberListReducer.memberUpdatedLogs
   );
@@ -22,8 +20,6 @@ const MemberUpdatedLog = () => {
     dispatch(memberActions.actions.getMemberUpdatedLogs(state));
   }, [dispatch, memberActions]);
 
-  console.log("member updated log", memberUpdatedLogs);
-
   const columns = [
     {
       title: "STT",
@@ -31,7 +27,6 @@ const MemberUpdatedLog = () => {
       key: "index",
       //render: (name) => <a>{name}</a>,
       render: (_, record) => {
-        console.log(record);
         return record.key + 1;
       },
       width: 20,

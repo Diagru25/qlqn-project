@@ -18,7 +18,6 @@ const UserInfo = () => {
   const userProfile = useSelector((state) => state.userReducer.userProfile);
   const userData = userProfile.userProfile;
 
-  console.log("abcd", userProfile);
 
   useEffect(() => {
     dispatch(userActions.actions.getUserProfile());
@@ -83,7 +82,6 @@ const UserInfo = () => {
         TinhTrangHonNhan: userOthersFormValue.TinhTrangHonNhan,
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
       };
-      console.log("Data", data);
       await userAPI.updateUserProfile({ ...data });
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {

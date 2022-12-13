@@ -41,7 +41,6 @@ function* login_saga(action) {
     if (res.statusCode === 200) {
       const sessionKey = res.result.token;
       writeLocalStorage(ACCESS_TOKEN, sessionKey);
-      console.log(ACCESS_TOKEN);
       yield put(
         authActions.actions.updateState({
           sessionKey: sessionKey,
@@ -51,7 +50,6 @@ function* login_saga(action) {
         })
       );
       showNotification("success", "Đăng nhập thành công")
-      console.log("Đăng nhập thành công");
     }
   } catch (error) {
     yield put(
@@ -71,7 +69,6 @@ function* logout_saga(action) {
   try {
     clearLocalStorage(ACCESS_TOKEN);
 
-    console.log("logout");
     yield put(
       authActions.actions.updateState({
         isLoggedIn: false,

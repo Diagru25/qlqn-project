@@ -33,23 +33,6 @@ const UserProfile = () => {
   useEffect(() => {
     dispatch(memberActions.actions.getMemberPosition());
   }, [dispatch, memberActions]);
-  // console.log(UserProfile.defaultProps);
-  // const newUserInfo = userInfo != null ? userInfo : UserProfile.defaultProps;
-
-  // const newUserInfo =
-  //   userInfo != null
-  //     ? { ...UserProfile.defaultProps, ...userInfo }
-  //     : { ...UserProfile.defaultProps };
-
-  // const initialValues = {
-  //   tenDangNhap: newUserInfo.Tendangnhap,
-  //   tenDayDu: newUserInfo.Tendaydu,
-  //   soDienThoai: newUserInfo.Dienthoai_mobile,
-  //   soDienThoai1: newUserInfo.Dienthoai_cd1,
-  //   soDienThoai2: newUserInfo.Dienthoai_cd2,
-  //   soDienThoai3: newUserInfo.Dienthoai_cd3,
-  //   ngaySinh: newUserInfo.Ngaysinh,
-  // };
 
   const initialValues = {
     tenDangNhap: "",

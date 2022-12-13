@@ -24,7 +24,6 @@ const reducer = (state = initialState, action) => {
       return state;
 
     case authActions.types.LOGIN:
-      console.log("Login State", state);
       return {
         ...state,
         ...{
@@ -36,7 +35,6 @@ const reducer = (state = initialState, action) => {
       return state;
 
     case authActions.types.UPDATE_STATE:
-      console.log("Update State", payload.state)
       return {
         ...state,
         ...payload.state,

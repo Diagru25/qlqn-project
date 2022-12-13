@@ -41,14 +41,19 @@ const UserPermissions = () => {
       dataIndex: "AllowView",
       key: "AllowView",
       width: "20%",
-      render: (value, record) => (
-        <Checkbox
-          checked={value}
-          onClick={(e) =>
-            handleCheckboxChange(e, { ...record, AllowView: e.target.checked })
-          }
-        />
-      ),
+      render: (value, record) => {
+        return (
+          <Checkbox
+            checked={value}
+            onClick={(e) => {
+              handleCheckboxChange(e, {
+                ...record,
+                AllowView: e.target.checked,
+              });
+            }}
+          />
+        );
+      },
     },
     {
       title: "Sửa đổi",

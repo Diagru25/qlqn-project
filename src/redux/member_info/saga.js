@@ -38,8 +38,6 @@ function* getMemberList_saga(action) {
       limitSize
     );
 
-    console.log("Member list", res.result);
-
     const { message, page, limit, total } = res.result;
 
     yield put(
