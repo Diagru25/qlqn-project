@@ -89,6 +89,9 @@ function* getPermissionList_saga(action) {
         },
       })
     );
+    if (error.status === 403) {
+      showNotification("error", "Lỗi phân quyền", "Bạn không có quyền xem danh sách quyền!")
+    }
   }
 }
 
@@ -128,7 +131,9 @@ function* updatePermission_saga(action) {
       }
     }
   } catch (error) {
-    console.log(error);
+    if (error.status === 403) {
+      showNotification("error", "Lỗi phân quyền", "Bạn không có quyền cập nhập quyền!");
+    }
   }
 }
 

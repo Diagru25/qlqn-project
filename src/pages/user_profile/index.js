@@ -1,14 +1,20 @@
-import { Button, Col, Row, Space } from "antd";
+import { Alert, Button, Col, Row, Space } from "antd";
 import { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+
 import MemberControl from "../../components/MemberControl";
 import { adminRoute } from "../../constants/route.constant";
 import { showNotification } from "../../helper/showNotification";
 import userAPI from "../../services/apis/userAPI";
 import Breadcrumb from "../../components/Breadcrumb";
-import { useDispatch, useSelector } from "react-redux";
 import useActions from "../../redux/useActions";
 import Loading from "../../components/Loading";
+import { makeMilitaryPdf } from "../../helper/web";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const UserInfo = () => {
   const navigate = useNavigate();
@@ -17,7 +23,6 @@ const UserInfo = () => {
 
   const userProfile = useSelector((state) => state.userReducer.userProfile);
   const userData = userProfile.userProfile;
-
 
   useEffect(() => {
     dispatch(userActions.actions.getUserProfile());
@@ -85,14 +90,34 @@ const UserInfo = () => {
       await userAPI.updateUserProfile({ ...data });
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {
-      console.log(error);
+      if (error.status === 403) {
+        showNotification(
+          "error",
+          "Lỗi phân quyền",
+          "Người dùng không có quyền cập nhập hồ sơ quân nhân!"
+        );
+      }
+      if (error.status === 500) {
+        showNotification(
+          "error",
+          "Lỗi server",
+          "Yêu cầu kiểm tra lại kết nối internet!"
+        );
+      }
     }
+  };
+
+  const printPdf = async () => {
+    const docDefinition = await makeMilitaryPdf(userProfile);
+    
+    pdfMake.createPdf(docDefinition).print();
   };
 
   const renderActions = (onSubmit) => {
     return (
       <Space>
         <Button onClick={() => navigate(adminRoute.DASHBOARD)}>Hủy</Button>
+        <Button onClick={printPdf}>Xuất file PDF</Button>
         <Button type="primary" onClick={onSubmit}>
           Lưu &#38; Hiển thị
         </Button>

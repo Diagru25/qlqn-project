@@ -3,13 +3,15 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import authApi from "../../services/apis/authApi";
 import Breadcrumb from "../../components/Breadcrumb";
+import { showNotification } from "../../helper/showNotification";
 
 const ManageLog = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [systemLog, setSystemLog] = useState({
     page_size: 20,
     page_index: 1,
     items: [],
-    isLoading: true,
   });
 
   const [pagination, setPagination] = useState({
@@ -32,9 +34,9 @@ const ManageLog = () => {
           items: items,
           page_index: page_index,
           page_size: page_size,
-          isLoading: false,
         };
       });
+      setIsLoading(false);
       setPagination((state) => {
         return {
           ...state,
@@ -43,6 +45,14 @@ const ManageLog = () => {
       });
     } catch (error) {
       console.log(error);
+      if (error.status === 403) {
+        showNotification(
+          "error",
+          "Lỗi phân quyền",
+          "Bạn không có quyền xem nhật ký quản lý!"
+        );
+      }
+      setIsLoading(false);
     }
   };
 
@@ -91,10 +101,11 @@ const ManageLog = () => {
     });
   };
 
-  const data = systemLog.items.map((item, index) => {
-    return { ...item, key: index };
-  });
-
+  const data = systemLog.items
+    ? systemLog.items.map((item, index) => {
+        return { ...item, key: index };
+      })
+    : [];
 
   return (
     <>

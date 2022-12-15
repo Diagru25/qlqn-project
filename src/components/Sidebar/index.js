@@ -23,7 +23,6 @@ const Sidebar = ({ collapsed }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [sidebarItems, setSidebarItems] = useState([]);
   const [openUnit, setOpenUnit] = useState(false);
   const [sizeUnit, setSizeUnit] = useState();
   // const isAdmin = usePermission();
@@ -35,50 +34,6 @@ const Sidebar = ({ collapsed }) => {
   const onClose = () => {
     setOpenUnit(false);
   };
-
-  // useEffect(() => {
-  //   handlePermission(isAdmin);
-  // }, [isAdmin]);
-
-  // const handlePermission = async (isAdmin) => {
-  //   if (isAdmin) {
-  //     setSidebarItems();
-  //   } else {
-  //     setSidebarItems([
-  //       {
-  //         key: "Tongquan",
-  //         icon: <DashboardOutlined />,
-  //         label: "Tổng quan",
-  //         onClick: () => {
-  //           navigate(adminRoute.DASHBOARD);
-  //         },
-  //       },
-  //       {
-  //         key: "Quanlythongtin",
-  //         icon: <ControlOutlined />,
-  //         label: "Quản lý thông tin",
-  //         children: [
-  //           {
-  //             label: "Danh sách QN",
-  //             onClick: () => {
-  //               navigate(adminRoute.MEMBERS);
-  //             },
-  //             key: "list-user",
-  //           },
-  //         ],
-  //       },
-
-  //       {
-  //         key: "Quanlydonvi",
-  //         icon: <DeploymentUnitOutlined />,
-  //         label: "Quản lý đơn vị",
-  //         onClick: () => {
-  //           showDrawer();
-  //         },
-  //       },
-  //     ]);
-  //   }
-  // };
 
   return (
     <>

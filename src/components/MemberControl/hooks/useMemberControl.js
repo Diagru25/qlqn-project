@@ -2,25 +2,6 @@ import { useFormik } from "formik";
 import { useCallback, useEffect } from "react";
 import * as Yup from "yup";
 
-// const useMemberControl = ({
-//     onSubmit
-//     initData
-// }) => {
-
-//        tao formik
-//        onsubmit cua formik = onSubmit
-//     useEffect(() => {
-//         set value formik
-//     }, [initData])
-
-//     handleChange = (obj={name: "son"}) => {//set laij vaule cho fomik}
-
-// return {
-//formik.values,
-//formik error,
-//formik.submit
-// handleCHange
-// }
 const initialValues = {
   userBasicFormValue: {
     HoVaTen: "",
@@ -201,7 +182,6 @@ const useMemberControl = (onSubmit, initialMember) => {
           TinhTrangHonNhan: initialMember.TinhTrangHonNhan,
           NganhQuanLy: initialMember.NganhQuanLy,
         },
-        user_id: initialMember.user_id,
       });
     }
   }, [initialMember]);

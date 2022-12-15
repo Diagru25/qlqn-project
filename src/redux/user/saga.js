@@ -16,10 +16,6 @@ function* getUserProfile_saga(action) {
         },
       })
     );
-    showNotification(
-      "success",
-      "Cập nhập hồ sơ thông tin quân nhân thành công!"
-    );
   } catch (error) {
     yield put(
       userActions.actions.updateState({
@@ -29,7 +25,7 @@ function* getUserProfile_saga(action) {
         },
       })
     );
-    showNotification("error", "Cập nhập hồ sơ quân nhân thất bại");
+    showNotification("error", "Cập nhập hồ sơ quân nhân lỗi!");
   }
 }
 
