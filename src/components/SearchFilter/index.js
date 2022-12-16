@@ -1,4 +1,6 @@
-import { Input, Space } from "antd";
+import { Col, Input, Row, Space } from "antd";
+
+import styles from "./style.module.css";
 
 const { Search } = Input;
 
@@ -18,36 +20,52 @@ const SearchField = ({ onSubmit }) => {
 
   return (
     <>
-      <Space direction="vertical">
-        <Search
-          placeholder="Tìm kiếm họ tên..."
-          allowClear
-          enterButton="Tìm kiếm"
-          size="large"
-          onSearch={handleSearchHoTen}
-        />
-        <Search
-          placeholder="Tìm kiếm đơn vị..."
-          allowClear
-          enterButton="Tìm kiếm"
-          size="large"
-          onSearch={handleSearchDonVi}
-        />
-        <Search
-          placeholder="Tìm kiếm chuyên ngành..."
-          allowClear
-          enterButton="Tìm kiếm"
-          size="large"
-          onSearch={handleSearchNganhNghe}
-        />
-        <Search
-          placeholder="Tìm kiếm địa lý..."
-          allowClear
-          enterButton="Tìm kiếm"
-          size="large"
-          onSearch={handleSearchDiaLy}
-        />
-      </Space>
+      <Row gutter={24}>
+        <Col span={12}>
+          <Space direction="vertical">
+            <div className={styles["search-filter__title"]}>
+              Tìm kiếm theo họ tên
+            </div>
+            <Search
+              placeholder="Tìm kiếm họ tên..."
+              allowClear
+              size="large"
+              onSearch={handleSearchHoTen}
+            />
+            <div className={styles["search-filter__title"]}>
+              Tìm kiếm theo đơn vị
+            </div>
+            <Search
+              placeholder="Tìm kiếm đơn vị..."
+              allowClear
+              size="large"
+              onSearch={handleSearchDonVi}
+            />
+          </Space>
+        </Col>
+        <Col span={12}>
+          <Space direction="vertical">
+            <div className={styles["search-filter__title"]}>
+              Tìm kiếm theo chuyên ngành
+            </div>
+            <Search
+              placeholder="Tìm kiếm chuyên ngành..."
+              allowClear
+              size="large"
+              onSearch={handleSearchNganhNghe}
+            />
+            <div className={styles["search-filter__title"]}>
+              Tìm kiếm theo khu vực địa lý
+            </div>
+            <Search
+              placeholder="Tìm kiếm địa lý..."
+              allowClear
+              size="large"
+              onSearch={handleSearchDiaLy}
+            />
+          </Space>
+        </Col>
+      </Row>
     </>
   );
 };

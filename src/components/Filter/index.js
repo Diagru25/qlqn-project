@@ -11,11 +11,7 @@ const FilterButton = ({ onSubmit }) => {
 
   useEffect(() => {
     dispatch(memberActions.actions.getMemberList());
-  });
-
-  const memberList = useSelector((state) => state.memberListReducer.memberList);
-  
-  
+  });  
 
   return (
     <>

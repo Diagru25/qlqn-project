@@ -125,14 +125,7 @@ const MemberCorporate = ({
               </Form.Item>
               <Form.Item
                 label="Chức vụ đảng"
-                validateStatus={
-                  errors?.userCorporateFormValue?.ChucVuDang ? "error" : ""
-                }
-                help={
-                  errors?.userCorporateFormValue?.ChucVuDang &&
-                  errors?.userCorporateFormValue?.ChucVuDang
-                }
-                required
+            
                 //validateStatus={errors.name ? "error" : ""}
                 //help={errors.name}
               >

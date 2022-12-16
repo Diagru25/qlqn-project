@@ -30,7 +30,6 @@ const initialMemberList = {
 
 const Members = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const { memberActions } = useActions();
@@ -100,24 +99,9 @@ const Members = () => {
       setIsLoading(false);
     }
   };
-  // const memberList = useSelector((state) => state.memberListReducer.memberList);
-
-  // useEffect(() => {
-  //   dispatch(
-  //     memberActions.actions.getMemberList(
-  //       searchVal.DonVi,
-  //       searchVal.HoVaTen,
-  //       searchVal.NganhNgheDaoTao,
-  //       searchVal.NguyenQuan,
-  //       pagination.current,
-  //       10
-  //     )
-  //   );
-  // }, [dispatch, memberActions, searchVal, pagination]);
-
-  // useEffect(() => {}, [memberList.total, memberList.limit]);
 
   const searchHandler = (value = {}) => {
+    setIsLoading(true);
     setSearchVal((state) => {
       return {
         ...state,
@@ -256,7 +240,7 @@ const Members = () => {
         </Col>
         <Col span={12}>
           <div className={styles["right-control"]}>
-            <Button onClick={handleExport}>Xuất file</Button>
+            <Button onClick={handleExport}>Xuất file Excel</Button>
             <Button onClick={() => navigate(adminRoute.ADD_MEMBER)}>
               Tạo mới
             </Button>
@@ -266,6 +250,7 @@ const Members = () => {
               trigger="click"
               open={openSearch}
               onOpenChange={handleOpenSearchChange}
+              style={{width: 400}}
             >
               <Button type="primary">Tìm kiếm</Button>
             </Popover>
