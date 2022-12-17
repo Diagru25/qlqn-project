@@ -29,11 +29,8 @@ const UserInfo = () => {
 
   useEffect(() => {
     dispatch(userActions.actions.getUserProfile());
-  }, [dispatch, userActions, verifyActions, userData.user_id]);
-
-  useEffect(() => {
     dispatch(verifyActions.actions.getVerifyInfo(userData.user_id));
-  }, [verifyActions, userData.user_id, dispatch]);
+  }, [dispatch, userActions, verifyActions, userData.user_id]);
 
   const handleSubmitEditMember = async (memberData) => {
     try {
