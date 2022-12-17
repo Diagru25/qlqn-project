@@ -96,14 +96,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Bí danh"
-                validateStatus={
-                  errors?.userBasicFormValue?.BiDanh ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.BiDanh &&
-                  errors?.userBasicFormValue?.BiDanh
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.BiDanh ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.BiDanh &&
+                //   errors?.userBasicFormValue?.BiDanh
+                // }
+                // required
               >
                 <Input
                   placeholder="Bí danh"
@@ -111,23 +111,23 @@ const MemberBasic = ({
                   //value={name}
                   //onChange={}
                   value={userBasicFormValue.BiDanh}
-                  onChange={(e) =>
-                    handleChangeValue({ BiDanh: e.target.value })
-                  }
+                  onChange={(e) => {
+                    handleChangeValue({ BiDanh: e.target.value });
+                  }}
                   disabled={disabled}
                   allowClear
                 />
               </Form.Item>
               <Form.Item
                 label="Tên khác"
-                validateStatus={
-                  errors?.userBasicFormValue?.TenKhac ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.TenKhac &&
-                  errors?.userBasicFormValue?.TenKhac
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.TenKhac ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.TenKhac &&
+                //   errors?.userBasicFormValue?.TenKhac
+                // }
+                // required
               >
                 <Input
                   placeholder="Tên khác"
@@ -168,14 +168,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Số CMND"
-                validateStatus={
-                  errors?.userBasicFormValue?.SoCMND ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.SoCMND &&
-                  errors?.userBasicFormValue?.SoCMND
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.SoCMND ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.SoCMND &&
+                //   errors?.userBasicFormValue?.SoCMND
+                // }
+                // required
               >
                 <Input
                   placeholder="Số CMND"
@@ -192,14 +192,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Giới tính"
-                validateStatus={
-                  errors?.userBasicFormValue?.GioiTinh ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.GioiTinh &&
-                  errors?.userBasicFormValue?.GioiTinh
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.GioiTinh ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.GioiTinh &&
+                //   errors?.userBasicFormValue?.GioiTinh
+                // }
+                // required
               >
                 <Select
                   allowClear
@@ -312,14 +312,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Ngày nhận cấp bậc"
-                validateStatus={
-                  errors?.userBasicFormValue?.NgayNhanCapBac ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.NgayNhanCapBac &&
-                  errors?.userBasicFormValue?.NgayNhanCapBac
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.NgayNhanCapBac ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.NgayNhanCapBac &&
+                //   errors?.userBasicFormValue?.NgayNhanCapBac
+                // }
+                // required
               >
                 <DatePicker
                   name="NgayNhanCapBac"
@@ -344,14 +344,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Ngày nhận chức vụ"
-                validateStatus={
-                  errors?.userBasicFormValue?.NgayNhanChucVu ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.NgayNhanChucVu &&
-                  errors?.userBasicFormValue?.NgayNhanChucVu
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.NgayNhanChucVu ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.NgayNhanChucVu &&
+                //   errors?.userBasicFormValue?.NgayNhanChucVu
+                // }
+                // required
               >
                 <DatePicker
                   placeholder="Ngày nhận chức vụ"
@@ -378,14 +378,14 @@ const MemberBasic = ({
             <Col span={12}>
               <Form.Item
                 label="Ngày sinh"
-                validateStatus={
-                  errors?.userBasicFormValue?.NgaySinh ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.NgaySinh &&
-                  errors?.userBasicFormValue?.NgaySinh
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.NgaySinh ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.NgaySinh &&
+                //   errors?.userBasicFormValue?.NgaySinh
+                // }
+                // required
               >
                 <DatePicker
                   placeholder="Ngày sinh"
@@ -410,14 +410,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Dân tộc"
-                validateStatus={
-                  errors?.userBasicFormValue?.DanToc ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.DanToc &&
-                  errors?.userBasicFormValue?.DanToc
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.DanToc ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.DanToc &&
+                //   errors?.userBasicFormValue?.DanToc
+                // }
+                // required
               >
                 <Input
                   placeholder="Dân tộc"
@@ -458,14 +458,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Ngày nhập ngũ"
-                validateStatus={
-                  errors?.userBasicFormValue?.NgayNhapNgu ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.NgayNhapNgu &&
-                  errors?.userBasicFormValue?.NgayNhapNgu
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.NgayNhapNgu ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.NgayNhapNgu &&
+                //   errors?.userBasicFormValue?.NgayNhapNgu
+                // }
+                // required
               >
                 <DatePicker
                   placeholder="Ngày nhập ngũ"
@@ -536,14 +536,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Nguyên quán"
-                validateStatus={
-                  errors?.userBasicFormValue?.NguyenQuan ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.NguyenQuan &&
-                  errors?.userBasicFormValue?.NguyenQuan
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.NguyenQuan ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.NguyenQuan &&
+                //   errors?.userBasicFormValue?.NguyenQuan
+                // }
+                // required
                 //validateStatus={errors.description ? "error" : ""}
                 //help={errors.description}
               >
@@ -561,14 +561,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="Thường trú"
-                validateStatus={
-                  errors?.userBasicFormValue?.ThuongTru ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.ThuongTru &&
-                  errors?.userBasicFormValue?.ThuongTru
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.ThuongTru ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.ThuongTru &&
+                //   errors?.userBasicFormValue?.ThuongTru
+                // }
+                // required
                 //validateStatus={errors.description ? "error" : ""}
                 //help={errors.description}
               >
@@ -586,14 +586,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="TP gia đình"
-                validateStatus={
-                  errors?.userBasicFormValue?.TPGiaDinh ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.TPGiaDinh &&
-                  errors?.userBasicFormValue?.TPGiaDinh
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.TPGiaDinh ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.TPGiaDinh &&
+                //   errors?.userBasicFormValue?.TPGiaDinh
+                // }
+                // required
                 //validateStatus={errors.description ? "error" : ""}
                 //help={errors.description}
               >
@@ -611,14 +611,14 @@ const MemberBasic = ({
               </Form.Item>
               <Form.Item
                 label="TP bản thân"
-                validateStatus={
-                  errors?.userBasicFormValue?.TPBanThan ? "error" : ""
-                }
-                help={
-                  errors?.userBasicFormValue?.TPBanThan &&
-                  errors?.userBasicFormValue?.TPBanThan
-                }
-                required
+                // validateStatus={
+                //   errors?.userBasicFormValue?.TPBanThan ? "error" : ""
+                // }
+                // help={
+                //   errors?.userBasicFormValue?.TPBanThan &&
+                //   errors?.userBasicFormValue?.TPBanThan
+                // }
+                // required
                 //validateStatus={errors.description ? "error" : ""}
                 //help={errors.description}
               >

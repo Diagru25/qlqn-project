@@ -1,4 +1,4 @@
-import { Alert, Button, Col, Row, Space } from "antd";
+import { Button, Col, Row, Space } from "antd";
 import { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const UserInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const { userActions } = useActions();
 
   const userProfile = useSelector((state) => state.userReducer.userProfile);
@@ -87,7 +88,10 @@ const UserInfo = () => {
         TinhTrangHonNhan: userOthersFormValue.TinhTrangHonNhan,
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
       };
+      console.log(data);
+      setIsLoading(true);
       await userAPI.updateUserProfile({ ...data });
+      setIsLoading(false);
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {
       if (error.status === 403) {
@@ -109,7 +113,7 @@ const UserInfo = () => {
 
   const printPdf = async () => {
     const docDefinition = await makeMilitaryPdf(userProfile);
-    
+
     pdfMake.createPdf(docDefinition).print();
   };
 
@@ -137,6 +141,7 @@ const UserInfo = () => {
       ) : (
         <div>
           <MemberControl
+            isLoading={isLoading}
             flag="user-profile"
             renderActions={renderActions}
             onSubmit={handleSubmitEditMember}

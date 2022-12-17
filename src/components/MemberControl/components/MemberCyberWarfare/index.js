@@ -36,16 +36,16 @@ const MemberCyberWarfare = ({
             <Col span={12}>
               <Form.Item
                 label="Cấp tổ chức đào tạo"
-                required
-                validateStatus={
-                  errors?.userCyberWarfareFormValue?.CapToChucDaoTao
-                    ? "error"
-                    : ""
-                }
-                help={
-                  errors?.userCyberWarfareFormValue?.CapToChucDaoTao &&
-                  errors?.userCyberWarfareFormValue?.CapToChucDaoTao
-                }
+                // required
+                // validateStatus={
+                //   errors?.userCyberWarfareFormValue?.CapToChucDaoTao
+                //     ? "error"
+                //     : ""
+                // }
+                // help={
+                //   errors?.userCyberWarfareFormValue?.CapToChucDaoTao &&
+                //   errors?.userCyberWarfareFormValue?.CapToChucDaoTao
+                // }
               >
                 <Input
                   placeholder="Cấp tổ chức đào tạo"
@@ -60,16 +60,16 @@ const MemberCyberWarfare = ({
               </Form.Item>
               <Form.Item
                 label="Chứng chỉ đào tạo"
-                validateStatus={
-                  errors?.userCyberWarfareFormValue?.ChungChiDaoTao
-                    ? "error"
-                    : ""
-                }
-                help={
-                  errors?.userCyberWarfareFormValue?.ChungChiDaoTao &&
-                  errors?.userCyberWarfareFormValue?.ChungChiDaoTao
-                }
-                required
+                // validateStatus={
+                //   errors?.userCyberWarfareFormValue?.ChungChiDaoTao
+                //     ? "error"
+                //     : ""
+                // }
+                // help={
+                //   errors?.userCyberWarfareFormValue?.ChungChiDaoTao &&
+                //   errors?.userCyberWarfareFormValue?.ChungChiDaoTao
+                // }
+                // required
               >
                 <Input
                   placeholder="Chứng chỉ đào tạo"
@@ -84,16 +84,16 @@ const MemberCyberWarfare = ({
               </Form.Item>
               <Form.Item
                 label="Loại hình đào tạo"
-                validateStatus={
-                  errors?.userCyberWarfareFormValue?.LoaiHinhDaoTao
-                    ? "error"
-                    : ""
-                }
-                help={
-                  errors?.userCyberWarfareFormValue?.LoaiHinhDaoTao &&
-                  errors?.userCyberWarfareFormValue?.LoaiHinhDaoTao
-                }
-                required
+                // validateStatus={
+                //   errors?.userCyberWarfareFormValue?.LoaiHinhDaoTao
+                //     ? "error"
+                //     : ""
+                // }
+                // help={
+                //   errors?.userCyberWarfareFormValue?.LoaiHinhDaoTao &&
+                //   errors?.userCyberWarfareFormValue?.LoaiHinhDaoTao
+                // }
+                // required
               >
                 <Select
                   allowClear
@@ -116,14 +116,14 @@ const MemberCyberWarfare = ({
             <Col span={12}>
               <Form.Item
                 label="Cơ sở đào tạo"
-                required
-                validateStatus={
-                  errors?.userCyberWarfareFormValue?.CoSoDaoTao ? "error" : ""
-                }
-                help={
-                  errors?.userCyberWarfareFormValue?.CoSoDaoTao &&
-                  errors?.userCyberWarfareFormValue?.CoSoDaoTao
-                }
+                // required
+                // validateStatus={
+                //   errors?.userCyberWarfareFormValue?.CoSoDaoTao ? "error" : ""
+                // }
+                // help={
+                //   errors?.userCyberWarfareFormValue?.CoSoDaoTao &&
+                //   errors?.userCyberWarfareFormValue?.CoSoDaoTao
+                // }
               >
                 <Input
                   placeholder="Cơ sở đào tạo"
@@ -138,16 +138,16 @@ const MemberCyberWarfare = ({
               </Form.Item>
               <Form.Item
                 label="Nội dung đào tạo"
-                validateStatus={
-                  errors?.userCyberWarfareFormValue?.NoiDungDaoTao
-                    ? "error"
-                    : ""
-                }
-                help={
-                  errors?.userCyberWarfareFormValue?.NoiDungDaoTao &&
-                  errors?.userCyberWarfareFormValue?.NoiDungDaoTao
-                }
-                required
+                // validateStatus={
+                //   errors?.userCyberWarfareFormValue?.NoiDungDaoTao
+                //     ? "error"
+                //     : ""
+                // }
+                // help={
+                //   errors?.userCyberWarfareFormValue?.NoiDungDaoTao &&
+                //   errors?.userCyberWarfareFormValue?.NoiDungDaoTao
+                // }
+                // required
               >
                 <Input.TextArea
                   name="NoiDungDaoTao"
@@ -160,16 +160,16 @@ const MemberCyberWarfare = ({
               </Form.Item>
               <Form.Item
                 label="Ngành nghề đào tạo"
-                required
-                validateStatus={
-                  errors?.userCyberWarfareFormValue?.NganhNgheDaoTao
-                    ? "error"
-                    : ""
-                }
-                help={
-                  errors?.userCyberWarfareFormValue?.NganhNgheDaoTao &&
-                  errors?.userCyberWarfareFormValue?.NganhNgheDaoTao
-                }
+                // required
+                // validateStatus={
+                //   errors?.userCyberWarfareFormValue?.NganhNgheDaoTao
+                //     ? "error"
+                //     : ""
+                // }
+                // help={
+                //   errors?.userCyberWarfareFormValue?.NganhNgheDaoTao &&
+                //   errors?.userCyberWarfareFormValue?.NganhNgheDaoTao
+                // }
               >
                 <Input
                   placeholder="Ngành nghề đào tạo"

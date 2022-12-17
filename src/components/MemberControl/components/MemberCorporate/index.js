@@ -144,14 +144,14 @@ const MemberCorporate = ({
               </Form.Item>
               <Form.Item
                 label="Chức vụ đoàn"
-                validateStatus={
-                  errors?.userCorporateFormValue?.ChucVuDoan ? "error" : ""
-                }
-                help={
-                  errors?.userCorporateFormValue?.ChucVuDoan &&
-                  errors?.userCorporateFormValue?.ChucVuDoan
-                }
-                required
+                // validateStatus={
+                //   errors?.userCorporateFormValue?.ChucVuDoan ? "error" : ""
+                // }
+                // help={
+                //   errors?.userCorporateFormValue?.ChucVuDoan &&
+                //   errors?.userCorporateFormValue?.ChucVuDoan
+                // }
+                // required
                 //validateStatus={errors.name ? "error" : ""}
                 //help={errors.name}
               >
