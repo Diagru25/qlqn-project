@@ -29,8 +29,11 @@ const UserInfo = () => {
 
   useEffect(() => {
     dispatch(userActions.actions.getUserProfile());
-    dispatch(verifyActions.actions.getVerifyInfo(userData.user_id));
   }, [dispatch, userActions, verifyActions, userData.user_id]);
+
+  useEffect(() => {
+    dispatch(verifyActions.actions.getVerifyInfo(userData.user_id));
+  }, [verifyActions, userData.user_id, dispatch]);
 
   const handleSubmitEditMember = async (memberData) => {
     try {
@@ -91,7 +94,6 @@ const UserInfo = () => {
         TinhTrangHonNhan: userOthersFormValue.TinhTrangHonNhan,
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
       };
-      console.log(data);
       setIsLoading(true);
       await userAPI.updateUserProfile({ ...data });
       setIsLoading(false);
