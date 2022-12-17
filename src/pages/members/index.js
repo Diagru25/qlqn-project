@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { adminRoute } from "../../constants/route.constant";
 
 import styles from "./style.module.css";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useActions from "../../redux/useActions";
 import SearchField from "../../components/SearchFilter";
@@ -32,13 +31,12 @@ const Members = () => {
   const navigate = useNavigate();
 
   const [searchVal, setSearchVal] = useState(initialSearchVal);
-  const { memberActions } = useActions();
 
   const [memberList, setMemberList] = useState(initialMemberList);
   const [isLoading, setIsLoading] = useState(true);
   const [openSearch, setOpenSearch] = useState(false);
   const [pagination, setPagination] = useState({
-    pageSize: 4,
+    pageSize: 10,
     total: 0,
     current: 1,
   });
