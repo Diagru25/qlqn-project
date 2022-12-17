@@ -30,6 +30,7 @@ const AddMember = () => {
       </Row>
       <div>
         <MemberControl
+          verifyInfo=""
           renderActions={renderActions}
           onSubmit={handleSubmitAddMember}
         />

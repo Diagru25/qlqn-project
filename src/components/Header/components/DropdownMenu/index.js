@@ -13,17 +13,20 @@ import styles from "./style.module.css";
 import {  writeLocalStorage } from "../../../../helper/localStorage";
 import { FULL_NAME } from "../../../../constants/auth.constant";
 import userAPI from "../../../../services/apis/userAPI";
+import { showNotification } from "../../../../helper/showNotification";
 
 const DropdownMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { isLoggedIn } = useSelector((state) => state.authReducer);
+  const { recover_data } = useSelector((state) => state.verifyReducer.verifyInfo);
+
   const [hoTen, setHoTen] = useState("");
 
   useEffect(() => {
     getUserProfile();
-  }, []);
+  }, [recover_data]);
 
   const getUserProfile = async () => {
     try {
@@ -31,7 +34,7 @@ const DropdownMenu = () => {
       const { HoVaTen } = res.result.Record;
       setHoTen(HoVaTen);
     } catch (error) {
-      console.log(error);
+      showNotification("error", "Lỗi hiển thị tên người dùng", "Yêu cầu kiểm tra lại kết nối mạng")
     }
   };
 

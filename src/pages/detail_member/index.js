@@ -1,17 +1,27 @@
 import { Button, Col, Row, Space } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import MemberControl from "../../components/MemberControl";
 import { adminRoute } from "../../constants/route.constant";
 import { showNotification } from "../../helper/showNotification";
+import useActions from "../../redux/useActions";
 import memberApi from "../../services/apis/memberAPI";
 
 const DetailMember = () => {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const dispatch = useDispatch();
+  const { verifyActions } = useActions();
+
   const [memberDetail, setMemberDetail] = useState({});
 
-  const { state } = useLocation();
-  const navigate = useNavigate();
+  const verifyInfo = useSelector((state) => state.verifyReducer.verifyInfo);
+
+  useEffect(() => {
+    dispatch(verifyActions.actions.getVerifyInfo(state));
+  }, [state, dispatch, verifyActions]);
 
   const handleSubmitEditMember = async (memberData) => {
     try {
@@ -114,6 +124,7 @@ const DetailMember = () => {
       </Row>
       <div>
         <MemberControl
+          verifyInfo={verifyInfo}
           initialMember={memberDetail}
           renderActions={renderActions}
           onSubmit={handleSubmitEditMember}

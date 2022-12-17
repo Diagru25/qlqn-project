@@ -120,7 +120,7 @@ const userValidSchema = Yup.object().shape({
   }),
 });
 
-const useMemberControl = (onSubmit, initialMember) => {
+const useMemberControl = (onSubmit, initialMember, verifyInfo) => {
   useEffect(() => {
     if (initialMember) {
       userFormik.setValues({
@@ -186,6 +186,71 @@ const useMemberControl = (onSubmit, initialMember) => {
     }
   }, [initialMember]);
 
+  useEffect(() => {
+    if (verifyInfo.recover_data) {
+      userFormik.setValues({
+        userBasicFormValue: {
+          HoVaTen: verifyInfo.recover_data.HoVaTen,
+          HoVaTenKhaiSinh: verifyInfo.recover_data.HoVaTenKhaiSinh,
+          BiDanh: verifyInfo.recover_data.BiDanh,
+          TenKhac: verifyInfo.recover_data.TenKhac,
+          SoHieuQuanNhan: verifyInfo.recover_data.SoHieuQuanNhan,
+          SoCMND: verifyInfo.recover_data.SoCMND,
+          GioiTinh: verifyInfo.recover_data.GioiTinh,
+          CapBac: verifyInfo.recover_data.CapBac,
+          NgayNhanCapBac: verifyInfo.recover_data.NgayNhanCapBac,
+          ChucVu: verifyInfo.recover_data.ChucVu,
+          DonVi: verifyInfo.recover_data.DonVi,
+          NgayNhanChucVu: verifyInfo.recover_data.NgayNhanChucVu,
+          NgaySinh: verifyInfo.recover_data.NgaySinh,
+          DanToc: verifyInfo.recover_data.DanToc,
+          TonGiao: verifyInfo.recover_data.TonGiao,
+          NgayNhapNgu: verifyInfo.recover_data.NgayNhapNgu,
+          NgayXuatNgu: verifyInfo.recover_data.NgayXuatNgu,
+          NgayTaiNgu: verifyInfo.recover_data.NgayTaiNgu,
+          NguyenQuan: verifyInfo.recover_data.NguyenQuan,
+          ThuongTru: verifyInfo.recover_data.ThuongTru,
+          TPGiaDinh: verifyInfo.recover_data.TPGiaDinh,
+          TPBanThan: verifyInfo.recover_data.TPBanThan,
+        },
+        userCorporateFormValue: {
+          NgayVaoDang: verifyInfo.recover_data.NgayVaoDang,
+          NoiVaoDang: verifyInfo.recover_data.NoiVaoDang,
+          NgayVaoDangChinhThuc: verifyInfo.recover_data.NgayVaoDangChinhThuc,
+          NgayVaoDoan: verifyInfo.recover_data.NgayVaoDoan,
+          ChucVuDang: verifyInfo.recover_data.ChucVuDang,
+          ChucVuDoan: verifyInfo.recover_data.ChucVuDoan,
+        },
+        userQualificationFormValue: {
+          TrinhDoVanHoa: verifyInfo.recover_data.TrinhDoVanHoa,
+          HocHam: verifyInfo.recover_data.HocHam,
+          HocVi: verifyInfo.recover_data.HocVi,
+          TrinhDoQuanLy: verifyInfo.recover_data.TrinhDoQuanLy,
+          TrinhDoLyLuanChinhTri: verifyInfo.recover_data.TrinhDoLyLuanChinhTri,
+          TrinhDoCMKT: verifyInfo.recover_data.TrinhDoCMKT,
+          TrinhDoNgoaiNgu: verifyInfo.recover_data.TrinhDoNgoaiNgu,
+        },
+        userCyberWarfareFormValue: {
+          CapToChucDaoTao: verifyInfo.recover_data.CapToChucDaoTao,
+          ChungChiDaoTao: verifyInfo.recover_data.ChungChiDaoTao,
+          CoSoDaoTao: verifyInfo.recover_data.CoSoDaoTao,
+          NoiDungDaoTao: verifyInfo.recover_data.NoiDungDaoTao,
+          LoaiHinhDaoTao: verifyInfo.recover_data.LoaiHinhDaoTao,
+          NganhNgheDaoTao: verifyInfo.recover_data.NganhNgheDaoTao,
+        },
+        userOthersFormValue: {
+          SucKhoe: verifyInfo.recover_data.SucKhoe,
+          NhomMau: verifyInfo.recover_data.NhomMau,
+          SoBHXH: verifyInfo.recover_data.SoBHXH,
+          BacLuong: verifyInfo.recover_data.BacLuong,
+          HeSoLuong: verifyInfo.recover_data.HeSoLuong,
+          TinhTrangHonNhan: verifyInfo.recover_data.TinhTrangHonNhan,
+          NganhQuanLy: verifyInfo.recover_data.NganhQuanLy,
+        },
+      });
+    }
+  }, [verifyInfo.recover_data]);
+
   const userFormik = useFormik({
     initialValues: initialValues,
     validationSchema: userValidSchema,
@@ -203,7 +268,6 @@ const useMemberControl = (onSubmit, initialMember) => {
     });
   }, []);
   //const handleUserFormChange = useCallback();
-
 
   return {
     // userBasicFormValue: userFormik.values.userBasicFormValue,

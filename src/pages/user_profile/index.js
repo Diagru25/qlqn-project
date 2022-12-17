@@ -21,13 +21,16 @@ const UserInfo = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { userActions } = useActions();
+  const { verifyActions } = useActions();
 
+  const verifyInfo = useSelector((state) => state.verifyReducer.verifyInfo);
   const userProfile = useSelector((state) => state.userReducer.userProfile);
   const userData = userProfile.userProfile;
 
   useEffect(() => {
     dispatch(userActions.actions.getUserProfile());
-  }, [dispatch, userActions]);
+    dispatch(verifyActions.actions.getVerifyInfo(userData.user_id));
+  }, [dispatch, userActions, verifyActions, userData.user_id]);
 
   const handleSubmitEditMember = async (memberData) => {
     try {
@@ -142,7 +145,7 @@ const UserInfo = () => {
         <div>
           <MemberControl
             isLoading={isLoading}
-            flag="user-profile"
+            verifyInfo={verifyInfo}
             renderActions={renderActions}
             onSubmit={handleSubmitEditMember}
             initialMember={userData}

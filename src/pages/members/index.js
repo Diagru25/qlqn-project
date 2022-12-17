@@ -6,12 +6,12 @@ import { adminRoute } from "../../constants/route.constant";
 
 import styles from "./style.module.css";
 import { useEffect, useState } from "react";
-import useActions from "../../redux/useActions";
 import SearchField from "../../components/SearchFilter";
 import handleExport from "../../helper/exportFile";
 import BreadCrumb from "../../components/Breadcrumb";
 import memberApi from "../../services/apis/memberAPI";
 import { showNotification } from "../../helper/showNotification";
+
 
 const initialSearchVal = {
   DonVi: "",
@@ -29,6 +29,7 @@ const initialMemberList = {
 
 const Members = () => {
   const navigate = useNavigate();
+  
 
   const [searchVal, setSearchVal] = useState(initialSearchVal);
 
@@ -40,6 +41,7 @@ const Members = () => {
     total: 0,
     current: 1,
   });
+
 
   const handleOpenSearchChange = (newOpen) => {
     setOpenSearch(newOpen);

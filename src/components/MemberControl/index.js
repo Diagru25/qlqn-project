@@ -8,10 +8,16 @@ import MemberQualification from "./components/MemberQualification";
 import styles from "./style.module.css";
 import useMemberControl from "./hooks/useMemberControl";
 
-const MemberControl = ({ flag, renderActions, onSubmit, initialMember }) => {
+const MemberControl = ({
+  flag,
+  renderActions,
+  onSubmit,
+  initialMember,
+  verifyInfo,
+}) => {
   // let disabled = false;
   const { handleSubmit, memberState, userFormError, handleUserFormChange } =
-    useMemberControl(onSubmit, initialMember);
+    useMemberControl(onSubmit, initialMember, verifyInfo);
 
   // if (flag === "member-detail") {
   //   disabled = true;
