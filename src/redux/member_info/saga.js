@@ -14,12 +14,7 @@ function* getMemberList_saga(action) {
     //   ? params.page_index
     //   : memberList.page_index;
 
-    const donVi = params.DonVi ? params.DonVi : "";
-    const hoVaTen = params.HoVaTen ? params.HoVaTen : "";
-    const nganhNgheDaoTao = params.NganhNgheDaoTao
-      ? params.NganhNgheDaoTao
-      : "";
-    const nguyenQuan = params.NguyenQuan ? params.NguyenQuan : "";
+    const metric = params.metric ? params.metric : "";
     const pageSize = params.page ? params.page : memberList.page;
     const limitSize = params.limit ? params.limit : memberList.limit;
 
@@ -30,12 +25,9 @@ function* getMemberList_saga(action) {
     // yield put(memberActions.actions.setFilter(filter));
 
     const res = yield memberApi.getMemberlist(
-      donVi,
-      hoVaTen,
-      nganhNgheDaoTao,
-      nguyenQuan,
       pageSize,
-      limitSize
+      limitSize,
+      metric
     );
 
     const { message, page, limit, total } = res.result;

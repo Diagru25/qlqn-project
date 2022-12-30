@@ -20,7 +20,7 @@ const initData = {
   SoTuoi: 30,
 };
 
-const FilterModal = () => {
+const FilterModal = ({ handleValuesStatistic }) => {
   const dispatch = useDispatch();
   const { memberActions } = useActions();
 
@@ -51,6 +51,19 @@ const FilterModal = () => {
           SoNamNhapNgu,
           SoTuoi,
         } = values;
+        handleValuesStatistic({
+          DonVi,
+          ChucVu,
+          CapBac,
+          TrinhDoNgoaiNgu,
+          KhuVucDiaLy,
+          ChungChiDaoTao,
+          TrinhDoCMKT,
+          LoaiHinhDaoTao,
+          CoSoDaoTao,
+          SoNamNhapNgu,
+          SoTuoi,
+        });
         dispatch(
           memberActions.actions.getListStatistic(
             DonVi,

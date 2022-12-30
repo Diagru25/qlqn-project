@@ -12,14 +12,6 @@ import BreadCrumb from "../../components/Breadcrumb";
 import memberApi from "../../services/apis/memberAPI";
 import { showNotification } from "../../helper/showNotification";
 
-
-const initialSearchVal = {
-  DonVi: "",
-  HoVaTen: "",
-  NganhNgheDaoTao: "",
-  NguyenQuan: "",
-};
-
 const initialMemberList = {
   message: [],
   page: 1,
@@ -29,9 +21,8 @@ const initialMemberList = {
 
 const Members = () => {
   const navigate = useNavigate();
-  
 
-  const [searchVal, setSearchVal] = useState(initialSearchVal);
+  const [searchVal, setSearchVal] = useState("");
 
   const [memberList, setMemberList] = useState(initialMemberList);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,38 +33,25 @@ const Members = () => {
     current: 1,
   });
 
-
   const handleOpenSearchChange = (newOpen) => {
     setOpenSearch(newOpen);
   };
 
-  useEffect(() => {
-    getMemberList(
-      searchVal.DonVi,
-      searchVal.HoVaTen,
-      searchVal.NganhNgheDaoTao,
-      searchVal.NguyenQuan,
-      pagination.current,
-      pagination.pageSize
-    );
-  }, [searchVal]);
+  console.log("search value", searchVal);
 
-  const getMemberList = async (
-    donVi,
-    hoVaTen,
-    nganhNgheDaoTao,
-    nguyenQuan,
-    changedPage,
-    pageSize
-  ) => {
+  console.log("pagination", pagination);
+
+  useEffect(() => {
+    console.log("a");
+    getMemberList(pagination.current, pagination.pageSize, searchVal);
+  }, [searchVal, pagination.current]);
+
+  const getMemberList = async (changedPage, pageSize, searchVal) => {
     try {
       const res = await memberApi.getMemberlist(
-        donVi,
-        hoVaTen,
-        nganhNgheDaoTao,
-        nguyenQuan,
         changedPage,
-        pageSize
+        pageSize,
+        searchVal
       );
       const { message, page, limit, total } = res.result;
       setMemberList({
@@ -100,12 +78,13 @@ const Members = () => {
     }
   };
 
-  const searchHandler = (value = {}) => {
+  const searchHandler = (value) => {
     setIsLoading(true);
-    setSearchVal((state) => {
+    setSearchVal(value);
+    setPagination((state) => {
       return {
         ...state,
-        ...value,
+        current: 1,
       };
     });
   };
@@ -113,14 +92,7 @@ const Members = () => {
   const handlePageChange = async (pageIndex, pageSize) => {
     try {
       setIsLoading(true);
-      await getMemberList(
-        searchVal.DonVi,
-        searchVal.HoVaTen,
-        searchVal.NganhNgheDaoTao,
-        searchVal.NguyenQuan,
-        pageIndex,
-        pageSize
-      );
+      await getMemberList(pageIndex, pageSize);
 
       setPagination({
         ...pagination,
@@ -250,7 +222,7 @@ const Members = () => {
               trigger="click"
               open={openSearch}
               onOpenChange={handleOpenSearchChange}
-              style={{width: 400}}
+              style={{ width: 400 }}
             >
               <Button type="primary">Tìm kiếm</Button>
             </Popover>

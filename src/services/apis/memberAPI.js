@@ -1,19 +1,16 @@
 import { request } from "./baseRequest";
 
 const memberApi = {
-  getMemberlist: (DonVi, HoVaTen, NganhNgheDaoTao, NguyenQuan, page, limit) => {
+  getMemberlist: (page, limit, metric) => {
     return request({
       url: "/admin/v1/canbo",
       method: "GET",
       params: {
         // page_size: page_size,
         // page_index: page_index,
-        DonVi: DonVi,
-        HoVaTen: HoVaTen,
-        NganhNgheDaoTao: NganhNgheDaoTao,
-        NguyenQuan: NguyenQuan,
         page: page,
         limit: limit,
+        metric: metric,
       },
       isAuthRequest: true,
     });

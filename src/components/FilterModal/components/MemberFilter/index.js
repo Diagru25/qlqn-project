@@ -3,8 +3,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useActions from "../../../../redux/useActions";
 
-const MemberFilter = ({ statisticFormik, handleUpdateStatistic, handleClearFilter }) => {
-  const { initialValues, handleSubmit } = statisticFormik;
+const MemberFilter = ({
+  statisticFormik,
+  handleUpdateStatistic,
+  handleClearFilter,
+}) => {
+  const { handleSubmit } = statisticFormik;
   const dispatch = useDispatch();
   const { memberActions } = useActions();
 
@@ -31,7 +35,7 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic, handleClearFilte
                 style={{ width: "100%" }}
                 placeholder="Chức vụ"
                 onChange={(value) => {
-                  console.log("value", value)
+                  console.log("value", value);
                   handleUpdateStatistic({ ChucVu: encodeURI(value) });
                 }}
               >
@@ -280,8 +284,8 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic, handleClearFilte
         </Row>
         <Row>
           <Space>
-            <Button onClick={handleSubmit}>Lọc</Button>
-            <Button onClick={handleClearFilter}>Xóa lọc</Button>
+            <Button onClick={handleSubmit}>Thống kê</Button>
+            {/* <Button onClick={handleClearFilter}>Xóa lọc</Button> */}
           </Space>
         </Row>
       </Form>

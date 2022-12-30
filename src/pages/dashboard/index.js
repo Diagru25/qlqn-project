@@ -1,10 +1,9 @@
 import { Card, Carousel, Col, Row, Space } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import CardTitleStatistic from "../../components/CardTitleStatistic";
 import FilterModal from "../../components/FilterModal";
-import { usePermissionControl } from "../../hooks/usePermissionControl";
 import useActions from "../../redux/useActions";
 import BarChartDashboard from "./components/BarChart";
 import PieChartDashboard from "./components/PieChart";
@@ -13,8 +12,19 @@ import styles from "./style.module.css";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-
-  usePermissionControl();
+  const [statisticValue, setStatisticValue] = useState({
+    DonVi: "",
+    ChucVu: "",
+    CapBac: "",
+    TrinhDoNgoaiNgu: "",
+    KhuVucDiaLy: "",
+    ChungChiDaoTao: "",
+    TrinhDoCMKT: "",
+    LoaiHinhDaoTao: "",
+    CoSoDaoTao: "",
+    SoNamNhapNgu: 25,
+    SoTuoi: 30,
+  });
 
   const memberListStatistic = useSelector(
     (state) => state.memberListReducer.memberListStatistic
@@ -25,6 +35,17 @@ const Dashboard = () => {
     dispatch(memberActions.actions.getListStatistic());
   }, [dispatch, memberActions]);
 
+  const handleValueStatistic = async (value = {}) => {
+    setStatisticValue((state) => {
+      return {
+        ...state,
+        ...value,
+      };
+    });
+  };
+
+  console.log("abc", statisticValue.SoNamNhapNgu);
+
   return (
     <>
       <Row gutter={24} className={styles["dashboard-filter__header"]}>
@@ -32,7 +53,7 @@ const Dashboard = () => {
           <Breadcrumb title="Trang chủ" />
         </Col>
         <Col span={12} className={styles["dashboard-filter__action"]}>
-          <FilterModal />
+          <FilterModal handleValuesStatistic={handleValueStatistic} />
         </Col>
       </Row>
 
@@ -48,6 +69,7 @@ const Dashboard = () => {
                 color="DonVi"
                 title="Thống kê theo đơn vị"
                 subtitle={memberListStatistic.countDonVi}
+                detail={decodeURI(statisticValue.DonVi)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
@@ -55,6 +77,7 @@ const Dashboard = () => {
                 color="CapBac"
                 title="Thống kê theo quân hàm"
                 subtitle={memberListStatistic.countCapBac}
+                detail={decodeURI(statisticValue.CapBac)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
@@ -62,6 +85,7 @@ const Dashboard = () => {
                 color="ChucVu"
                 title="Thống kê theo chức vụ"
                 subtitle={memberListStatistic.countChucVu}
+                detail={decodeURI(statisticValue.ChucVu)}
               />
             </Card>
           </Carousel>
@@ -77,6 +101,7 @@ const Dashboard = () => {
                 color="HocVan"
                 title="Thống kê theo học vấn"
                 subtitle={memberListStatistic.countTrinhDoCMKT}
+                detail={decodeURI(statisticValue.TrinhDoCMKT)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
@@ -84,6 +109,7 @@ const Dashboard = () => {
                 color="NgoaiNgu"
                 title="Thống kê theo ngoại ngữ"
                 subtitle={memberListStatistic.countTrinhDoNgoaiNgu}
+                detail={decodeURI(statisticValue.TrinhDoNgoaiNgu)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
@@ -91,6 +117,7 @@ const Dashboard = () => {
                 color="NamNhapNgu"
                 title="Thống kê theo năm nhập ngũ"
                 subtitle={memberListStatistic.countSoNamNhapNgu}
+                detail={`${decodeURI(statisticValue.SoNamNhapNgu.toString())} năm`}
               />
             </Card>
           </Carousel>
@@ -106,6 +133,7 @@ const Dashboard = () => {
                 color="Tuoi"
                 title="Thống kê theo tuổi"
                 subtitle={memberListStatistic.countSoTuoi}
+                detail={`${decodeURI(statisticValue.SoTuoi.toString())} tuổi`}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
@@ -113,6 +141,7 @@ const Dashboard = () => {
                 color="KhuVuc"
                 title="Thống kê theo khu vực"
                 subtitle={memberListStatistic.countKhuVucDiaLy}
+                detail={decodeURI(statisticValue.KhuVucDiaLy)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
@@ -120,6 +149,7 @@ const Dashboard = () => {
                 color="ChungChi"
                 title="Thống kê theo chứng chỉ"
                 subtitle={memberListStatistic.countChungChiDaoTao}
+                detail={decodeURI(statisticValue.ChungChiDaoTao)}
               />
             </Card>
           </Carousel>
@@ -135,6 +165,7 @@ const Dashboard = () => {
                 color="LoaiHinhDaoTao"
                 title="Thống kê loại hình đào tạo"
                 subtitle={memberListStatistic.countLoaiHinhDaoTao}
+                detail={decodeURI(statisticValue.LoaiHinhDaoTao)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
@@ -142,6 +173,7 @@ const Dashboard = () => {
                 color="CoSoDaoTao"
                 title="Thống kê cơ sở đào tạo"
                 subtitle={memberListStatistic.countCoSoDaoTao}
+                detail={decodeURI(statisticValue.CoSoDaoTao)}
               />
             </Card>
           </Carousel>

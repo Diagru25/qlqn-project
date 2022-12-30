@@ -14,16 +14,13 @@ const types = {
 };
 
 const actions = {
-  getMemberList: (DonVi, HoVaTen, NganhNgheDaoTao, NguyenQuan, page, limit) => {
+  getMemberList: (page, limit, metric) => {
     return {
       type: types.GET_MEMBER_LIST,
       payload: {
-        DonVi,
-        HoVaTen,
-        NganhNgheDaoTao,
-        NguyenQuan,
         page,
         limit,
+        metric,
       },
     };
   },

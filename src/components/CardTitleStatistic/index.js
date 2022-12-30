@@ -1,6 +1,6 @@
 import styles from "./style.module.css";
 
-const CardTitleStatistic = ({ title, subtitle, color }) => {
+const CardTitleStatistic = ({ title, subtitle, color, detail }) => {
   let styleColor = "";
   if (color === "DonVi") {
     styleColor = "#FF6900";
@@ -35,6 +35,9 @@ const CardTitleStatistic = ({ title, subtitle, color }) => {
       </div>
       <span className={styles["be-card-title-statistic__subtitle"]}>
         {subtitle}
+      </span>
+      <span className={styles["be-card-title-statistic__detail"]}>
+        ({detail})
       </span>
     </div>
   );
