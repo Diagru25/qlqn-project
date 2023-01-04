@@ -16,15 +16,15 @@ const CardTitleStatistic = ({
     styleColor = "#7BDCB5";
   } else if (name === "HocVan") {
     styleColor = "#00D084";
-  } else if (name === "NgoaiNgu") {
+  } else if (name === "TrinhDoNgoaiNgu") {
     styleColor = "#8ED1FC";
-  } else if (name === "NamNhapNgu") {
+  } else if (name === "SoNamNhapNgu") {
     styleColor = "#0693E3";
-  } else if (name === "Tuoi") {
+  } else if (name === "SoTuoi") {
     styleColor = "#EB144C";
-  } else if (name === "KhuVuc") {
+  } else if (name === "KhuVucDiaLy") {
     styleColor = "#F78DA7";
-  } else if (name === "ChungChi") {
+  } else if (name === "ChungChiDaoTao") {
     styleColor = "#9900EF";
   } else if (name === "LoaiHinhDaoTao") {
     styleColor = "#3F51B5";
@@ -52,9 +52,19 @@ const CardTitleStatistic = ({
         <span className={styles["be-card-title-statistic__subtitle"]}>
           {subtitle}
         </span>
-        {detail && (
+        {detail && name !== "NamNhapNgu" && name !== "Tuoi" && (
           <span className={styles["be-card-title-statistic__detail"]}>
             ({detail})
+          </span>
+        )}
+        {name === "NamNhapNgu" && (
+          <span className={styles["be-card-title-statistic__detail"]}>
+            ({detail} năm công tác)
+          </span>
+        )}
+        {name === "Tuoi" && (
+          <span className={styles["be-card-title-statistic__detail"]}>
+            ({detail} tuổi)
           </span>
         )}
       </div>

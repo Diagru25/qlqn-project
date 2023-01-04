@@ -104,22 +104,25 @@ const Dashboard = () => {
                 title="Thống kê theo học vấn"
                 subtitle={memberListStatistic.countTrinhDoCMKT}
                 detail={decodeURI(filter.TrinhDoCMKT)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                name="NgoaiNgu"
+                name="TrinhDoNgoaiNgu"
                 title="Thống kê theo ngoại ngữ"
                 subtitle={memberListStatistic.countTrinhDoNgoaiNgu}
                 detail={decodeURI(filter.TrinhDoNgoaiNgu)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                name="NamNhapNgu"
+                name="SoNamNhapNgu"
                 title="Thống kê theo năm nhập ngũ"
                 subtitle={memberListStatistic.countSoNamNhapNgu}
                 detail={decodeURI(filter.SoNamNhapNgu.toString())}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
           </Carousel>
@@ -132,26 +135,29 @@ const Dashboard = () => {
           >
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                name="Tuoi"
+                name="SoTuoi"
                 title="Thống kê theo tuổi"
                 subtitle={memberListStatistic.countSoTuoi}
                 detail={decodeURI(filter.SoTuoi.toString())}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                name="KhuVuc"
+                name="KhuVucDiaLy"
                 title="Thống kê theo khu vực"
                 subtitle={memberListStatistic.countKhuVucDiaLy}
                 detail={decodeURI(filter.KhuVucDiaLy)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                name="ChungChi"
+                name="ChungChiDaoTao"
                 title="Thống kê theo chứng chỉ"
                 subtitle={memberListStatistic.countChungChiDaoTao}
                 detail={decodeURI(filter.ChungChiDaoTao)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
           </Carousel>
@@ -168,6 +174,7 @@ const Dashboard = () => {
                 title="Thống kê loại hình đào tạo"
                 subtitle={memberListStatistic.countLoaiHinhDaoTao}
                 detail={decodeURI(filter.LoaiHinhDaoTao)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
@@ -176,6 +183,7 @@ const Dashboard = () => {
                 title="Thống kê cơ sở đào tạo"
                 subtitle={memberListStatistic.countCoSoDaoTao}
                 detail={decodeURI(filter.CoSoDaoTao)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
           </Carousel>

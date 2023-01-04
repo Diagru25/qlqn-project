@@ -34,7 +34,7 @@ const FilterStatisticModal = ({
         pagination.limit
       )
     );
-    setPagination({ ...pagination, total: filterStatistic.total });
+    setPagination({ ...pagination, current: 1, total: filterStatistic.total });
   }, [
     memberActions,
     dispatch,
