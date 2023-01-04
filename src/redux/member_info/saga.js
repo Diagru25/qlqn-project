@@ -24,11 +24,7 @@ function* getMemberList_saga(action) {
 
     // yield put(memberActions.actions.setFilter(filter));
 
-    const res = yield memberApi.getMemberlist(
-      pageSize,
-      limitSize,
-      metric
-    );
+    const res = yield memberApi.getMemberlist(pageSize, limitSize, metric);
 
     const { message, page, limit, total } = res.result;
 
@@ -195,6 +191,11 @@ function* getMemberUnit_saga(action) {
 function* getListStatistic_saga(action) {
   try {
     const params = action.payload;
+
+    const memberListStatistic = yield select(
+      (state) => state.memberListReducer.memberListStatistic
+    );
+
     const donVi = params.DonVi ? params.DonVi : "";
     const chucVu = params.ChucVu ? params.ChucVu : "";
     const capBac = params.CapBac ? params.CapBac : "";
@@ -208,6 +209,12 @@ function* getListStatistic_saga(action) {
     const coSoDaoTao = params.CoSoDaoTao ? params.CoSoDaoTao : "";
     const soNamNhapNgu = params.SoNamNhapNgu ? params.SoNamNhapNgu : 25;
     const soTuoi = params.SoTuoi ? params.SoTuoi : 30;
+
+    const filter = params
+      ? { ...memberListStatistic.filter, ...params }
+      : memberListStatistic.filter;
+
+    yield put(memberActions.actions.setFilter(filter));
 
     const res = yield memberApi.getListStatistic(
       donVi,
@@ -252,6 +259,7 @@ function* getListStatistic_saga(action) {
           countTrinhDoNgoaiNgu: countTrinhDoNgoaiNgu,
           countTrinhDoCMKT: countTrinhDoCMKT,
           isLoading: false,
+          filter: filter
         },
       })
     );
@@ -277,6 +285,54 @@ function* getListStatistic_saga(action) {
     );
 
     showNotification("error", "Thống kê danh sách quân nhân thất bại!");
+  }
+}
+
+function* getFilterStatistic_saga(action) {
+  try {
+    const params = action.payload;
+
+    const filterStatistic = yield select(
+      (state) => state.memberListReducer.filterStatistic
+    );
+
+    const filter = params.filter ? params.filter : "";
+    const value = params.value ? params.value : "";
+    const pageIndex = params.limit ? params.limit : filterStatistic.limit;
+    const pageSize = params.page ? params.page : filterStatistic.page;
+
+    const res = yield memberApi.getFilterStatistic(
+      filter,
+      value,
+      pageSize,
+      pageIndex
+    );
+
+    const { message, limit, page, total } = res.result;
+
+    yield put(
+      memberActions.actions.updateState({
+        filterStatistic: {
+          message,
+          limit,
+          page,
+          total,
+          isLoading: false,
+        },
+      })
+    );
+  } catch (error) {
+    yield put(
+      memberActions.actions.updateState({
+        filterStatistic: {
+          message: [],
+          limit: 40,
+          page: 1,
+          total: 0,
+          isLoading: false,
+        },
+      })
+    );
   }
 }
 
@@ -324,6 +380,10 @@ function* listen() {
   yield takeEvery(
     memberActions.types.GET_MEMBER_UPDATED_LOGS,
     getMemberUpdatedLogs_saga
+  );
+  yield takeEvery(
+    memberActions.types.GET_FILTER_STATISTIC,
+    getFilterStatistic_saga
   );
 }
 

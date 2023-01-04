@@ -37,12 +37,7 @@ const Members = () => {
     setOpenSearch(newOpen);
   };
 
-  console.log("search value", searchVal);
-
-  console.log("pagination", pagination);
-
   useEffect(() => {
-    console.log("a");
     getMemberList(pagination.current, pagination.pageSize, searchVal);
   }, [searchVal, pagination.current]);
 

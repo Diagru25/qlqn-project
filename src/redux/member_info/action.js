@@ -7,6 +7,7 @@ const types = {
   GET_MEMBER_DETAIL: prefix + "GET_MEMBER_DETAIL",
   GET_MEMBER_UNIT: prefix + "GET_MEMBER_UNIT",
   GET_LIST_STATISTIC: prefix + "GET_LIST_STATISTIC",
+  GET_FILTER_STATISTIC: prefix + "GET_FILTER_STATISTIC",
   GET_MEMBER_UPDATED_LOGS: prefix + "GET_MEMBER_UPDATED_LOGS",
   SET_FILTER: prefix + "SET_FILTER",
   SET_DEFAULT_FILTER: prefix + "SET_DEFAULT_FILTER",
@@ -90,6 +91,18 @@ const actions = {
     };
   },
 
+  getFilterStatistic: (filter, value, limit, page) => {
+    return {
+      type: types.GET_FILTER_STATISTIC,
+      payload: {
+        filter,
+        value,
+        limit,
+        page,
+      },
+    };
+  },
+
   getMemberUpdatedLogs: (memberId) => {
     return {
       type: types.GET_MEMBER_UPDATED_LOGS,
@@ -108,10 +121,12 @@ const actions = {
     };
   },
 
-  setDefaultFilter: () => {
+  setDefaultFilter: (filter) => {
     return {
       type: types.SET_FILTER,
-      payload: {},
+      payload: {
+        filter,
+      },
     };
   },
 

@@ -2,7 +2,7 @@ import { Button, Modal } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useActions from "../../redux/useActions";
 import MemberFilter from "./components/MemberFilter";
 
@@ -20,7 +20,7 @@ const initData = {
   SoTuoi: 30,
 };
 
-const FilterModal = ({ handleValuesStatistic }) => {
+const FilterModal = () => {
   const dispatch = useDispatch();
   const { memberActions } = useActions();
 
@@ -36,7 +36,6 @@ const FilterModal = ({ handleValuesStatistic }) => {
   const statisticFormik = useFormik({
     initialValues: initData,
     onSubmit: (values = {}) => {
-      console.log("On submit value ", values);
       if (values) {
         const {
           DonVi,
@@ -51,19 +50,7 @@ const FilterModal = ({ handleValuesStatistic }) => {
           SoNamNhapNgu,
           SoTuoi,
         } = values;
-        handleValuesStatistic({
-          DonVi,
-          ChucVu,
-          CapBac,
-          TrinhDoNgoaiNgu,
-          KhuVucDiaLy,
-          ChungChiDaoTao,
-          TrinhDoCMKT,
-          LoaiHinhDaoTao,
-          CoSoDaoTao,
-          SoNamNhapNgu,
-          SoTuoi,
-        });
+
         dispatch(
           memberActions.actions.getListStatistic(
             DonVi,

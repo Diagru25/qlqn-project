@@ -1,59 +1,58 @@
-import { Card, Carousel, Col, Row, Space } from "antd";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Card, Carousel, Col, Row } from "antd";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import CardTitleStatistic from "../../components/CardTitleStatistic";
 import FilterModal from "../../components/FilterModal";
-import useActions from "../../redux/useActions";
 import BarChartDashboard from "./components/BarChart";
+import FilterStatisticModal from "./components/FilterStatisticModal";
 import PieChartDashboard from "./components/PieChart";
 
 import styles from "./style.module.css";
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-  const [statisticValue, setStatisticValue] = useState({
-    DonVi: "",
-    ChucVu: "",
-    CapBac: "",
-    TrinhDoNgoaiNgu: "",
-    KhuVucDiaLy: "",
-    ChungChiDaoTao: "",
-    TrinhDoCMKT: "",
-    LoaiHinhDaoTao: "",
-    CoSoDaoTao: "",
-    SoNamNhapNgu: 25,
-    SoTuoi: 30,
-  });
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [filterField, setFilterField] = useState("");
+  const [filterValue, setFilterValue] = useState("");
+
+  const handleFilterCancel = () => {
+    setIsFilterModalOpen(false);
+  };
+
+  const handleFilterModal = (filterField, filterVal) => {
+    setIsFilterModalOpen(true);
+    setFilterField(filterField);
+    setFilterValue(filterVal);
+  };
+
+  console.log(filterField + "-----" + filterValue);
+
+  // const [statisticValue, setStatisticValue] = useState({
+
+  // });
 
   const memberListStatistic = useSelector(
     (state) => state.memberListReducer.memberListStatistic
   );
 
-  const { memberActions } = useActions();
-  useEffect(() => {
-    dispatch(memberActions.actions.getListStatistic());
-  }, [dispatch, memberActions]);
+  const { filter } = memberListStatistic;
 
-  const handleValueStatistic = async (value = {}) => {
-    setStatisticValue((state) => {
-      return {
-        ...state,
-        ...value,
-      };
-    });
-  };
-
-  console.log("abc", statisticValue.SoNamNhapNgu);
+  console.log("abc", memberListStatistic);
 
   return (
     <>
+      <FilterStatisticModal
+        isFilterModalOpen={isFilterModalOpen}
+        filterField={filterField}
+        filterValue={filterValue}
+        handleFilterCancel={handleFilterCancel}
+      />
       <Row gutter={24} className={styles["dashboard-filter__header"]}>
         <Col span={12}>
           <Breadcrumb title="Trang chủ" />
         </Col>
         <Col span={12} className={styles["dashboard-filter__action"]}>
-          <FilterModal handleValuesStatistic={handleValueStatistic} />
+          <FilterModal />
         </Col>
       </Row>
 
@@ -66,26 +65,29 @@ const Dashboard = () => {
           >
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="DonVi"
+                name="DonVi"
                 title="Thống kê theo đơn vị"
                 subtitle={memberListStatistic.countDonVi}
-                detail={decodeURI(statisticValue.DonVi)}
+                detail={decodeURI(filter.DonVi)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="CapBac"
+                name="CapBac"
                 title="Thống kê theo quân hàm"
                 subtitle={memberListStatistic.countCapBac}
-                detail={decodeURI(statisticValue.CapBac)}
+                detail={decodeURI(filter.CapBac)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="ChucVu"
+                name="ChucVu"
                 title="Thống kê theo chức vụ"
                 subtitle={memberListStatistic.countChucVu}
-                detail={decodeURI(statisticValue.ChucVu)}
+                detail={decodeURI(filter.ChucVu)}
+                handleFilterModal={handleFilterModal}
               />
             </Card>
           </Carousel>
@@ -98,26 +100,26 @@ const Dashboard = () => {
           >
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="HocVan"
+                name="HocVan"
                 title="Thống kê theo học vấn"
                 subtitle={memberListStatistic.countTrinhDoCMKT}
-                detail={decodeURI(statisticValue.TrinhDoCMKT)}
+                detail={decodeURI(filter.TrinhDoCMKT)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="NgoaiNgu"
+                name="NgoaiNgu"
                 title="Thống kê theo ngoại ngữ"
                 subtitle={memberListStatistic.countTrinhDoNgoaiNgu}
-                detail={decodeURI(statisticValue.TrinhDoNgoaiNgu)}
+                detail={decodeURI(filter.TrinhDoNgoaiNgu)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="NamNhapNgu"
+                name="NamNhapNgu"
                 title="Thống kê theo năm nhập ngũ"
                 subtitle={memberListStatistic.countSoNamNhapNgu}
-                detail={`${decodeURI(statisticValue.SoNamNhapNgu.toString())} năm`}
+                detail={decodeURI(filter.SoNamNhapNgu.toString())}
               />
             </Card>
           </Carousel>
@@ -130,26 +132,26 @@ const Dashboard = () => {
           >
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="Tuoi"
+                name="Tuoi"
                 title="Thống kê theo tuổi"
                 subtitle={memberListStatistic.countSoTuoi}
-                detail={`${decodeURI(statisticValue.SoTuoi.toString())} tuổi`}
+                detail={decodeURI(filter.SoTuoi.toString())}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="KhuVuc"
+                name="KhuVuc"
                 title="Thống kê theo khu vực"
                 subtitle={memberListStatistic.countKhuVucDiaLy}
-                detail={decodeURI(statisticValue.KhuVucDiaLy)}
+                detail={decodeURI(filter.KhuVucDiaLy)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="ChungChi"
+                name="ChungChi"
                 title="Thống kê theo chứng chỉ"
                 subtitle={memberListStatistic.countChungChiDaoTao}
-                detail={decodeURI(statisticValue.ChungChiDaoTao)}
+                detail={decodeURI(filter.ChungChiDaoTao)}
               />
             </Card>
           </Carousel>
@@ -162,18 +164,18 @@ const Dashboard = () => {
           >
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="LoaiHinhDaoTao"
+                name="LoaiHinhDaoTao"
                 title="Thống kê loại hình đào tạo"
                 subtitle={memberListStatistic.countLoaiHinhDaoTao}
-                detail={decodeURI(statisticValue.LoaiHinhDaoTao)}
+                detail={decodeURI(filter.LoaiHinhDaoTao)}
               />
             </Card>
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                color="CoSoDaoTao"
+                name="CoSoDaoTao"
                 title="Thống kê cơ sở đào tạo"
                 subtitle={memberListStatistic.countCoSoDaoTao}
-                detail={decodeURI(statisticValue.CoSoDaoTao)}
+                detail={decodeURI(filter.CoSoDaoTao)}
               />
             </Card>
           </Carousel>

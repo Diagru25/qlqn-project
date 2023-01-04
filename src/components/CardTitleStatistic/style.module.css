@@ -18,3 +18,11 @@
   font-weight: 500;
   margin-left: 15px;
 }
+
+.be-card-title-statistic__btn {
+  outline: none;
+  border: none;
+  background-color: white;
+  text-align: left;
+  cursor: pointer;
+}

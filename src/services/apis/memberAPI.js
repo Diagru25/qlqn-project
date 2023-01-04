@@ -103,6 +103,20 @@ const memberApi = {
     });
   },
 
+  getFilterStatistic: (filter, value, limit, page) => {
+    return request({
+      url: "/admin/v1/thongke/timkiemthongke",
+      method: "GET",
+      params: {
+        filter: filter,
+        value: value,
+        limit: limit,
+        page: page,
+      },
+      isAuthRequest: true,
+    });
+  },
+
   getMemberUpdatedLogs: (memberId) => {
     return request({
       url: `/admin/v1/canbo/history/${memberId}`,

@@ -1,4 +1,4 @@
-import { Button, Col, Row, Space } from "antd";
+import { Button, Col, Row, Space, Spin } from "antd";
 import { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,6 @@ import { showNotification } from "../../helper/showNotification";
 import userAPI from "../../services/apis/userAPI";
 import Breadcrumb from "../../components/Breadcrumb";
 import useActions from "../../redux/useActions";
-import Loading from "../../components/Loading";
 import { makeMilitaryPdf } from "../../helper/web";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -96,6 +95,7 @@ const UserInfo = () => {
       setIsLoading(false);
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {
+      setIsLoading(false);
       if (error.status === 403) {
         showNotification(
           "error",
@@ -138,9 +138,7 @@ const UserInfo = () => {
           <Breadcrumb title="Hồ sơ người dùng" />
         </Col>
       </Row>
-      {userProfile.isLoading ? (
-        <Loading />
-      ) : (
+      <Spin tip="Đang xử lý..." spinning={isLoading}>
         <div>
           <MemberControl
             isLoading={isLoading}
@@ -150,7 +148,7 @@ const UserInfo = () => {
             initialMember={userData}
           />
         </div>
-      )}
+      </Spin>
     </>
   );
 };

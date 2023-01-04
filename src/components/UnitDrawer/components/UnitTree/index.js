@@ -1,8 +1,7 @@
-import { Tree } from "antd";
-import { useEffect, useState } from "react";
+import { Spin, Tree } from "antd";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useActions from "../../../../redux/useActions";
-import Loading from "../../../Loading";
 
 const UnitTree = () => {
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const UnitTree = () => {
     dispatch(memberActions.actions.getMemberUnit());
   }, [dispatch, memberActions]);
 
-  return <>{isLoading ? <Loading /> : <Tree treeData={treeUnitData} />}</>;
+  return <>{isLoading ? <Spin /> : <Tree treeData={treeUnitData} />}</>;
 };
 
 export default UnitTree;

@@ -3,11 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useActions from "../../../../redux/useActions";
 
-const MemberFilter = ({
-  statisticFormik,
-  handleUpdateStatistic,
-  handleClearFilter,
-}) => {
+const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
   const { handleSubmit } = statisticFormik;
   const dispatch = useDispatch();
   const { memberActions } = useActions();
@@ -35,7 +31,6 @@ const MemberFilter = ({
                 style={{ width: "100%" }}
                 placeholder="Chức vụ"
                 onChange={(value) => {
-                  console.log("value", value);
                   handleUpdateStatistic({ ChucVu: encodeURI(value) });
                 }}
               >

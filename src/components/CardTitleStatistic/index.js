@@ -1,45 +1,64 @@
 import styles from "./style.module.css";
 
-const CardTitleStatistic = ({ title, subtitle, color, detail }) => {
+const CardTitleStatistic = ({
+  title,
+  subtitle,
+  name,
+  detail,
+  handleFilterModal,
+}) => {
   let styleColor = "";
-  if (color === "DonVi") {
+  if (name === "DonVi") {
     styleColor = "#FF6900";
-  } else if (color === "CapBac") {
+  } else if (name === "CapBac") {
     styleColor = "#FCB900";
-  } else if (color === "ChucVu") {
+  } else if (name === "ChucVu") {
     styleColor = "#7BDCB5";
-  } else if (color === "HocVan") {
+  } else if (name === "HocVan") {
     styleColor = "#00D084";
-  } else if (color === "NgoaiNgu") {
+  } else if (name === "NgoaiNgu") {
     styleColor = "#8ED1FC";
-  } else if (color === "NamNhapNgu") {
+  } else if (name === "NamNhapNgu") {
     styleColor = "#0693E3";
-  } else if (color === "Tuoi") {
+  } else if (name === "Tuoi") {
     styleColor = "#EB144C";
-  } else if (color === "KhuVuc") {
+  } else if (name === "KhuVuc") {
     styleColor = "#F78DA7";
-  } else if (color === "ChungChi") {
+  } else if (name === "ChungChi") {
     styleColor = "#9900EF";
-  } else if (color === "LoaiHinhDaoTao") {
+  } else if (name === "LoaiHinhDaoTao") {
     styleColor = "#3F51B5";
-  } else if (color === "CoSoDaoTao") {
+  } else if (name === "CoSoDaoTao") {
     styleColor = "#009688";
   }
+
+  const handleFilterModalOpen = () => {
+    console.log(detail);
+    handleFilterModal(name, detail);
+  };
+
   return (
-    <div className={styles["be-card-title-statistic"]}>
-      <div
-        className={styles["be-card-title-statistic__title"]}
-        style={{ color: styleColor }}
-      >
-        {title}
+    <button
+      className={styles["be-card-title-statistic__btn"]}
+      onClick={handleFilterModalOpen}
+    >
+      <div className={styles["be-card-title-statistic"]}>
+        <div
+          className={styles["be-card-title-statistic__title"]}
+          style={{ color: styleColor }}
+        >
+          {title}
+        </div>
+        <span className={styles["be-card-title-statistic__subtitle"]}>
+          {subtitle}
+        </span>
+        {detail && (
+          <span className={styles["be-card-title-statistic__detail"]}>
+            ({detail})
+          </span>
+        )}
       </div>
-      <span className={styles["be-card-title-statistic__subtitle"]}>
-        {subtitle}
-      </span>
-      <span className={styles["be-card-title-statistic__detail"]}>
-        ({detail})
-      </span>
-    </div>
+    </button>
   );
 };
 

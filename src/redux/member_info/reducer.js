@@ -1,6 +1,19 @@
 import memberActions from "./action";
 
-// const defaultFilter = {};
+const defaultFilter = {
+  DonVi: "",
+  ChucVu: "",
+  CapBac: "",
+  TrinhDoNgoaiNgu: "",
+  KhuVucDiaLy: "",
+  ChungChiDaoTao: "",
+  TrinhDoCMKT: "",
+  LoaiHinhDaoTao: "",
+  CoSoDaoTao: "",
+  SoNamNhapNgu: 25,
+  SoTuoi: 30,
+};
+
 const initialState = {
   memberList: {
     message: [],
@@ -8,7 +21,14 @@ const initialState = {
     limit: 40,
     total: 0,
     isLoading: false,
-    // filter: defaultFilter,
+  },
+
+  filterStatistic: {
+    message: [],
+    limit: 40,
+    page: 1,
+    total: 0,
+    isLoading: false,
   },
 
   memberPosition: {
@@ -48,6 +68,7 @@ const initialState = {
     countTrinhDoNgoaiNgu: 0,
     countTrinhDoCMKT: 0,
     isLoading: false,
+    filter: defaultFilter,
   },
 
   memberUpdatedLogs: {
@@ -100,9 +121,9 @@ const reducer = (state = initialState, action) => {
     case memberActions.types.SET_FILTER: {
       return {
         ...state,
-        memberList: {
-          ...state.memberList,
-          filter: { ...state.memberList.filter, ...payload.filter },
+        memberListStatistic: {
+          ...state.memberListStatistic,
+          filter: { ...state.memberListStatistic.filter, ...payload.filter },
         },
       };
     }
@@ -112,6 +133,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         memberListStatistic: {
           ...state.memberListStatistic,
+          isLoading: true,
+        },
+      };
+    }
+
+    case memberActions.types.GET_FILTER_STATISTIC: {
+      return {
+        ...state,
+        filterStatistic: {
+          ...state.filterStatistic,
           isLoading: true,
         },
       };
@@ -132,7 +163,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         memberList: {
           ...state.memberList,
-          // filter: defaultFilter,
         },
       };
     }
