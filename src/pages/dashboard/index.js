@@ -25,8 +25,6 @@ const Dashboard = () => {
     setFilterValue(filterVal);
   };
 
-  console.log(filterField + "-----" + filterValue);
-
   // const [statisticValue, setStatisticValue] = useState({
 
   // });
@@ -36,8 +34,6 @@ const Dashboard = () => {
   );
 
   const { filter } = memberListStatistic;
-
-  console.log("abc", memberListStatistic);
 
   return (
     <>
@@ -100,7 +96,7 @@ const Dashboard = () => {
           >
             <Card className={styles["dashboard-carousel__card"]}>
               <CardTitleStatistic
-                name="HocVan"
+                name="TrinhDoCMKT"
                 title="Thống kê theo học vấn"
                 subtitle={memberListStatistic.countTrinhDoCMKT}
                 detail={decodeURI(filter.TrinhDoCMKT)}

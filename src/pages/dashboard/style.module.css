@@ -17,5 +17,6 @@
 
 .dashboard-carousel__card {
   width: 250px;
+  height: 160px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }

@@ -16,8 +16,8 @@ const initData = {
   TrinhDoCMKT: "",
   LoaiHinhDaoTao: "",
   CoSoDaoTao: "",
-  SoNamNhapNgu: 25,
-  SoTuoi: 30,
+  SoNamNhapNgu: "",
+  SoTuoi: "",
 };
 
 const FilterModal = () => {
@@ -36,7 +36,6 @@ const FilterModal = () => {
   const statisticFormik = useFormik({
     initialValues: initData,
     onSubmit: (values = {}) => {
-      console.log(values);
       if (values) {
         const {
           DonVi,

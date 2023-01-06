@@ -259,7 +259,7 @@ function* getListStatistic_saga(action) {
           countTrinhDoNgoaiNgu: countTrinhDoNgoaiNgu,
           countTrinhDoCMKT: countTrinhDoCMKT,
           isLoading: false,
-          filter: filter
+          filter: filter,
         },
       })
     );

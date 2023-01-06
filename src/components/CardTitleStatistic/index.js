@@ -14,7 +14,7 @@ const CardTitleStatistic = ({
     styleColor = "#FCB900";
   } else if (name === "ChucVu") {
     styleColor = "#7BDCB5";
-  } else if (name === "HocVan") {
+  } else if (name === "TrinhDoCMKT") {
     styleColor = "#00D084";
   } else if (name === "TrinhDoNgoaiNgu") {
     styleColor = "#8ED1FC";
@@ -33,7 +33,6 @@ const CardTitleStatistic = ({
   }
 
   const handleFilterModalOpen = () => {
-    console.log(detail);
     handleFilterModal(name, detail);
   };
 
@@ -52,19 +51,44 @@ const CardTitleStatistic = ({
         <span className={styles["be-card-title-statistic__subtitle"]}>
           {subtitle}
         </span>
-        {detail && name !== "NamNhapNgu" && name !== "Tuoi" && (
+        {detail && name !== "SoNamNhapNgu" && name !== "SoTuoi" && (
           <span className={styles["be-card-title-statistic__detail"]}>
             ({detail})
           </span>
         )}
-        {name === "NamNhapNgu" && (
+        {detail && name === "SoNamNhapNgu" && detail !== "25" && (
           <span className={styles["be-card-title-statistic__detail"]}>
             ({detail} năm công tác)
           </span>
         )}
-        {name === "Tuoi" && (
+        {name === "SoNamNhapNgu" && detail === "25" && (
+          <span className={styles["be-card-title-statistic__detail"]}>
+            ({detail} năm công tác trở lên)
+          </span>
+        )}
+        {detail && name === "SoTuoi" && detail !== "30" && (
           <span className={styles["be-card-title-statistic__detail"]}>
             ({detail} tuổi)
+          </span>
+        )}
+        {name === "SoTuoi" && detail === "30" && (
+          <span className={styles["be-card-title-statistic__detail"]}>
+            ({detail} tuổi trở xuống)
+          </span>
+        )}
+        {name === "SoTuoi" && detail === "" && subtitle !== 0 && (
+          <span className={styles["be-card-title-statistic__detail"]}>
+            (30 tuổi trở xuống)
+          </span>
+        )}
+        {name === "KhuVucDiaLy" && detail === "" && subtitle !== 0 && (
+          <span className={styles["be-card-title-statistic__detail"]}>
+            (Ngoài TP Hà Nội)
+          </span>
+        )}
+        {name === "CoSoDaoTao" && detail === "" && subtitle !== 0 && (
+          <span className={styles["be-card-title-statistic__detail"]}>
+            (Ngoài TP Hà Nội)
           </span>
         )}
       </div>

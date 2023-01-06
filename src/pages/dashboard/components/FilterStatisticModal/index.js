@@ -85,6 +85,7 @@ const FilterStatisticModal = ({
     return {
       ...item.Record,
       key: item.Key,
+      index: (filterStatistic.page - 1) * filterStatistic.limit + index + 1,
     };
   });
 

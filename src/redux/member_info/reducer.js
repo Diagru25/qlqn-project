@@ -10,8 +10,8 @@ const defaultFilter = {
   TrinhDoCMKT: "",
   LoaiHinhDaoTao: "",
   CoSoDaoTao: "",
-  SoNamNhapNgu: 25,
-  SoTuoi: 30,
+  SoNamNhapNgu: "",
+  SoTuoi: "",
 };
 
 const initialState = {
