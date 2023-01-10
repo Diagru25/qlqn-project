@@ -1,0 +1,10 @@
+.bar-chart-tooltip {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: rgba(240, 240, 240, 0.7);
+}
+
+.bar-chart-tooltip__label {
+  font-size: 16px;
+  font-weight: 500;
+}

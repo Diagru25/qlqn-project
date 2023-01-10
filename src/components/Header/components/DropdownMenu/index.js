@@ -10,8 +10,6 @@ import { replace } from "formik";
 
 import avatar from "../../../../assets/images/1239288.png";
 import styles from "./style.module.css";
-import {  writeLocalStorage } from "../../../../helper/localStorage";
-import { FULL_NAME } from "../../../../constants/auth.constant";
 import userAPI from "../../../../services/apis/userAPI";
 import { showNotification } from "../../../../helper/showNotification";
 
@@ -34,7 +32,7 @@ const DropdownMenu = () => {
       const { HoVaTen } = res.result.Record;
       setHoTen(HoVaTen);
     } catch (error) {
-      showNotification("error", "Lỗi hiển thị tên người dùng", "Yêu cầu kiểm tra lại kết nối mạng")
+      showNotification("error", "Lỗi hiển thị tên người dùng", "Yêu cầu kiểm tra lại kết nối mạng hoặc nhập thông tin người dùng")
     }
   };
 

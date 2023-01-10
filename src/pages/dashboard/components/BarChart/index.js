@@ -1,101 +1,124 @@
+import { useSelector } from "react-redux";
 import {
   Bar,
   BarChart,
+  CartesianAxis,
   Cell,
   LabelList,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-const data = [
-  {
-    name: "01/2022",
-    uv: 35,
-    color: "#85A5FF",
-  },
-  {
-    name: "02/2022",
-    uv: 95,
-    color: "#ADC6FF",
-  },
-  {
-    name: "03/2022",
-    uv: 40,
-    color: "#D6E4FF",
-  },
-  {
-    name: "04/2022",
-    uv: 95,
-    color: "#ADC6FF",
-  },
-  {
-    name: "05/2022",
-    uv: 65,
-    color: "#85A5FF",
-  },
-  {
-    name: "06/2022",
-    uv: 95,
-    color: "#ADC6FF",
-  },
-  {
-    name: "07/2022",
-    uv: 80,
-    color: "#D6E4FF",
-  },
-  {
-    name: "08/2022",
-    uv: 55,
-    color: "#85A5FF",
-  },
-  {
-    name: "09/2022",
-    uv: 65,
-    color: "#ADC6FF",
-  },
-  {
-    name: "10/2022",
-    uv: 85,
-    color: "#85A5FF",
-  },
-  {
-    name: "11/2022",
-    uv: 95,
-    color: "#ADC6FF",
-  },
-  {
-    name: "12/2022",
-    uv: 80,
-    color: "#D6E4FF",
-  },
-];
+import BarChartTooltip from "../../../../components/BarChartTooltip";
 
 const BarChartDashboard = () => {
+  const memberListStatistic = useSelector(
+    (state) => state.memberListReducer.memberListStatistic
+  );
+
+  console.log("Member list", memberListStatistic);
+  const data = [
+    {
+      name: "Chức vụ",
+      uv: Math.round((memberListStatistic.countChucVu / 98) * 100),
+      color: "#85A5FF",
+    },
+    {
+      name: "Cấp bậc",
+      uv: Math.round((memberListStatistic.countCapBac / 98) * 100),
+      color: "#ADC6FF",
+    },
+    {
+      name: "Đơn vị",
+      uv: Math.round((memberListStatistic.countDonVi / 98) * 100),
+      color: "#D6E4FF",
+    },
+    {
+      name: "Trình độ học vấn",
+      uv: Math.round((memberListStatistic.countTrinhDoCMKT / 98) * 100),
+      color: "#ADC6FF",
+    },
+    {
+      name: "Trình độ ngoại ngữ",
+      uv: Math.round((memberListStatistic.countTrinhDoNgoaiNgu / 98) * 100),
+      color: "#85A5FF",
+    },
+    {
+      name: "Số năm nhập ngũ",
+      uv: Math.round((memberListStatistic.countSoNamNhapNgu / 98) * 100),
+      color: "#ADC6FF",
+    },
+    {
+      name: "Số tuổi",
+      uv: Math.round((memberListStatistic.countSoTuoi / 98) * 100),
+      color: "#D6E4FF",
+    },
+    {
+      name: "Khu vực địa lý",
+      uv: Math.round((memberListStatistic.countKhuVucDiaLy / 98) * 100),
+      color: "#85A5FF",
+    },
+    {
+      name: "Chứng chỉ đào tạo",
+      uv: Math.round((memberListStatistic.countChungChiDaoTao / 98) * 100),
+      color: "#ADC6FF",
+    },
+    {
+      name: "Chuyên môn kỹ thuật",
+      uv: Math.round((memberListStatistic.countTrinhDoCMKT / 98) * 100),
+      color: "#85A5FF",
+    },
+    {
+      name: "Loại hình đào tạo",
+      uv: Math.round((memberListStatistic.countLoaiHinhDaoTao / 98) * 100),
+      color: "#ADC6FF",
+    },
+    {
+      name: "Cơ sở đào tạo",
+      uv: Math.round((memberListStatistic.countCoSoDaoTao / 98) * 100),
+      color: "#D6E4FF",
+    },
+  ];
+
   return (
-    <ResponsiveContainer style={{width: "100%"}} height={400} >
-      <BarChart   data={data}>
+    <ResponsiveContainer style={{ width: "100%" }} height={500}>
+      <BarChart data={data} style={{ paddingTop: 0 }}>
         <XAxis
           dataKey="name"
           interval={0}
-          minTickGap={20}
+          tick={{ width: 80, fontWeight: 500 }}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         />
-        <YAxis hide />
+        <YAxis
+          label={{
+            value: "Tỉ lệ thống kê quân nhân (%)",
+            position: "insideLeft",
+            angle: -90,
+          }}
+        />
+        <Tooltip content={<BarChartTooltip />} />
         <Bar
           dataKey="uv"
           fill="#85A5FF"
-          radius={8}
+          radius={6}
           label={{
-            position: "insideBottom",
-            angle: -60,
+            position: "top",
             fill: "black",
-            offset: 25,
+            offset: 10,
           }}
+          barSize={80}
         >
-          <LabelList dataKey="name" />
-          {data.map((entry, index) => (
-            <Cell fill={entry.color} key={`cell-${index}`} />
-          ))}
+          {data.map((entry, index) => {
+            let color = "#D6E4FF";
+            if (entry.uv > 30) {
+              color = "#85A5FF";
+            }
+            if (entry.uv > 60) {
+              color = "#ADC6FF";
+            }
+            return <Cell fill={color} key={`cell-${index}`} />;
+          })}
         </Bar>
       </BarChart>
     </ResponsiveContainer>

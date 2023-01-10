@@ -9,7 +9,6 @@ import styles from "./style.module.css";
 import useMemberControl from "./hooks/useMemberControl";
 
 const MemberControl = ({
-  flag,
   renderActions,
   onSubmit,
   initialMember,
@@ -19,38 +18,30 @@ const MemberControl = ({
   const { handleSubmit, memberState, userFormError, handleUserFormChange } =
     useMemberControl(onSubmit, initialMember, verifyInfo);
 
-  // if (flag === "member-detail") {
-  //   disabled = true;
-  // }
   return (
     <div className={styles["be-member-info"]}>
       <Space direction="vertical" style={{ width: "100%" }}>
         <MemberBasic
-          // disabled={disabled}
           userBasicFormValue={memberState.userBasicFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberCorporate
-          // disabled={disabled}
           userCorporateFormValue={memberState.userCorporateFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberQualification
-          // disabled={disabled}
           userQualificationFormValue={memberState.userQualificationFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberCyberWarfare
-          // disabled={disabled}
           userCyberWarfareFormValue={memberState.userCyberWarfareFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberOthers
-          // disabled={disabled}
           userOthersFormValue={memberState.userOthersFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}

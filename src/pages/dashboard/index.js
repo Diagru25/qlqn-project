@@ -185,24 +185,21 @@ const Dashboard = () => {
           </Carousel>
         </Col>
       </Row>
-      <Row gutter={24} style={{ marginTop: 10 }}>
-        <Col span={12}>
-          <Card
-            style={{ width: "100%", height: "100%" }}
-            title="Số lượng quân nhân thay đổi theo tháng"
-          >
-            <BarChartDashboard />
-          </Card>
-        </Col>
-        <Col span={12}>
+      <Card
+        style={{ width: "100%", marginTop: 10, height: "auto" }}
+        title="Biểu đồ thống kê quân nhân theo danh mục"
+      >
+        <BarChartDashboard memberListStatistic={memberListStatistic} />
+      </Card>
+      {/* <Row gutter={24} style={{}}>
+        
           <Card
             style={{ width: "100%", height: "100%" }}
             title="Thống kê chứng chỉ của quân nhân"
           >
             <PieChartDashboard />
           </Card>
-        </Col>
-      </Row>
+      </Row> */}
     </>
   );
 };
