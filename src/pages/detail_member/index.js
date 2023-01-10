@@ -86,7 +86,7 @@ const DetailMember = () => {
       await memberApi.updateMemberList(state, { ...data });
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {
-      console.log(error);
+      showNotification("error", "Không thể cập nhập thông tin quân nhân");
     }
   };
 
@@ -110,9 +110,7 @@ const DetailMember = () => {
       const res = await memberApi.getMemberDetail(state);
       const memberRecord = res.result.Record;
       setMemberDetail(memberRecord);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

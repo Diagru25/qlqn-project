@@ -11,10 +11,6 @@ const BarChartTooltip = ({ active, payload, label }) => {
 
   const { filter } = memberListStatistic;
 
-  console.log("member list statistic", memberListStatistic);
-
-  console.log("label", label);
-
   if (label === "Chức vụ") {
     barDesc = decodeURI(filter.ChucVu);
     count = memberListStatistic.countChucVu;

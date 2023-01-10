@@ -2,9 +2,7 @@ import { useSelector } from "react-redux";
 import {
   Bar,
   BarChart,
-  CartesianAxis,
   Cell,
-  LabelList,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -17,7 +15,6 @@ const BarChartDashboard = () => {
     (state) => state.memberListReducer.memberListStatistic
   );
 
-  console.log("Member list", memberListStatistic);
   const data = [
     {
       name: "Chức vụ",

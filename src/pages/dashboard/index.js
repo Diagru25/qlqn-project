@@ -6,7 +6,6 @@ import CardTitleStatistic from "../../components/CardTitleStatistic";
 import FilterModal from "../../components/FilterModal";
 import BarChartDashboard from "./components/BarChart";
 import FilterStatisticModal from "./components/FilterStatisticModal";
-import PieChartDashboard from "./components/PieChart";
 
 import styles from "./style.module.css";
 
