@@ -20,7 +20,7 @@ const MemberCorporate = ({
       <Card>
         <CardTitle
           title="Thông tin đoàn thể"
-          //subtitle="Bổ sung thông tin đoàn của quân nhân. VD: Họ tên, đia chỉ, ...v...v"
+          subtitle="Bổ sung thông tin đoàn của quân nhân. VD: Ngày vào đoàn, ngày vào Đảng, ...v...v"
         />
         <Form
           colon={false}
@@ -125,7 +125,7 @@ const MemberCorporate = ({
               </Form.Item>
               <Form.Item
                 label="Chức vụ đảng"
-            
+
                 //validateStatus={errors.name ? "error" : ""}
                 //help={errors.name}
               >
@@ -144,14 +144,14 @@ const MemberCorporate = ({
               </Form.Item>
               <Form.Item
                 label="Chức vụ đoàn"
-                // validateStatus={
-                //   errors?.userCorporateFormValue?.ChucVuDoan ? "error" : ""
-                // }
-                // help={
-                //   errors?.userCorporateFormValue?.ChucVuDoan &&
-                //   errors?.userCorporateFormValue?.ChucVuDoan
-                // }
-                // required
+                validateStatus={
+                  errors?.userCorporateFormValue?.ChucVuDoan ? "error" : ""
+                }
+                help={
+                  errors?.userCorporateFormValue?.ChucVuDoan &&
+                  errors?.userCorporateFormValue?.ChucVuDoan
+                }
+                required
                 //validateStatus={errors.name ? "error" : ""}
                 //help={errors.name}
               >

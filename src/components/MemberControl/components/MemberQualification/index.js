@@ -18,7 +18,7 @@ const MemberQualification = ({
       <Card>
         <CardTitle
           title="Thông tin trình độ chuyên môn"
-          //subtitle="Bổ sung thông tin trình độ chuyên môn của quân nhân. VD: Họ tên, đia chỉ, ...v...v"
+          subtitle="Bổ sung thông tin trình độ chuyên môn của quân nhân. VD: Học hàm, học vị, trình độ ngoại ngữ...v...v"
         />
         <Form
           colon={false}
@@ -33,16 +33,16 @@ const MemberQualification = ({
             <Col span={12}>
               <Form.Item
                 label="Trình độ văn hóa"
-                // validateStatus={
-                //   errors?.userQualificationFormValue?.TrinhDoVanHoa
-                //     ? "error"
-                //     : ""
-                // }
-                // help={
-                //   errors?.userQualificationFormValue?.TrinhDoVanHoa &&
-                //   errors?.userQualificationFormValue?.TrinhDoVanHoa
-                // }
-                // required
+                validateStatus={
+                  errors?.userQualificationFormValue?.TrinhDoVanHoa
+                    ? "error"
+                    : ""
+                }
+                help={
+                  errors?.userQualificationFormValue?.TrinhDoVanHoa &&
+                  errors?.userQualificationFormValue?.TrinhDoVanHoa
+                }
+                required
                 //validateStatus={errors.name ? "error" : ""}
                 //help={errors.name}
               >
@@ -61,14 +61,14 @@ const MemberQualification = ({
               </Form.Item>
               <Form.Item
                 label="Học hàm"
-                // validateStatus={
-                //   errors?.userQualificationFormValue?.HocHam ? "error" : ""
-                // }
-                // help={
-                //   errors?.userQualificationFormValue?.HocHam &&
-                //   errors?.userQualificationFormValue?.HocHam
-                // }
-                // required
+                validateStatus={
+                  errors?.userQualificationFormValue?.HocHam ? "error" : ""
+                }
+                help={
+                  errors?.userQualificationFormValue?.HocHam &&
+                  errors?.userQualificationFormValue?.HocHam
+                }
+                required
               >
                 <Input
                   placeholder="Học hàm"
@@ -85,14 +85,14 @@ const MemberQualification = ({
               </Form.Item>
               <Form.Item
                 label="Học vị"
-                // validateStatus={
-                //   errors?.userQualificationFormValue?.HocVi ? "error" : ""
-                // }
-                // help={
-                //   errors?.userQualificationFormValue?.HocVi &&
-                //   errors?.userQualificationFormValue?.HocVi
-                // }
-                // required
+                validateStatus={
+                  errors?.userQualificationFormValue?.HocVi ? "error" : ""
+                }
+                help={
+                  errors?.userQualificationFormValue?.HocVi &&
+                  errors?.userQualificationFormValue?.HocVi
+                }
+                required
               >
                 <Input
                   placeholder="Học vị"
@@ -107,16 +107,16 @@ const MemberQualification = ({
               </Form.Item>
               <Form.Item
                 label="Trình độ ngoại ngữ"
-                // validateStatus={
-                //   errors?.userQualificationFormValue?.TrinhDoNgoaiNgu
-                //     ? "error"
-                //     : ""
-                // }
-                // help={
-                //   errors?.userQualificationFormValue?.TrinhDoNgoaiNgu &&
-                //   errors?.userQualificationFormValue?.TrinhDoNgoaiNgu
-                // }
-                // required
+                validateStatus={
+                  errors?.userQualificationFormValue?.TrinhDoNgoaiNgu
+                    ? "error"
+                    : ""
+                }
+                help={
+                  errors?.userQualificationFormValue?.TrinhDoNgoaiNgu &&
+                  errors?.userQualificationFormValue?.TrinhDoNgoaiNgu
+                }
+                required
               >
                 <Select
                   allowClear
@@ -147,16 +147,16 @@ const MemberQualification = ({
             <Col span={12}>
               <Form.Item
                 label="Trình độ quản lý"
-                // validateStatus={
-                //   errors?.userQualificationFormValue?.TrinhDoQuanLy
-                //     ? "error"
-                //     : ""
-                // }
-                // help={
-                //   errors?.userQualificationFormValue?.TrinhDoQuanLy &&
-                //   errors?.userQualificationFormValue?.TrinhDoQuanLy
-                // }
-                // required
+                validateStatus={
+                  errors?.userQualificationFormValue?.TrinhDoQuanLy
+                    ? "error"
+                    : ""
+                }
+                help={
+                  errors?.userQualificationFormValue?.TrinhDoQuanLy &&
+                  errors?.userQualificationFormValue?.TrinhDoQuanLy
+                }
+                required
               >
                 <Input
                   placeholder="Trình độ quản lý"
@@ -173,17 +173,17 @@ const MemberQualification = ({
               </Form.Item>
               <Form.Item
                 label="Trình độ lý luận chính trị"
-                // validateStatus={
-                //   errors?.userQualificationFormValue?.TrinhDoLyLuanChinhTri
-                //     ? "error"
-                //     : ""
-                // }
-                // help={
-                //   errors?.userQualificationFormValue?.TrinhDoLyLuanChinhTri &&
-                //   errors?.userQualificationFormValue?.TrinhDoLyLuanChinhTri
-                // }
+                validateStatus={
+                  errors?.userQualificationFormValue?.TrinhDoLyLuanChinhTri
+                    ? "error"
+                    : ""
+                }
+                help={
+                  errors?.userQualificationFormValue?.TrinhDoLyLuanChinhTri &&
+                  errors?.userQualificationFormValue?.TrinhDoLyLuanChinhTri
+                }
                 disabled={disabled}
-                // required
+                required
               >
                 <Input
                   placeholder="Trình độ lý luận chính trị"
@@ -200,14 +200,14 @@ const MemberQualification = ({
               </Form.Item>
               <Form.Item
                 label="Trình độ CMKT"
-                // validateStatus={
-                //   errors?.userQualificationFormValue?.TrinhDoCMKT ? "error" : ""
-                // }
-                // help={
-                //   errors?.userQualificationFormValue?.TrinhDoCMKT &&
-                //   errors?.userQualificationFormValue?.TrinhDoCMKT
-                // }
-                // required
+                validateStatus={
+                  errors?.userQualificationFormValue?.TrinhDoCMKT ? "error" : ""
+                }
+                help={
+                  errors?.userQualificationFormValue?.TrinhDoCMKT &&
+                  errors?.userQualificationFormValue?.TrinhDoCMKT
+                }
+                required
               >
                 <Input
                   placeholder="Trình độ CMKT"
