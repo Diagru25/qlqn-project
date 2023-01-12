@@ -98,9 +98,11 @@ const MemberCyberWarfare = ({
                 <Select
                   allowClear
                   style={{ width: "100%" }}
+                  value={userCyberWarfareFormValue.LoaiHinhDaoTao}
                   name="LoaiHinhDaoTao"
                   placeholder="Loại hình đào tạo"
                   onChange={(value) => {
+                    console.log("Loai hinh dao tao", value);
                     handleChangeValue({ LoaiHinhDaoTao: value });
                   }}
                 >

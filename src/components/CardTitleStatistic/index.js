@@ -48,6 +48,16 @@ const CardTitleStatistic = ({
         >
           {title}
         </div>
+        {name === "SoTuoi" && detail === "" && (
+          <span className={styles["be-card-title-statistic__subtitle"]}>
+            0
+          </span>
+        )}
+        {name === "SoNamNhapNgu" && detail === "" && (
+          <span className={styles["be-card-title-statistic__subtitle"]}>
+            0
+          </span>
+        )}
         <span className={styles["be-card-title-statistic__subtitle"]}>
           {subtitle}
         </span>
@@ -76,11 +86,7 @@ const CardTitleStatistic = ({
             ({detail} tuổi trở xuống)
           </span>
         )}
-        {name === "SoTuoi" && detail === "" && subtitle !== 0 && (
-          <span className={styles["be-card-title-statistic__detail"]}>
-            (30 tuổi trở xuống)
-          </span>
-        )}
+
         {name === "KhuVucDiaLy" && detail === "" && subtitle !== 0 && (
           <span className={styles["be-card-title-statistic__detail"]}>
             (Ngoài TP Hà Nội)

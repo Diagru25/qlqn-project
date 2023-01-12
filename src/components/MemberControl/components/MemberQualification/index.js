@@ -121,6 +121,7 @@ const MemberQualification = ({
                 <Select
                   allowClear
                   style={{ width: "100%" }}
+                  value={userQualificationFormValue.TrinhDoNgoaiNgu}
                   placeholder="Trình độ ngoại ngữ"
                   onChange={(value) => {
                     handleChangeValue({ TrinhDoNgoaiNgu: value });

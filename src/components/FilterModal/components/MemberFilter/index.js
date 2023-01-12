@@ -87,7 +87,7 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ TrinhDoCMKT: encodeURI(value) })
-                    : handleUpdateStatistic({ TrinhDoCMKT: "" });
+                    : handleUpdateStatistic({ TrinhDoCMKT: encodeURI("") });
                 }}
               >
                 <Select.Option key="1" value="Tiến sĩ">
@@ -175,7 +175,7 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ SoTuoi: encodeURI(value) })
-                    : handleUpdateStatistic({ SoTuoi: 30 });
+                    : handleUpdateStatistic({ SoTuoi: "" });
                   if (value && value === "30") {
                     handleUpdateStatistic({ SoTuoi: +value });
                   }

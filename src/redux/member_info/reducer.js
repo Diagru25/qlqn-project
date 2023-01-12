@@ -67,6 +67,7 @@ const initialState = {
     countKhuVucDiaLy: 0,
     countTrinhDoNgoaiNgu: 0,
     countTrinhDoCMKT: 0,
+    countTotal: 0,
     isLoading: false,
     filter: defaultFilter,
   },

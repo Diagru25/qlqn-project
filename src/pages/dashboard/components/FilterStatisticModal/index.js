@@ -10,6 +10,8 @@ const FilterStatisticModal = ({
   filterField,
   filterValue,
 }) => {
+  console.log("filter field", filterField);
+  console.log("filter value", filterValue);
   const dispatch = useDispatch();
   const { memberActions } = useActions();
 

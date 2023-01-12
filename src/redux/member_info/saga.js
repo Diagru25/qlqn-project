@@ -207,8 +207,8 @@ function* getListStatistic_saga(action) {
     const chungChiDaoTao = params.ChungChiDaoTao ? params.ChungChiDaoTao : "";
     const loaiHinhDaoTao = params.LoaiHinhDaoTao ? params.LoaiHinhDaoTao : "";
     const coSoDaoTao = params.CoSoDaoTao ? params.CoSoDaoTao : "";
-    const soNamNhapNgu = params.SoNamNhapNgu ? params.SoNamNhapNgu : 25;
-    const soTuoi = params.SoTuoi ? params.SoTuoi : 30;
+    const soNamNhapNgu = params.SoNamNhapNgu ? params.SoNamNhapNgu : "";
+    const soTuoi = params.SoTuoi ? params.SoTuoi : "";
 
     const filter = params
       ? { ...memberListStatistic.filter, ...params }
@@ -242,6 +242,7 @@ function* getListStatistic_saga(action) {
       countKhuVucDiaLy,
       countTrinhDoNgoaiNgu,
       countTrinhDoCMKT,
+      countTotal,
     } = res.result;
 
     yield put(
@@ -258,6 +259,7 @@ function* getListStatistic_saga(action) {
           countKhuVucDiaLy: countKhuVucDiaLy,
           countTrinhDoNgoaiNgu: countTrinhDoNgoaiNgu,
           countTrinhDoCMKT: countTrinhDoCMKT,
+          countTotal: countTotal,
           isLoading: false,
           filter: filter,
         },
@@ -279,6 +281,7 @@ function* getListStatistic_saga(action) {
           countKhuVucDiaLy: 0,
           countTrinhDoNgoaiNgu: 0,
           countTrinhDoCMKT: 0,
+          countTotal: 0,
           isLoading: false,
         },
       })

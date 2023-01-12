@@ -18,7 +18,7 @@ const Dashboard = () => {
     setIsFilterModalOpen(false);
   };
 
-  const handleFilterModal = (filterField, filterVal) => {
+  const handleFilterModal = async (filterField, filterVal) => {
     setIsFilterModalOpen(true);
     setFilterField(filterField);
     setFilterValue(filterVal);
@@ -188,7 +188,10 @@ const Dashboard = () => {
         style={{ width: "100%", marginTop: 10, height: "auto" }}
         title="Biểu đồ thống kê quân nhân theo danh mục"
       >
-        <BarChartDashboard memberListStatistic={memberListStatistic} />
+        <BarChartDashboard
+          memberListStatistic={memberListStatistic}
+          handleFilterModal={handleFilterModal}
+        />
       </Card>
       {/* <Row gutter={24} style={{}}>
         
