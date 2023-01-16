@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useActions from "../../../../redux/useActions";
 
 const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
-  const { handleSubmit } = statisticFormik;
+  const { handleSubmit, values, resetForm } = statisticFormik;
   const dispatch = useDispatch();
   const { memberActions } = useActions();
 
@@ -13,6 +13,10 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
     (state) => state.memberListReducer.memberPosition
   );
   const memberUnit = useSelector((state) => state.memberListReducer.memberUnit);
+
+  const handleStatisticClear = () => {
+    resetForm();
+  };
 
   useEffect(() => {
     dispatch(memberActions.actions.getMemberPosition());
@@ -30,6 +34,8 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Chức vụ"
+                // defaultValue={filter.ChucVu ? decodeURI(filter.ChucVu) :}
+                value={values.ChucVu ? decodeURI(values.ChucVu) : undefined}
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ ChucVu: encodeURI(value) })
@@ -48,6 +54,7 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Cấp bậc"
+                value={values.CapBac ? decodeURI(values.CapBac) : undefined}
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ CapBac: encodeURI(value) })
@@ -66,6 +73,7 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Đơn vị"
+                value={values.DonVi ? decodeURI(values.DonVi) : undefined}
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ DonVi: encodeURI(value) })
@@ -84,10 +92,11 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Trình độ học vấn"
+                value={values.HocVi ? decodeURI(values.HocVi) : undefined}
                 onChange={(value) => {
                   value
-                    ? handleUpdateStatistic({ TrinhDoCMKT: encodeURI(value) })
-                    : handleUpdateStatistic({ TrinhDoCMKT: encodeURI("") });
+                    ? handleUpdateStatistic({ HocVi: encodeURI(value) })
+                    : handleUpdateStatistic({ HocVi: encodeURI("") });
                 }}
               >
                 <Select.Option key="1" value="Tiến sĩ">
@@ -106,6 +115,11 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Trình độ ngoại ngữ"
+                value={
+                  values.TrinhDoNgoaiNgu
+                    ? decodeURI(values.TrinhDoNgoaiNgu)
+                    : undefined
+                }
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({
@@ -136,6 +150,11 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Số năm nhập ngũ"
+                value={
+                  values.SoNamNhapNgu
+                    ? decodeURI(values.SoNamNhapNgu)
+                    : undefined
+                }
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ SoNamNhapNgu: encodeURI(value) })
@@ -172,6 +191,7 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Số tuổi"
+                value={values.SoTuoi ? decodeURI(values.SoTuoi) : undefined}
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ SoTuoi: encodeURI(value) })
@@ -209,6 +229,9 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Khu vực địa lý"
+                value={
+                  values.KhuVucDiaLy ? decodeURI(values.KhuVucDiaLy) : undefined
+                }
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ KhuVucDiaLy: encodeURI(value) })
@@ -228,6 +251,11 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Chứng chỉ đào tạo"
+                value={
+                  values.ChungChiDaoTao
+                    ? decodeURI(values.ChungChiDaoTao)
+                    : undefined
+                }
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({
@@ -252,20 +280,23 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Chuyên môn kỹ thuật"
+                value={
+                  values.TrinhDoCMKT ? decodeURI(values.TrinhDoCMKT) : undefined
+                }
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ TrinhDoCMKT: encodeURI(value) })
                     : handleUpdateStatistic({ TrinhDoCMKT: "" });
                 }}
               >
-                <Select.Option key="26" value="Tiến sĩ">
-                  Tiến sĩ
+                <Select.Option key="26" value="Sơ cấp">
+                  Sơ cấp
                 </Select.Option>
-                <Select.Option key="27" value="Thạc sĩ">
-                  Thạc sĩ
+                <Select.Option key="27" value="Trung cấp">
+                  Trung cấp
                 </Select.Option>
-                <Select.Option key="28" value="Kỹ sư">
-                  10-15
+                <Select.Option key="28" value="Cao cấp">
+                  Cao cấp
                 </Select.Option>
               </Select>
             </Form.Item>
@@ -274,6 +305,11 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Loại hình đào tạo"
+                value={
+                  values.LoaiHinhDaoTao
+                    ? decodeURI(values.LoaiHinhDaoTao)
+                    : undefined
+                }
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({
@@ -295,6 +331,9 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 allowClear
                 style={{ width: "100%" }}
                 placeholder="Cơ sở đào tạo"
+                value={
+                  values.CoSoDaoTao ? decodeURI(values.CoSoDaoTao) : undefined
+                }
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({ CoSoDaoTao: encodeURI(value) })
@@ -314,7 +353,7 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
         <Row>
           <Space>
             <Button onClick={handleSubmit}>Thống kê</Button>
-            {/* <Button onClick={handleClearFilter}>Xóa lọc</Button> */}
+            <Button onClick={handleStatisticClear}>Xóa thống kê</Button>
           </Space>
         </Row>
       </Form>

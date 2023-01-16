@@ -32,6 +32,8 @@ const CardTitleStatistic = ({
     styleColor = "#009688";
   }
 
+  // console.log("sub", title + "----" + subtitle);
+
   const handleFilterModalOpen = () => {
     handleFilterModal(name, detail);
   };
@@ -48,16 +50,12 @@ const CardTitleStatistic = ({
         >
           {title}
         </div>
-        {name === "SoTuoi" && detail === "" && (
-          <span className={styles["be-card-title-statistic__subtitle"]}>
-            0
-          </span>
+        {/* {name === "SoTuoi" && detail === "" && (
+          <span className={styles["be-card-title-statistic__subtitle"]}>0</span>
         )}
         {name === "SoNamNhapNgu" && detail === "" && (
-          <span className={styles["be-card-title-statistic__subtitle"]}>
-            0
-          </span>
-        )}
+          <span className={styles["be-card-title-statistic__subtitle"]}>0</span>
+        )} */}
         <span className={styles["be-card-title-statistic__subtitle"]}>
           {subtitle}
         </span>

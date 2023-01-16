@@ -10,10 +10,9 @@ const FilterStatisticModal = ({
   filterField,
   filterValue,
 }) => {
-  console.log("filter field", filterField);
-  console.log("filter value", filterValue);
   const dispatch = useDispatch();
   const { memberActions } = useActions();
+  let data = [];
 
   const filterValEncode = encodeURI(filterValue);
 
@@ -83,13 +82,15 @@ const FilterStatisticModal = ({
     },
   ];
 
-  const data = filterStatistic.message.map((item, index) => {
-    return {
-      ...item.Record,
-      key: item.Key,
-      index: (filterStatistic.page - 1) * filterStatistic.limit + index + 1,
-    };
-  });
+  if (filterStatistic.message && filterStatistic.message.length > 0) {
+    data = filterStatistic.message.map((item, index) => {
+      return {
+        ...item.Record,
+        key: item.Key,
+        index: (filterStatistic.page - 1) * filterStatistic.limit + index + 1,
+      };
+    });
+  }
 
   return (
     <Modal

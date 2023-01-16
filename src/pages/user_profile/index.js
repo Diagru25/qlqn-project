@@ -77,7 +77,7 @@ const UserInfo = () => {
         TrinhDoCMKT: userQualificationFormValue.TrinhDoCMKT,
         TrinhDoNgoaiNgu: userQualificationFormValue.TrinhDoNgoaiNgu,
         CapToChucDaoTao: userCyberWarfareFormValue.CapToChucDaoTao,
-        CoSoDaoTao: userCyberWarfareFormValue.CapToChucDaoTao,
+        CoSoDaoTao: userCyberWarfareFormValue.CoSoDaoTao,
         ChungChiDaoTao: userCyberWarfareFormValue.ChungChiDaoTao,
         NoiDungDaoTao: userCyberWarfareFormValue.NoiDungDaoTao,
         LoaiHinhDaoTao: userCyberWarfareFormValue.LoaiHinhDaoTao,

@@ -167,6 +167,17 @@ const reducer = (state = initialState, action) => {
         },
       };
     }
+
+    case memberActions.types.SET_DEFAULT_STATISTIC_LIST: {
+      return {
+        ...state,
+        filterStatistic: {
+          ...state.filterStatistic,
+          message: [],
+        },
+      };
+    }
+
     case memberActions.types.UPDATE_STATE: {
       return {
         ...state,

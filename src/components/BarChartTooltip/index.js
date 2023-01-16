@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import styles from "./style.module.css";
 
 const BarChartTooltip = ({ active, payload, label }) => {
-  let count = "";
+  let count = 0;
   let barDesc = "";
 
   const memberListStatistic = useSelector(
@@ -36,14 +36,20 @@ const BarChartTooltip = ({ active, payload, label }) => {
       filter.SoNamNhapNgu === 25
         ? `trên ${decodeURI(filter.SoNamNhapNgu)} năm công tác`
         : `${decodeURI(filter.SoNamNhapNgu)} năm công tác`;
-    count = memberListStatistic.countSoNamNhapNgu;
+    count =
+      memberListStatistic.countSoNamNhapNgu === undefined
+        ? 0
+        : memberListStatistic.countSoNamNhapNgu;
   }
   if (label === "Số tuổi") {
     barDesc =
       filter.SoTuoi === 30
         ? `dưới ${decodeURI(filter.SoTuoi)} tuổi`
         : `${decodeURI(filter.SoTuoi)} tuổi`;
-    count = memberListStatistic.countSoTuoi;
+    count =
+      memberListStatistic.countSoTuoi === undefined
+        ? 0
+        : memberListStatistic.countSoTuoi;
   }
   if (label === "Khu vực địa lý") {
     barDesc =

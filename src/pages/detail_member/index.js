@@ -1,4 +1,4 @@
-import { Button, Col, Row, Space } from "antd";
+import { Button, Col, Row, Space, Spin } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ const DetailMember = () => {
   const { verifyActions } = useActions();
 
   const [memberDetail, setMemberDetail] = useState({});
-
+  const [isLoading, setIsLoading] = useState(false);
   const verifyInfo = useSelector((state) => state.verifyReducer.verifyInfo);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const DetailMember = () => {
 
   const handleSubmitEditMember = async (memberData) => {
     try {
+      setIsLoading(true);
       const {
         userBasicFormValue,
         userCorporateFormValue,
@@ -84,8 +85,10 @@ const DetailMember = () => {
       };
 
       await memberApi.updateMemberList(state, { ...data });
+      setIsLoading(false);
       showNotification("success", "Cập nhập mới thành công!");
     } catch (error) {
+      setIsLoading(false);
       showNotification("error", "Không thể cập nhập thông tin quân nhân");
     }
   };
@@ -120,14 +123,16 @@ const DetailMember = () => {
           <Breadcrumb title="Chi tiết hồ sơ" />
         </Col>
       </Row>
-      <div>
-        <MemberControl
-          verifyInfo={verifyInfo}
-          initialMember={memberDetail}
-          renderActions={renderActions}
-          onSubmit={handleSubmitEditMember}
-        />
-      </div>
+      <Spin tip="Đang xử lý..." spinning={isLoading}>
+        <div>
+          <MemberControl
+            verifyInfo={verifyInfo}
+            initialMember={memberDetail}
+            renderActions={renderActions}
+            onSubmit={handleSubmitEditMember}
+          />
+        </div>
+      </Spin>
     </>
   );
 };

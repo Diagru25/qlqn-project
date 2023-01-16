@@ -11,6 +11,7 @@ const types = {
   GET_MEMBER_UPDATED_LOGS: prefix + "GET_MEMBER_UPDATED_LOGS",
   SET_FILTER: prefix + "SET_FILTER",
   SET_DEFAULT_FILTER: prefix + "SET_DEFAULT_FILTER",
+  SET_DEFAULT_STATISTIC_LIST: prefix + "SET_DEFAULT_STATISTIC_LIST",
   UPDATE_STATE: prefix + "UPDATE_STATE",
 };
 
@@ -71,7 +72,8 @@ const actions = {
     LoaiHinhDaoTao,
     CoSoDaoTao,
     SoNamNhapNgu,
-    SoTuoi
+    SoTuoi,
+    HocVi
   ) => {
     return {
       type: types.GET_LIST_STATISTIC,
@@ -87,6 +89,7 @@ const actions = {
         CoSoDaoTao,
         SoNamNhapNgu,
         SoTuoi,
+        HocVi,
       },
     };
   },
@@ -127,6 +130,13 @@ const actions = {
       payload: {
         filter,
       },
+    };
+  },
+
+  setDefaultStatisticList: () => {
+    return {
+      type: types.SET_DEFAULT_STATISTIC_LIST,
+      payload: {},
     };
   },
 

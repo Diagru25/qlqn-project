@@ -9,6 +9,7 @@ const MemberCyberWarfare = ({
   handleUserFormChange,
 }) => {
   const handleChangeValue = (value = {}) => {
+    console.log("value", value);
     handleUserFormChange({
       userCyberWarfareFormValue: {
         ...userCyberWarfareFormValue,

@@ -209,6 +209,7 @@ function* getListStatistic_saga(action) {
     const coSoDaoTao = params.CoSoDaoTao ? params.CoSoDaoTao : "";
     const soNamNhapNgu = params.SoNamNhapNgu ? params.SoNamNhapNgu : "";
     const soTuoi = params.SoTuoi ? params.SoTuoi : "";
+    const hocVi = params.HocVi ? params.HocVi : "";
 
     const filter = params
       ? { ...memberListStatistic.filter, ...params }
@@ -227,7 +228,8 @@ function* getListStatistic_saga(action) {
       loaiHinhDaoTao,
       coSoDaoTao,
       soNamNhapNgu,
-      soTuoi
+      soTuoi,
+      hocVi
     );
 
     const {

@@ -1,7 +1,7 @@
 import { Button, Modal } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useActions from "../../redux/useActions";
 import MemberFilter from "./components/MemberFilter";
@@ -18,9 +18,10 @@ const initData = {
   CoSoDaoTao: "",
   SoNamNhapNgu: "",
   SoTuoi: "",
+  HocVi: "",
 };
 
-const FilterModal = () => {
+const FilterModal = ({ filterData }) => {
   const dispatch = useDispatch();
   const { memberActions } = useActions();
 
@@ -33,10 +34,29 @@ const FilterModal = () => {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    if (filterData) {
+      statisticFormik.setValues({
+        DonVi: filterData.DonVi,
+        ChucVu: filterData.ChucVu,
+        CapBac: filterData.CapBac,
+        TrinhDoNgoaiNgu: filterData.TrinhDoNgoaiNgu,
+        KhuVucDiaLy: filterData.KhuVucDiaLy,
+        ChungChiDaoTao: filterData.ChungChiDaoTao,
+        TrinhDoCMKT: filterData.TrinhDoCMKT,
+        LoaiHinhDaoTao: filterData.LoaiHinhDaoTao,
+        CoSoDaoTao: filterData.CoSoDaoTao,
+        SoNamNhapNgu: filterData.SoNamNhapNgu,
+        SoTuoi: filterData.SoTuoi,
+        HocVi: filterData.HocVi,
+      });
+    }
+  }, [filterData]);
+
   const statisticFormik = useFormik({
     initialValues: initData,
-    onSubmit: (values = {}) => {
-      if (values) {
+    onSubmit: (data) => {
+      if (data) {
         const {
           DonVi,
           ChucVu,
@@ -49,7 +69,8 @@ const FilterModal = () => {
           CoSoDaoTao,
           SoNamNhapNgu,
           SoTuoi,
-        } = values;
+          HocVi,
+        } = data;
 
         dispatch(
           memberActions.actions.getListStatistic(
@@ -63,7 +84,8 @@ const FilterModal = () => {
             LoaiHinhDaoTao,
             CoSoDaoTao,
             SoNamNhapNgu,
-            SoTuoi
+            SoTuoi,
+            HocVi
           )
         );
       }

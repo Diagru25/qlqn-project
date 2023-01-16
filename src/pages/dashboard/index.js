@@ -1,20 +1,25 @@
 import { Card, Carousel, Col, Row } from "antd";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import CardTitleStatistic from "../../components/CardTitleStatistic";
 import FilterModal from "../../components/FilterModal";
+import useActions from "../../redux/useActions";
 import BarChartDashboard from "./components/BarChart";
 import FilterStatisticModal from "./components/FilterStatisticModal";
 
 import styles from "./style.module.css";
 
 const Dashboard = () => {
+  const { memberActions } = useActions();
+  const dispatch = useDispatch();
+
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [filterField, setFilterField] = useState("");
   const [filterValue, setFilterValue] = useState("");
 
   const handleFilterCancel = () => {
+    dispatch(memberActions.actions.setDefaultStatisticList());
     setIsFilterModalOpen(false);
   };
 
@@ -47,7 +52,7 @@ const Dashboard = () => {
           <Breadcrumb title="Trang chủ" />
         </Col>
         <Col span={12} className={styles["dashboard-filter__action"]}>
-          <FilterModal />
+          <FilterModal filterData={filter} />
         </Col>
       </Row>
 
@@ -115,7 +120,11 @@ const Dashboard = () => {
               <CardTitleStatistic
                 name="SoNamNhapNgu"
                 title="Thống kê theo năm nhập ngũ"
-                subtitle={memberListStatistic.countSoNamNhapNgu}
+                subtitle={
+                  memberListStatistic.countSoNamNhapNgu === undefined
+                    ? "0"
+                    : memberListStatistic.countSoNamNhapNgu
+                }
                 detail={decodeURI(filter.SoNamNhapNgu.toString())}
                 handleFilterModal={handleFilterModal}
               />
@@ -132,7 +141,11 @@ const Dashboard = () => {
               <CardTitleStatistic
                 name="SoTuoi"
                 title="Thống kê theo tuổi"
-                subtitle={memberListStatistic.countSoTuoi}
+                subtitle={
+                  memberListStatistic.countSoTuoi === undefined
+                    ? "0"
+                    : memberListStatistic.countSoTuoi
+                }
                 detail={decodeURI(filter.SoTuoi.toString())}
                 handleFilterModal={handleFilterModal}
               />
