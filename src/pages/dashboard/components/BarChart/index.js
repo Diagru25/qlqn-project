@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   Bar,
@@ -9,8 +10,11 @@ import {
   YAxis,
 } from "recharts";
 import BarChartTooltip from "../../../../components/BarChartTooltip";
+import { useStatistic } from "../hook/useStatistic";
 
 const BarChartDashboard = ({ handleFilterModal }) => {
+  // const [newData, setNewData] = useState([]);
+
   const memberListStatistic = useSelector(
     (state) => state.memberListReducer.memberListStatistic
   );
@@ -27,9 +31,9 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countChucVu / memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countChucVu / memberListStatistic.countTotal) *
+          100
+        ),
       color: "#85A5FF",
     },
     {
@@ -41,9 +45,9 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countCapBac / memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countCapBac / memberListStatistic.countTotal) *
+          100
+        ),
       color: "#ADC6FF",
     },
     {
@@ -53,9 +57,9 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       uv: isNaN(memberListStatistic.countDonVi / memberListStatistic.countTotal)
         ? "0"
         : Math.round(
-            (memberListStatistic.countDonVi / memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countDonVi / memberListStatistic.countTotal) *
+          100
+        ),
       color: "#D6E4FF",
     },
     {
@@ -79,14 +83,14 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       detail: filter.TrinhDoNgoaiNgu,
       uv: isNaN(
         memberListStatistic.countTrinhDoNgoaiNgu /
-          memberListStatistic.countTotal
+        memberListStatistic.countTotal
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countTrinhDoNgoaiNgu /
-              memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countTrinhDoNgoaiNgu /
+            memberListStatistic.countTotal) *
+          100
+        ),
       color: "#85A5FF",
     },
     {
@@ -98,10 +102,10 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countSoNamNhapNgu /
-              memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countSoNamNhapNgu /
+            memberListStatistic.countTotal) *
+          100
+        ),
       color: "#ADC6FF",
     },
     {
@@ -113,9 +117,9 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countSoTuoi / memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countSoTuoi / memberListStatistic.countTotal) *
+          100
+        ),
       color: "#D6E4FF",
     },
     {
@@ -127,10 +131,10 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countKhuVucDiaLy /
-              memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countKhuVucDiaLy /
+            memberListStatistic.countTotal) *
+          100
+        ),
       color: "#85A5FF",
     },
     {
@@ -142,10 +146,10 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countChungChiDaoTao /
-              memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countChungChiDaoTao /
+            memberListStatistic.countTotal) *
+          100
+        ),
       color: "#ADC6FF",
     },
     {
@@ -157,10 +161,10 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countTrinhDoCMKT /
-              memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countTrinhDoCMKT /
+            memberListStatistic.countTotal) *
+          100
+        ),
       color: "#85A5FF",
     },
     {
@@ -172,10 +176,10 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countLoaiHinhDaoTao /
-              memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countLoaiHinhDaoTao /
+            memberListStatistic.countTotal) *
+          100
+        ),
       color: "#ADC6FF",
     },
     {
@@ -187,24 +191,30 @@ const BarChartDashboard = ({ handleFilterModal }) => {
       )
         ? "0"
         : Math.round(
-            (memberListStatistic.countCoSoDaoTao /
-              memberListStatistic.countTotal) *
-              100
-          ),
+          (memberListStatistic.countCoSoDaoTao /
+            memberListStatistic.countTotal) *
+          100
+        ),
       color: "#D6E4FF",
     },
   ];
+
+  // console.log('data cahrt', data);
+
+  const { newData } = useStatistic(data);
+
 
   return (
     <>
       <ResponsiveContainer style={{ width: "100%" }} height={500}>
         <BarChart
-          data={data}
+          data={newData.length === 0 ? [{ label: '' }] : newData}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
           <XAxis
             dataKey="name"
             interval={0}
+            domain={[0, 12]}
             tick={{ width: 80, fontWeight: 500 }}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           />
@@ -232,7 +242,7 @@ const BarChartDashboard = ({ handleFilterModal }) => {
             }}
             style={{ cursor: "pointer", paddingTop: "30px" }}
           >
-            {data.map((entry, index) => {
+            {newData.map((entry, index) => {
               let color = "#D6E4FF";
               if (entry.uv > 30) {
                 color = "#85A5FF";

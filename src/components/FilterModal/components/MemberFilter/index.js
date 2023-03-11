@@ -5,6 +5,8 @@ import useActions from "../../../../redux/useActions";
 
 const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
   const { handleSubmit, values, resetForm } = statisticFormik;
+  console.log('filter value', values)
+
   const dispatch = useDispatch();
   const { memberActions } = useActions();
 
