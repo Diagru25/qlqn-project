@@ -9,7 +9,7 @@ const MemberCyberWarfare = ({
   handleUserFormChange,
 }) => {
   const handleChangeValue = (value = {}) => {
-    console.log("value", value);
+    // console.log("value", value);
     handleUserFormChange({
       userCyberWarfareFormValue: {
         ...userCyberWarfareFormValue,
@@ -103,7 +103,7 @@ const MemberCyberWarfare = ({
                   name="LoaiHinhDaoTao"
                   placeholder="Loại hình đào tạo"
                   onChange={(value) => {
-                    console.log("Loai hinh dao tao", value);
+                    // console.log("Loai hinh dao tao", value);
                     handleChangeValue({ LoaiHinhDaoTao: value });
                   }}
                 >

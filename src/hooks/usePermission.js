@@ -6,19 +6,15 @@ export const usePermission = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const getAdminPermission = async () => {
-    const getPermission = await memberApi.getMemberPosition(1, 100);
     const getUserProfile = await userAPI.getUserProfile();
 
-    const { items } = getPermission.result;
-    const { Record } = getUserProfile.result;
+    // console.log(getUserProfile);
 
-    const adminIndex = items.findIndex(
-      (el) => el.Id === "3509DE02-52DD-4BA7-E244-08DA44747730"
-    );
+    const { result } = await getUserProfile;
 
-    const adminUser = items[adminIndex];
+    const userId = await result.Record.user_id;
 
-    if (Record.ChucVu === adminUser.Ten) {
+    if (userId === "FE3CAD63-5187-4F4B-ADAA-798FF932B5C4") {
       setIsAdmin(true);
     }
   };

@@ -3,6 +3,7 @@ import permissionActions from "./permission/action";
 import memberActions from "./member_info/action";
 import userActions from "./user/action";
 import verifyActions from "./verify/action";
+import approvalActions from "./approval/action";
 
 const useActions = () => {
   return {
@@ -11,6 +12,7 @@ const useActions = () => {
     memberActions,
     userActions,
     verifyActions,
+    approvalActions,
   };
 };
 

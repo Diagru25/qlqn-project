@@ -91,9 +91,13 @@ const UserInfo = () => {
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
       };
       setIsLoading(true);
-      await userAPI.updateUserProfile({ ...data });
+      const updatedUserInfo = await userAPI.updateUserProfile({ ...data });
+      
       setIsLoading(false);
-      showNotification("success", "Cập nhập mới thành công!");
+      if (updatedUserInfo.statusCode === 200) {
+        showNotification("success", updatedUserInfo.message);
+      }
+      
     } catch (error) {
       setIsLoading(false);
       if (error.status === 403) {
