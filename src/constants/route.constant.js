@@ -15,4 +15,5 @@ export const adminRoute = {
   MANAGE_LOG: "admin/manage-log",
   MEMBER_DETAIL: "/admin/member-detail",
   MEMBER_UPDATED_LOG: "/admin/updated-log",
+  APPROVE_REQUEST: "/admin/approve-request",
 };

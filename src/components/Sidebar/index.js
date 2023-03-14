@@ -4,6 +4,7 @@ import {
   ControlOutlined,
   HistoryOutlined,
   DeploymentUnitOutlined,
+  CarryOutOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -13,8 +14,9 @@ import logo from "../../assets/images/icon.png";
 import { adminRoute } from "../../constants/route.constant";
 import { useDispatch } from "react-redux";
 import authActions from "../../redux/auth/action";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import UnitDrawer from "../UnitDrawer";
+import { usePermission } from "../../hooks/usePermission";
 // import { usePermission } from "../../hooks/usePermission";
 
 const { Sider } = Layout;
@@ -25,7 +27,9 @@ const Sidebar = ({ collapsed }) => {
 
   const [openUnit, setOpenUnit] = useState(false);
   const [sizeUnit, setSizeUnit] = useState();
-  // const isAdmin = usePermission();
+  const isAdmin = usePermission();
+
+  console.log(isAdmin);
 
   const showDrawer = () => {
     setSizeUnit("large");
@@ -94,6 +98,17 @@ const Sidebar = ({ collapsed }) => {
                 navigate(adminRoute.PERMISSIONS);
               },
             },
+            isAdmin
+              ? {
+                  key: "pheduyet",
+                  icon: <CarryOutOutlined />,
+                  label: "Phê duyệt",
+                  onClick: () => {
+                    navigate(adminRoute.APPROVE_REQUEST);
+                  },
+                }
+              : "",
+
             {
               key: "Quanlylog",
               icon: <HistoryOutlined />,
