@@ -95,6 +95,7 @@ const ApproveMember = () => {
                     "Phê duyệt hồ sơ quân nhân thành công."
                   );
                 }
+                dispatch(approvalActions.actions.getApprovalList());
                 setIsLoading(false);
               }}
             >
