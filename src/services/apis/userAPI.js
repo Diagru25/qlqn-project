@@ -18,10 +18,13 @@ const userAPI = {
             isAuthRequest: true
         })
     },
-    updateUserProfile: (data = {}) => {
+    updateUserProfile: (data = {}, field_update) => {
         return request({
             url: "/admin/v1/users",
             method: "PUT",
+            params: {
+                field_update: field_update,
+            },
             data: data,
             isAuthRequest: true,
         })

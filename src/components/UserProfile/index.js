@@ -61,11 +61,11 @@ const UserProfile = () => {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
     },
   });
 
-  console.log(initialValues);
+  // console.log(initialValues);
 
   return (
     <>

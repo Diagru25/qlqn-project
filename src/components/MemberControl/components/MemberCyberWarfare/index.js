@@ -98,6 +98,7 @@ const MemberCyberWarfare = ({
               >
                 <Select
                   allowClear
+                  disabled={disabled}
                   style={{ width: "100%" }}
                   value={userCyberWarfareFormValue.LoaiHinhDaoTao}
                   name="LoaiHinhDaoTao"

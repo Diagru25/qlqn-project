@@ -121,6 +121,7 @@ const userValidSchema = Yup.object().shape({
 });
 
 const useMemberControl = (onSubmit, initialMember, verifyInfo) => {
+  // console.log("init member", initialMember)
   useEffect(() => {
     if (initialMember) {
       // console.log("abc", initialMember);

@@ -13,7 +13,7 @@ const initialState = {
   isLoggedIn: _getSessionKey()!=null,
   isLoading: false,
   error: null,
-  userInfo: null,
+  userLoggedInfo: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +28,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...{
           isLoading: true,
+          userLoggedInfo: {
+            ...state.userLoggedInfo,
+          }
         },
       };
 

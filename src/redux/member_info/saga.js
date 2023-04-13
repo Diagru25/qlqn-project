@@ -142,48 +142,65 @@ function* getMemberRank_saga(action) {
 function* getMemberUnit_saga(action) {
   try {
     const parentUnitRes = yield memberApi.getMemberUnit();
-    const parentUnitArr = parentUnitRes.result.items;
+    const { items, page_index, page_size, total } = parentUnitRes.result;
 
-    if (parentUnitArr) {
-      for (let i = 0; i < parentUnitArr.length; i++) {
+    const itemsParent = items;
+
+    // console.log(itemsParent);
+
+    yield put(memberActions.actions.updateState({
+      memberUnit: {
+        items: itemsParent,
+        page_index: page_index,
+        page_size: page_size,
+        
+        isLoading: false,
+        total: total,
+      }
+    }))
+
+    if (itemsParent) {
+      for (let i = 0; i < itemsParent.length; i++) {
         const childUnitRes = yield memberApi.getMemberAffiliatedUnit(
-          parentUnitArr[i].Id
+          itemsParent[i].Id
         );
-        const { Id, Ten } = parentUnitArr[i];
-        const { items, page_index, page_size } = childUnitRes.result;
+        // console.log("child unit", childUnitRes);
+        const { items, page_index, page_size, total } = childUnitRes.result;
+        const itemsChild = items;
 
-        yield put(
-          memberActions.actions.updateState({
-            memberUnit: {
-              data: [
-                {
-                  title: Ten,
-                  key: Id,
-                  children: items.map((item) => {
-                    return {
-                      title: item.Ten,
-                      key: item.Id,
-                    };
-                  }),
-                },
-              ],
-              isLoading: false,
-              page_index,
-              page_size,
-            },
-          })
-        );
+        yield put(memberActions.actions.updateState({
+          memberAffiliatedUnit: {
+            items: itemsChild,
+            page_index: page_index,
+            page_size: page_size,
+            isLoading: false,
+            total: total
+          }
+        }))
+
+        
+        // const { Id, Ten } = items[i];
+        // const { items, page_index, page_size } = childUnitRes.result;
+
       }
     }
   } catch (error) {
     yield memberActions.actions.updateState({
       memberAffiliatedUnit: {
-        data: [],
+        items: [],
         page_index: 1,
         page_size: 40,
         total: 0,
         isLoading: false,
       },
+
+      memberAffiliatedUnit: {
+        items: [],
+        page_index: 1,
+        page_size: 40,
+        isLoading: false,
+        total: 0,
+      }
     });
   }
 }

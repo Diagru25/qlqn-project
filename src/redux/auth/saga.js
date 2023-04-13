@@ -1,5 +1,6 @@
+import { IN } from "pdfmake/build/pdfmake";
 import { fork, all, takeEvery, put } from "redux-saga/effects";
-import { ACCESS_TOKEN } from "../../constants/auth.constant";
+import { ACCESS_TOKEN, HOTEN, INFO } from "../../constants/auth.constant";
 import {
   clearLocalStorage,
   writeLocalStorage,
@@ -38,15 +39,20 @@ function* login_saga(action) {
 
     const res = yield authApi.login(username, password);
 
+    console.log("Login", res.result);
+
     if (res.statusCode === 200) {
       const sessionKey = res.result.token;
       writeLocalStorage(ACCESS_TOKEN, sessionKey);
+      writeLocalStorage(INFO, res.result.chucvu.Viettat);
+      writeLocalStorage(HOTEN, res.result.user.Tendaydu);
       yield put(
         authActions.actions.updateState({
           sessionKey: sessionKey,
           isLoggedIn: true,
           isLoading: false,
           error: null,
+          userLoggedInfo: res.result,
         })
       );
       showNotification("success", "Đăng nhập thành công")
@@ -58,6 +64,7 @@ function* login_saga(action) {
         isLoading: false,
         sessionKey: null,
         error: "Đăng nhập không thành công",
+        userLoggedInfo: {},
       })
     );
     showNotification("error", "Đăng nhập không thành công", "Mời bạn nhập lại thông tin")
@@ -68,6 +75,8 @@ function* login_saga(action) {
 function* logout_saga(action) {
   try {
     clearLocalStorage(ACCESS_TOKEN);
+    clearLocalStorage(INFO);
+    clearLocalStorage(HOTEN);
 
     yield put(
       authActions.actions.updateState({
@@ -75,6 +84,7 @@ function* logout_saga(action) {
         isLoading: false,
         error: null,
         sessionKey: null,
+        userLoggedInfo: {},
       })
     );
     showNotification("success", "Đăng xuất người dùng thành công");

@@ -27,6 +27,9 @@ const ManageLog = () => {
   const getSystemLog = async (pageIndex, pageSize) => {
     try {
       const res = await authApi.getSystemLog(pageIndex, pageSize);
+
+      console.log("system log", res)
+
       const { items, total, page_index, page_size } = res.result;
       setSystemLog((state) => {
         return {

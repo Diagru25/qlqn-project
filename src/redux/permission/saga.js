@@ -16,6 +16,8 @@ function* getModuleList_saga(action) {
       : moduleList.page_index;
 
     const res = yield permissionApi.getModuleList(pageIndex, pageSize);
+
+    console.log("get module list", res);
     const { page_index, page_size, items } = res.result;
 
     yield put(
@@ -64,6 +66,8 @@ function* getPermissionList_saga(action) {
         pageIndex,
         pageSize
       );
+        console.log("get permission", res);
+
       const { page_index, page_size, items } = res.result;
 
       yield put(
@@ -117,6 +121,7 @@ function* updatePermission_saga(action) {
       };
 
       const res = yield permissionApi.updatePermission(moduleId, dataForUpdate);
+      console.log(res);
       if (res.statusCode === 200) {
         yield put(
           permissionActions.actions.updateState({

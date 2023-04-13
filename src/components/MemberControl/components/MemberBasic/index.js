@@ -21,6 +21,7 @@ const MemberBasic = ({
   );
   const memberUnit = useSelector((state) => state.memberListReducer.memberUnit);
 
+  // console.log(memberUnit.items);
   useEffect(() => {
     dispatch(memberActions.actions.getMemberPosition());
     dispatch(memberActions.actions.getMemberRank());
@@ -282,11 +283,11 @@ const MemberBasic = ({
               <Form.Item
                 label="Đơn vị"
                 validateStatus={
-                  errors?.userBasicFormValue?.ChucVu ? "error" : ""
+                  errors?.userBasicFormValue?.DonVi ? "error" : ""
                 }
                 help={
-                  errors?.userBasicFormValue?.ChucVu &&
-                  errors?.userBasicFormValue?.ChucVu
+                  errors?.userBasicFormValue?.DonVi &&
+                  errors?.userBasicFormValue?.DonVi
                 }
                 required
               >
@@ -303,9 +304,9 @@ const MemberBasic = ({
                   //onChange={}
                   allowClear
                 >
-                  {memberUnit.data.map((unit) => (
-                    <Select.Option key={unit.key} value={unit.title}>
-                      {unit.title}
+                  {memberUnit.items.map((unit) => (
+                    <Select.Option key={unit.Ma} value={unit.Ten}>
+                      {unit.Ten}
                     </Select.Option>
                   ))}
                 </Select>

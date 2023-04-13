@@ -8,16 +8,23 @@ const UnitTree = () => {
   const { memberActions } = useActions();
 
   const memberUnit = useSelector((state) => state.memberListReducer.memberUnit);
+  const memberAffiliatedUnit = useSelector((state) => state.memberListReducer.memberAffiliatedUnit);
 
-  const isLoading = memberUnit.isLoading;
+  console.log("member unit", memberUnit);
+  console.log("member affiliated", memberAffiliatedUnit);
+  
+  // const isLoadingParent = memberUnit.isLoading;
+  // const isLoadingChild = memberAffiliatedUnit.isLoading;
 
-  const treeUnitData = memberUnit.data;
+  const treeUnitData = [
+    
+  ]
 
   useEffect(() => {
     dispatch(memberActions.actions.getMemberUnit());
   }, [dispatch, memberActions]);
 
-  return <>{isLoading ? <Spin /> : <Tree treeData={treeUnitData} />}</>;
+  return <>{memberUnit.isLoading && memberAffiliatedUnit.isLoading ? <Spin /> : <Tree treeData={treeUnitData} />}</>;
 };
 
 export default UnitTree;

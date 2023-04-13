@@ -16,4 +16,5 @@ export const adminRoute = {
   MEMBER_DETAIL: "/admin/member-detail",
   MEMBER_UPDATED_LOG: "/admin/updated-log",
   APPROVE_REQUEST: "/admin/approve-request",
+  GENERAL_SCIENCE: "/admin/general-science"
 };

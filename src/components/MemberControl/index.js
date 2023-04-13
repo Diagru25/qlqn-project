@@ -13,8 +13,12 @@ const MemberControl = ({
   onSubmit,
   initialMember,
   verifyInfo,
+  field
 }) => {
-  // let disabled = false;
+  let disabled = false;
+  if (field === "science") {
+    disabled = true;
+  }
   const { handleSubmit, memberState, userFormError, handleUserFormChange } =
     useMemberControl(onSubmit, initialMember, verifyInfo);
 
@@ -22,11 +26,13 @@ const MemberControl = ({
     <div className={styles["be-member-info"]}>
       <Space direction="vertical" style={{ width: "100%" }}>
         <MemberBasic
+          disabled={disabled}
           userBasicFormValue={memberState.userBasicFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberCorporate
+          disabled={disabled}
           userCorporateFormValue={memberState.userCorporateFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
@@ -37,16 +43,18 @@ const MemberControl = ({
           handleUserFormChange={handleUserFormChange}
         />
         <MemberCyberWarfare
+          disabled={disabled}
           userCyberWarfareFormValue={memberState.userCyberWarfareFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
         <MemberOthers
+          disabled={disabled}
           userOthersFormValue={memberState.userOthersFormValue}
           errors={userFormError}
           handleUserFormChange={handleUserFormChange}
         />
-
+        
         <Affix offsetBottom={0}>
           <div className={styles["be-member-info__action"]}>
             {renderActions(handleSubmit)}

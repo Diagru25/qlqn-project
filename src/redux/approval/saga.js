@@ -1,12 +1,13 @@
+import { useState } from "react";
 import { fork, all, takeEvery, put, select } from "redux-saga/effects";
+import { isDeepEqual } from "../../helper/comparedObjects";
 import { showNotification } from "../../helper/showNotification";
 import approveApi from "../../services/apis/approveApi";
+import memberApi from "../../services/apis/memberAPI";
 import approvalActions from "./action";
 
 function* getApprovalList_saga(action) {
   try {
-    const params = action.payload;
-
     const res = yield approveApi.getApprovalList();
     const { items, page_size, page_index } = res.result;
 
@@ -45,6 +46,8 @@ function* updateApprovalList_saga(action) {
 
     const approvalId = params.approvalId;
 
+    // const fieldUpdate = params.fi
+
     if (approvalId) {
       const res = yield approveApi.updateApprovalRequest(approvalId);
 
@@ -57,7 +60,58 @@ function* updateApprovalList_saga(action) {
         );
       }
     }
-  } catch (error) {}
+  } catch (error) { }
+}
+
+function* deleteApprovalRequest_saga(action) {
+  try {
+    const params = action.payload;
+
+    const userId = params.userId;
+
+    const res = yield approveApi.deleteApprovalRequest(userId);
+
+    if (res.statusCode === 200) {
+      showNotification("success", "Xoa yeu cau phe duyet thanh cong!");
+    } 
+  } catch (error) {
+    showNotification("error", "Khong hoan thanh xoa yeu cau phe duyet!");
+  }
+}
+
+function* getDetailApprovalList_saga(action) {
+  try {
+    const params = action.payload;
+    const userId = params.userId;
+
+    const memberRes = yield memberApi.getMemberDetail(userId);
+
+    const memberDetail = memberRes.result.Record;
+
+    if (userId) {
+      const res = yield approveApi.getDetailApprovalList(userId);
+
+      const { user_info_value } = res.result;
+
+      const approvalValObj = JSON.parse(user_info_value)
+
+      yield put(approvalActions.actions.updateState({
+        detailApprovalList: {
+          approvalInfo: approvalValObj,
+          comparedInfo: memberDetail,
+          isLoading: false,
+        }
+      }))
+    }
+  } catch (error) {
+    yield put(approvalActions.actions.updateState({
+      detailApprovalList: {
+        approvalInfo: {},
+        compared: [],
+        isLoading: false,
+      }
+    }))
+  }
 }
 
 function* listen() {
@@ -69,6 +123,8 @@ function* listen() {
     approvalActions.types.UPDATE_APPROVAL_LIST,
     updateApprovalList_saga
   );
+  yield takeEvery(approvalActions.types.GET_DETAIL_APPROVAL_LIST, getDetailApprovalList_saga);
+  yield takeEvery(approvalActions.types.DELETE_APPROVAL_REQUEST, deleteApprovalRequest_saga);
 }
 
 export default function* approvalSaga() {

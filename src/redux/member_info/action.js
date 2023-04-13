@@ -6,6 +6,7 @@ const types = {
   GET_MEMBER_RANK: prefix + "GET_MEMBER_RANK",
   GET_MEMBER_DETAIL: prefix + "GET_MEMBER_DETAIL",
   GET_MEMBER_UNIT: prefix + "GET_MEMBER_UNIT",
+  // GET_MEMBER_AFFILIATED_UNIT: prefix + "GET_MEMBER_AFFILIATED_UNIT",
   GET_LIST_STATISTIC: prefix + "GET_LIST_STATISTIC",
   GET_FILTER_STATISTIC: prefix + "GET_FILTER_STATISTIC",
   GET_MEMBER_UPDATED_LOGS: prefix + "GET_MEMBER_UPDATED_LOGS",
@@ -51,6 +52,10 @@ const actions = {
       payload: {},
     };
   },
+
+  // getMemberAffiliatedUnit: () => {
+    
+  // },
 
   getMemberDetail: (memberId) => {
     return {

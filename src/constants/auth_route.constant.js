@@ -8,6 +8,7 @@ import manageLogRoute from "../pages/manage_log/route";
 import memberDetailRoute from "../pages/detail_member/route";
 import updatedLogRoute from "../pages/updated_log/route";
 import approveRequestRoute from "../pages/approve_member/route";
+import generalScienceRoute from "../pages/general_science/route";
 
 const route = [
   dashboardRoute,
@@ -20,6 +21,7 @@ const route = [
   memberDetailRoute,
   updatedLogRoute,
   approveRequestRoute,
+  generalScienceRoute,
 ];
 
 export default route;

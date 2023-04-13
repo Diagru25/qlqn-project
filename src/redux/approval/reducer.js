@@ -7,6 +7,12 @@ const initialState = {
     pageSize: 40,
     isLoading: false,
   },
+
+  detailApprovalList: {
+    approvalInfo: {},
+    compared: [],
+    isLoading: false,
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,12 +28,21 @@ const reducer = (state = initialState, action) => {
         },
       };
 
+    case approvalActions.types.GET_DETAIL_APPROVAL_LIST:
+      return {
+        ...state,
+        detailApprovalList: {
+          ...state.detailApprovalList,
+          isLoading: true,
+        }
+      }
+
     case approvalActions.types.UPDATE_STATE:
       return {
         ...state,
         ...payload.state,
       };
-
+    
     default:
       return {
         state,

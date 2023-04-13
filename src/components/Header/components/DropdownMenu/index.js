@@ -2,7 +2,6 @@ import { Dropdown, Menu, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { adminRoute, clientRoute } from "../../../../constants/route.constant";
 
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useActions from "../../../../redux/useActions";
@@ -10,8 +9,8 @@ import { replace } from "formik";
 
 import avatar from "../../../../assets/images/1239288.png";
 import styles from "./style.module.css";
-import userAPI from "../../../../services/apis/userAPI";
-import { showNotification } from "../../../../helper/showNotification";
+import { readLocalStorage } from "../../../../helper/localStorage";
+import { HOTEN } from "../../../../constants/auth.constant";
 
 const DropdownMenu = () => {
   const dispatch = useDispatch();
@@ -20,21 +19,21 @@ const DropdownMenu = () => {
   const { isLoggedIn } = useSelector((state) => state.authReducer);
   const { recover_data } = useSelector((state) => state.verifyReducer.verifyInfo);
 
-  const [hoTen, setHoTen] = useState("");
+  const hoTen = readLocalStorage(HOTEN);
+  // console.log(hoTen)
+  // const [hoTen, setHoTen] = useState("");
 
-  useEffect(() => {
-    getUserProfile();
-  }, [recover_data]);
+ 
 
-  const getUserProfile = async () => {
-    try {
-      const res = await userAPI.getUserProfile();
-      const { HoVaTen } = res.result.Record;
-      setHoTen(HoVaTen);
-    } catch (error) {
-      showNotification("error", "Lỗi hiển thị tên người dùng", "Yêu cầu kiểm tra lại kết nối mạng hoặc nhập thông tin người dùng")
-    }
-  };
+  // const getUserProfile = async () => {
+  //   try {
+  //     const res = await userAPI.getUserProfile();
+  //     const { HoVaTen } = res.result.Record;
+  //     setHoTen(HoVaTen);
+  //   } catch (error) {
+  //     showNotification("error", "Lỗi hiển thị tên người dùng", "Yêu cầu kiểm tra lại kết nối mạng hoặc nhập thông tin người dùng")
+  //   }
+  // };
 
   // const userProfile = useSelector((state) => state.userReducer.userProfile);
   const { authActions } = useActions();
@@ -42,12 +41,16 @@ const DropdownMenu = () => {
   const actions = {
     USER_INFO: "user-info",
     USER_LOG: "user-log",
+    GENERAL_SCIENCE: "general-science",
     LOGOUT: "logout",
   };
   const onClick = ({ key }) => {
     switch (key) {
       case actions.USER_INFO:
         navigate(adminRoute.USER_PROFILE);
+        break;
+      case actions.GENERAL_SCIENCE: 
+        navigate(adminRoute.GENERAL_SCIENCE);
         break;
       case actions.USER_LOG:
         navigate(adminRoute.USER_LOG);
@@ -69,6 +72,10 @@ const DropdownMenu = () => {
         {
           label: "Thông tin tài khoản",
           key: actions.USER_INFO,
+        },
+        {
+          label: "Ho so khoa hoc tong hop",
+          key: actions.GENERAL_SCIENCE,
         },
         {
           label: "Nhật ký người dùng",

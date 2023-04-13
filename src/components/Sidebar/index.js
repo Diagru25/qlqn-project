@@ -12,11 +12,13 @@ import { useNavigate } from "react-router-dom";
 import styles from "./style.module.css";
 import logo from "../../assets/images/icon.png";
 import { adminRoute } from "../../constants/route.constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import authActions from "../../redux/auth/action";
 import { useState } from "react";
 import UnitDrawer from "../UnitDrawer";
 import { usePermission } from "../../hooks/usePermission";
+import { readLocalStorage } from "../../helper/localStorage";
+import { INFO } from "../../constants/auth.constant";
 // import { usePermission } from "../../hooks/usePermission";
 
 const { Sider } = Layout;
@@ -27,9 +29,13 @@ const Sidebar = ({ collapsed }) => {
 
   const [openUnit, setOpenUnit] = useState(false);
   const [sizeUnit, setSizeUnit] = useState();
-  const isAdmin = usePermission();
 
-  console.log(isAdmin);
+  const info = readLocalStorage(INFO);
+
+  // const { userLoggedInfo } = useSelector((state) => state.authReducer);
+
+  // console.log(userLoggedInfo.chucvu.Viettat);
+  // console.log(isAdmin);
 
   const showDrawer = () => {
     setSizeUnit("large");
@@ -98,8 +104,8 @@ const Sidebar = ({ collapsed }) => {
                 navigate(adminRoute.PERMISSIONS);
               },
             },
-            isAdmin
-              ? {
+            info === "TP" || info === "TrL" || info === "CNCT" || info === "TrLKHTH"
+              ?{
                   key: "pheduyet",
                   icon: <CarryOutOutlined />,
                   label: "Phê duyệt",

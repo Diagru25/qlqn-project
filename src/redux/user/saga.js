@@ -6,6 +6,7 @@ import { showNotification } from "../../helper/showNotification";
 function* getUserProfile_saga(action) {
   try {
     const res = yield userAPI.getUserProfile();
+    // console.log("get user profile", res);
     const userProfile = res.result.Record;
 
     yield put(

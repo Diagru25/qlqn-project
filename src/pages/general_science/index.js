@@ -14,9 +14,8 @@ import useActions from "../../redux/useActions";
 import { makeMilitaryPdf } from "../../helper/web";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-const UserInfo = () => {
-  const navigate = useNavigate();
+const GeneralScience = () => {
+    const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { userActions } = useActions();
@@ -91,9 +90,9 @@ const UserInfo = () => {
         NganhQuanLy: userOthersFormValue.NganhQuanLy,
       };
 
-      // console.log("data", data);
+    //   console.log("data", data);
       setIsLoading(true);
-      const updatedUserInfo = await userAPI.updateUserProfile({ ...data }, "INFO");
+      const updatedUserInfo = await userAPI.updateUserProfile({ ...data }, "KH");
       
       setIsLoading(false);
       if (updatedUserInfo.statusCode === 200) {
@@ -141,13 +140,13 @@ const UserInfo = () => {
     <>
       <Row gutter={24} style={{ marginBottom: "15px" }}>
         <Col span={12}>
-          <Breadcrumb title="Hồ sơ người dùng" />
+          <Breadcrumb title="Ho so khoa hoc tong hop" />
         </Col>
       </Row>
       <Spin tip="Đang xử lý..." spinning={isLoading}>
         <div>
           <MemberControl
-            field="info"
+            field="science"
             isLoading={isLoading}
             verifyInfo={verifyInfo}
             renderActions={renderActions}
@@ -158,6 +157,6 @@ const UserInfo = () => {
       </Spin>
     </>
   );
-};
+}
 
-export default memo(UserInfo);
+export default memo(GeneralScience);

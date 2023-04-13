@@ -48,7 +48,15 @@ const initialState = {
   },
 
   memberUnit: {
-    data: [],
+    items: [],
+    page_index: 1,
+    page_size: 40,
+    isLoading: false,
+    total: 0,
+  },
+
+  memberAffiliatedUnit: {
+    items: [],
     page_index: 1,
     page_size: 40,
     isLoading: false,
