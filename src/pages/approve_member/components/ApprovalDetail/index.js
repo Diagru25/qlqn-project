@@ -9,16 +9,6 @@ const ApprovalDetail = () => {
 
     const { approvalInfo, comparedInfo } = detailApprovalList;
 
-    console.log(detailApprovalList);
-
-    // const _changedList = detailApprovalList?.compared?.map((item) => {
-    //     for (const key of Object.keys(detailApprovalList.approvalInfo)) {
-    //         if (key === item) {
-    //             console.log("1")
-    //         }
-    //     }
-    // })
-
     return <>
         {detailApprovalList?.approvalInfo && <>
             <Card style={{ marginBottom: 16 }}>

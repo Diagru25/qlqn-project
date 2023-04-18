@@ -10,22 +10,24 @@ import { showNotification } from "../../helper/showNotification";
 import ApprovalDetail from "./components/ApprovalDetail";
 
 const ApproveMember = () => {
-  let data = [];
-
-  const [openApprovalModal, setOpenApprovalModal] = useState(false);
+  const [approvalData, setApprovalData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [openApprovalModal, setOpenApprovalModal] = useState(false);
+
+  const dispatch = useDispatch();
+  const { approvalActions } = useActions();
+
   const [pagination, setPagination] = useState({
     pageSize: 10,
     total: 0,
     current: 1,
   });
 
-  const dispatch = useDispatch();
-  const { approvalActions } = useActions();
+  useEffect(() => {
+    dispatch(approvalActions.actions.getApprovalList());
+  }, [dispatch, approvalActions]);
 
-  const approvalList = useSelector(
-    (state) => state.approvalReducer.approvalList
-  );
+  const approvalList = useSelector((state) => state.approvalReducer.approvalList);
 
   if (approvalList?.total) {
     setPagination((prevState) => {
@@ -38,7 +40,7 @@ const ApproveMember = () => {
 
   const handlePageChange = async (pageIndex, pageSize) => {
     dispatch(approvalActions.actions.getApprovalList(pageIndex, pageSize));
-    setPagination((prevState) =>{
+    setPagination((prevState) => {
       return {
         ...prevState,
         current: pageIndex,
@@ -51,10 +53,6 @@ const ApproveMember = () => {
     setOpenApprovalModal(false);
   };
 
-  useEffect(() => {
-    dispatch(approvalActions.actions.getApprovalList());
-  }, [dispatch, approvalActions]);
-
   const columns = [
     {
       title: "STT",
@@ -62,9 +60,11 @@ const ApproveMember = () => {
       key: "index",
       //render: (name) => <a>{name}</a>,
       render: (_, record) => {
+
         return (
-          (approvalList.pageIndex - 1) * approvalList.pageSize + record.key
+          (pagination.current - 1) * pagination.pageSize + record.key
         );
+
       },
       width: 20,
     },
@@ -74,7 +74,6 @@ const ApproveMember = () => {
       key: "Tendaydu",
       //render: (name) => <a>{name}</a>,
       render: (_, record) => {
-        // console.log("record", record.Tendaydu);
         return record.Tendaydu;
       },
       width: 250,
@@ -140,7 +139,6 @@ const ApproveMember = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => {
-        // console.log(record);
         return (
           <>
             <Space size={6}>
@@ -159,7 +157,6 @@ const ApproveMember = () => {
                         "Phê duyệt hồ sơ quân nhân thành công."
                       );
                     }
-                    console.log("1");
                     dispatch(approvalActions.actions.getApprovalList());
                     setIsLoading(false);
                   }}
@@ -225,19 +222,19 @@ const ApproveMember = () => {
     },
   ];
 
-  if (approvalList?.items) {
-    data = approvalList?.items
-      ? approvalList?.items.map((item, index) => {
+  useEffect(() => {
+    if (approvalList) {
+      const data = approvalList?.items
+        ? approvalList?.items.map((item, index) => {
           return {
             ...item,
             key: index,
           };
         })
-      : [];
-  }
-
-  console.log("approval list items", approvalList?.items)
-  console.log("data approval", data);
+        : [];
+      setApprovalData(data);
+    }
+  }, [approvalList])
 
   return (
     <>
@@ -260,8 +257,8 @@ const ApproveMember = () => {
 
         <Table
           columns={columns}
-          dataSource={data}
-          pagination={{...pagination, onChange: handlePageChange}}
+          dataSource={approvalData}
+          pagination={{ ...pagination, onChange: handlePageChange }}
           loading={approvalList ? approvalList.isLoading : ""}
         />
       </Spin>

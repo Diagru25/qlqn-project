@@ -10,7 +10,6 @@ const types = {
 
 const actions = {
   getApprovalList: (page_index, page_size) => {
-    console.log("2");
     return {
       type: types.GET_APPROVAL_LIST,
       payload: {
