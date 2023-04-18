@@ -22,7 +22,7 @@ const ApprovalDetail = () => {
     return <>
         {detailApprovalList?.approvalInfo && <>
             <Card style={{ marginBottom: 16 }}>
-                <CardTitle title="Thông tin cơ bản" />
+                <CardTitle title="Thông tin cơ bản" subtitle="* Trường thông tin thay đổi là các trường được bôi đỏ" />
                 <Form
                     colon={false}
                     labelAlign={"right"}
@@ -107,7 +107,7 @@ const ApprovalDetail = () => {
                 </Form>
             </Card>
             <Card style={{ marginBottom: 16 }}>
-                <CardTitle title="Thông tin đoàn thể" />
+                <CardTitle title="Thông tin đoàn thể" subtitle="* Trường thông tin thay đổi là các trường được bôi đỏ" />
                 <Form
                     colon={false}
                     labelAlign={"right"}
@@ -144,7 +144,7 @@ const ApprovalDetail = () => {
                 </Form>
             </Card>
             <Card style={{ marginBottom: 16 }}>
-                <CardTitle title="Thông tin trình độ chuyên môn" />
+                <CardTitle title="Thông tin trình độ chuyên môn" subtitle="* Trường thông tin thay đổi là các trường được bôi đỏ" />
                 <Form
                     colon={false}
                     labelAlign={"right"}
@@ -184,7 +184,7 @@ const ApprovalDetail = () => {
                 </Form>
             </Card>
             <Card style={{ marginBottom: 16 }}>
-                <CardTitle title="Thông tin chuyên nghành tác chiến mạng" />
+                <CardTitle title="Thông tin chuyên nghành tác chiến mạng" subtitle="* Trường thông tin thay đổi là các trường được bôi đỏ" />
                 <Form
                     colon={false}
                     labelAlign={"right"}
@@ -221,7 +221,7 @@ const ApprovalDetail = () => {
                 </Form>
             </Card>
             <Card style={{ marginBottom: 16 }}>
-                <CardTitle title="Các thông tin khác" />
+                <CardTitle title="Các thông tin khác" subtitle="* Trường thông tin thay đổi là các trường được bôi đỏ" />
                 <Form
                     colon={false}
                     labelAlign={"right"}

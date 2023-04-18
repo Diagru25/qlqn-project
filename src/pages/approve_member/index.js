@@ -14,6 +14,11 @@ const ApproveMember = () => {
 
   const [openApprovalModal, setOpenApprovalModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [pagination, setPagination] = useState({
+    pageSize: 10,
+    total: 0,
+    current: 1,
+  });
 
   const dispatch = useDispatch();
   const { approvalActions } = useActions();
@@ -22,23 +27,29 @@ const ApproveMember = () => {
     (state) => state.approvalReducer.approvalList
   );
 
-  const handleCancelApprovalModal = () => {
-    setOpenApprovalModal(false);
+  if (approvalList?.total) {
+    setPagination((prevState) => {
+      return {
+        ...prevState,
+        total: approvalList.total,
+      };
+    });
   }
 
-  // const handleOkApprovalModal = async (instance) => {
-  //   console.log(instance);
-  //   setIsLoading(true);
-  //   const res = await approveApi.updateApprovalRequest(record.Id);
-  //   if (res.statusCode === 200) {
-  //     showNotification(
-  //       "success",
-  //       "Phê duyệt hồ sơ quân nhân thành công."
-  //     );
-  //   }
-  //   dispatch(approvalActions.actions.getApprovalList());
-  //   setIsLoading(false);
-  // }
+  const handlePageChange = async (pageIndex, pageSize) => {
+    dispatch(approvalActions.actions.getApprovalList(pageIndex, pageSize));
+    setPagination((prevState) =>{
+      return {
+        ...prevState,
+        current: pageIndex,
+        pageSize: pageSize
+      }
+    })
+  }
+
+  const handleCancelApprovalModal = () => {
+    setOpenApprovalModal(false);
+  };
 
   useEffect(() => {
     dispatch(approvalActions.actions.getApprovalList());
@@ -95,18 +106,31 @@ const ApproveMember = () => {
       render: (_, record) => {
         if (record.capnhat_lylich === true) {
           if (record.tp_confirm === true) {
-            return <div>Yeu cau cap nhap ho so quan nhan (Truong phong da xet duyet).</div>
+            return (
+              <div>
+                Yêu cầu cập nhật hồ sơ quân nhân (Trưởng phòng đã xét duyệt).
+              </div>
+            );
           }
           if (record.tl_confirm === true) {
-            return <div>Yeu cau cap nhap ho so quan nhan (Tro ly phong chinh tri da xet duyet).</div>
+            return (
+              <div>
+                Yêu cầu cập nhật hồ sơ quân nhân (Trợ lý phòng chính trị đã xét
+                duyệt).
+              </div>
+            );
           }
-          return <div>Yeu cau cap nhap ho so quan nhan.</div>
+          return <div>Yêu cầu cập nhật hồ sơ quân nhân.</div>;
         }
         if (record.capnhat_khoahoc === true) {
           if (record.tp_confirm === true) {
-            return <div>Yeu cau cap nhap ly lich khoa hoc (Truong phong da xet duyet).</div>
+            return (
+              <div>
+                Yêu cầu cập nhật lý lịch khoa học (Trưởng phòng đã xét duyệt).
+              </div>
+            );
           }
-          return <div>Yeu cau cap nhap ly lich khoa hoc.</div>
+          return <div>Yêu cầu cập nhật lý lịch khoa học.</div>;
         }
       },
       width: 700,
@@ -117,98 +141,114 @@ const ApproveMember = () => {
       key: "action",
       render: (_, record) => {
         // console.log(record);
-        return (<>
-          <Space size={6}>
-            <Tooltip title="Đồng ý" key="approve">
-              <Button
-                shape="circle"
-                type="link"
-                onClick={async () => {
-                  setIsLoading(true);
-                  const res = await approveApi.updateApprovalRequest(record.Id);
-                  if (res.statusCode === 200) {
-                    showNotification(
-                      "success",
-                      "Phê duyệt hồ sơ quân nhân thành công."
+        return (
+          <>
+            <Space size={6}>
+              <Tooltip title="Đồng ý" key="approve">
+                <Button
+                  shape="circle"
+                  type="link"
+                  onClick={async () => {
+                    setIsLoading(true);
+                    const res = await approveApi.updateApprovalRequest(
+                      record.Id
                     );
-                  }
-                  console.log("1");
-                  dispatch(approvalActions.actions.getApprovalList());
-                  setIsLoading(false);
-                }}
-              >
-                <CheckOutlined
-                  style={{
-                    fontSize: 16,
-                    padding: 5,
-                    border: "1px solid",
-                    borderRadius: 5,
-                    color: "green",
+                    if (res.statusCode === 200) {
+                      showNotification(
+                        "success",
+                        "Phê duyệt hồ sơ quân nhân thành công."
+                      );
+                    }
+                    console.log("1");
+                    dispatch(approvalActions.actions.getApprovalList());
+                    setIsLoading(false);
                   }}
-                />
-              </Button>
-            </Tooltip>
-            <Tooltip title="Huy bo" key="reject">
-              <Button
-                shape="circle"
-                type="link"
-                onClick={() => {
-                  dispatch(approvalActions.actions.deleteApprovalRequest(record.Id));
-                }}
-              >
-                <CloseOutlined
-                  style={{
-                    fontSize: 16,
-                    padding: 5,
-                    border: "1px solid",
-                    borderRadius: 5,
-                    color: "red"
+                >
+                  <CheckOutlined
+                    style={{
+                      fontSize: 16,
+                      padding: 5,
+                      border: "1px solid",
+                      borderRadius: 5,
+                      color: "green",
+                    }}
+                  />
+                </Button>
+              </Tooltip>
+              <Tooltip title="Hủy bỏ" key="reject">
+                <Button
+                  shape="circle"
+                  type="link"
+                  onClick={() => {
+                    dispatch(
+                      approvalActions.actions.deleteApprovalRequest(record.Id)
+                    );
                   }}
-                />
-              </Button>
-            </Tooltip>
-            <Tooltip title="Chi tiet" key="detail">
-              <Button
-                shape="circle"
-                type="link"
-                onClick={() => {
-                  dispatch(approvalActions.actions.getDetailApprovalList(record.Id));
-                  setOpenApprovalModal(true);
-                }}
-              >
-                <EyeOutlined
-                  style={{
-                    fontSize: 16,
-                    padding: 5,
-                    border: "1px solid",
-                    borderRadius: 5,
+                >
+                  <CloseOutlined
+                    style={{
+                      fontSize: 16,
+                      padding: 5,
+                      border: "1px solid",
+                      borderRadius: 5,
+                      color: "red",
+                    }}
+                  />
+                </Button>
+              </Tooltip>
+              <Tooltip title="Chi tiết" key="detail">
+                <Button
+                  shape="circle"
+                  type="link"
+                  onClick={() => {
+                    dispatch(
+                      approvalActions.actions.getDetailApprovalList(record.Id)
+                    );
+                    setOpenApprovalModal(true);
                   }}
-                />
-              </Button>
-            </Tooltip>
-          </Space>
-
-        </>
+                >
+                  <EyeOutlined
+                    style={{
+                      fontSize: 16,
+                      padding: 5,
+                      border: "1px solid",
+                      borderRadius: 5,
+                    }}
+                  />
+                </Button>
+              </Tooltip>
+            </Space>
+          </>
         );
       },
       width: 200,
     },
   ];
 
-  if (approvalList) {
-    data = approvalList.items
-      ? approvalList.items.map((item, index) => {
-        return {
-          ...item,
-          key: index,
-        };
-      })
+  if (approvalList?.items) {
+    data = approvalList?.items
+      ? approvalList?.items.map((item, index) => {
+          return {
+            ...item,
+            key: index,
+          };
+        })
       : [];
   }
 
+  console.log("approval list items", approvalList?.items)
+  console.log("data approval", data);
+
   return (
     <>
-      <Modal title="Chi tiet yeu cau phe duyet" open={openApprovalModal} onCancel={handleCancelApprovalModal} width={1000} bodyStyle={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)' }} okButtonProps={{ style: {display: "none"} }}>
+      <Modal
+        title="Chi tiết yêu cầu phê duyệt"
+        open={openApprovalModal}
+        onCancel={handleCancelApprovalModal}
+        width={1000}
+        bodyStyle={{ overflowY: "auto", maxHeight: "calc(100vh - 300px)" }}
+        okButtonProps={{ style: { display: "none" } }}
+      >
         <ApprovalDetail />
       </Modal>
       <Spin tip="Đang xử lý..." spinning={isLoading}>
@@ -221,6 +261,7 @@ const ApproveMember = () => {
         <Table
           columns={columns}
           dataSource={data}
+          pagination={{...pagination, onChange: handlePageChange}}
           loading={approvalList ? approvalList.isLoading : ""}
         />
       </Spin>

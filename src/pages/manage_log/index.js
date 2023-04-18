@@ -6,8 +6,6 @@ import Breadcrumb from "../../components/Breadcrumb";
 import { showNotification } from "../../helper/showNotification";
 
 const ManageLog = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
   const [systemLog, setSystemLog] = useState({
     page_size: 20,
     page_index: 1,
@@ -28,8 +26,6 @@ const ManageLog = () => {
     try {
       const res = await authApi.getSystemLog(pageIndex, pageSize);
 
-      console.log("system log", res)
-
       const { items, total, page_index, page_size } = res.result;
       setSystemLog((state) => {
         return {
@@ -39,7 +35,6 @@ const ManageLog = () => {
           page_size: page_size,
         };
       });
-      setIsLoading(false);
       setPagination((state) => {
         return {
           ...state,
@@ -47,7 +42,6 @@ const ManageLog = () => {
         };
       });
     } catch (error) {
-      console.log(error);
       if (error.status === 403) {
         showNotification(
           "error",
@@ -55,7 +49,6 @@ const ManageLog = () => {
           "Bạn không có quyền xem nhật ký quản lý!"
         );
       }
-      setIsLoading(false);
     }
   };
 

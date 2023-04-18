@@ -17,25 +17,10 @@ const DropdownMenu = () => {
   const navigate = useNavigate();
 
   const { isLoggedIn } = useSelector((state) => state.authReducer);
-  const { recover_data } = useSelector((state) => state.verifyReducer.verifyInfo);
+  // const { recover_data } = useSelector((state) => state.verifyReducer.verifyInfo);
 
   const hoTen = readLocalStorage(HOTEN);
-  // console.log(hoTen)
-  // const [hoTen, setHoTen] = useState("");
 
- 
-
-  // const getUserProfile = async () => {
-  //   try {
-  //     const res = await userAPI.getUserProfile();
-  //     const { HoVaTen } = res.result.Record;
-  //     setHoTen(HoVaTen);
-  //   } catch (error) {
-  //     showNotification("error", "Lỗi hiển thị tên người dùng", "Yêu cầu kiểm tra lại kết nối mạng hoặc nhập thông tin người dùng")
-  //   }
-  // };
-
-  // const userProfile = useSelector((state) => state.userReducer.userProfile);
   const { authActions } = useActions();
 
   const actions = {
@@ -74,7 +59,7 @@ const DropdownMenu = () => {
           key: actions.USER_INFO,
         },
         {
-          label: "Ho so khoa hoc tong hop",
+          label: "Hồ sơ khoa học tổng hợp",
           key: actions.GENERAL_SCIENCE,
         },
         {

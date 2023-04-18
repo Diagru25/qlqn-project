@@ -9,10 +9,14 @@ const types = {
 };
 
 const actions = {
-  getApprovalList: () => {
+  getApprovalList: (page_index, page_size) => {
+    console.log("2");
     return {
       type: types.GET_APPROVAL_LIST,
-      payload: {},
+      payload: {
+        page_index,
+        page_size,
+      },
     };
   },
 

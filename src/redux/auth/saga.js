@@ -1,4 +1,3 @@
-import { IN } from "pdfmake/build/pdfmake";
 import { fork, all, takeEvery, put } from "redux-saga/effects";
 import { ACCESS_TOKEN, HOTEN, INFO } from "../../constants/auth.constant";
 import {

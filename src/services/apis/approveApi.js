@@ -1,10 +1,14 @@
 import { request } from "./baseRequest";
 
 const approveApi = {
-  getApprovalList: () => {
+  getApprovalList: (page_index, page_size) => {
     return request({
       url: `/admin/v1/canbo/list/Approvals`,
       method: "GET",
+      params: {
+        page_index: page_index,
+        page_size: page_size,
+      },
       isAuthRequest: true,
     });
   },

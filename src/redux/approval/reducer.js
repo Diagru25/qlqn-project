@@ -3,8 +3,9 @@ import approvalActions from "./action";
 const initialState = {
   approvalList: {
     items: [],
-    pageIndex: 1,
-    pageSize: 40,
+    page_index: 1,
+    page_size: 40,
+    total: 0,
     isLoading: false,
   },
 

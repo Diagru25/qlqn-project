@@ -146,47 +146,51 @@ function* getMemberUnit_saga(action) {
 
     const itemsParent = items;
 
-    // console.log(itemsParent);
+    // console.log("items parent", itemsParent);
 
     yield put(memberActions.actions.updateState({
       memberUnit: {
         items: itemsParent,
         page_index: page_index,
         page_size: page_size,
-        
         isLoading: false,
         total: total,
       }
     }))
 
     if (itemsParent) {
+      let itemChildArr = []
+
       for (let i = 0; i < itemsParent.length; i++) {
+        // console.log(itemsParent[i])
         const childUnitRes = yield memberApi.getMemberAffiliatedUnit(
           itemsParent[i].Id
         );
         // console.log("child unit", childUnitRes);
-        const { items, page_index, page_size, total } = childUnitRes.result;
+        const { items } = childUnitRes.result;
         const itemsChild = items;
 
-        yield put(memberActions.actions.updateState({
-          memberAffiliatedUnit: {
-            items: itemsChild,
-            page_index: page_index,
-            page_size: page_size,
-            isLoading: false,
-            total: total
-          }
-        }))
+        itemChildArr.push(itemsChild);
 
-        
+        // itemsParent[i].children = itemsChild;
+
+        // console.og("items child", itemsParent[i].children);
+
+
         // const { Id, Ten } = items[i];
         // const { items, page_index, page_size } = childUnitRes.result;
 
       }
+      yield put(memberActions.actions.updateState({
+        memberAffiliatedUnit: {
+          items: itemChildArr,
+        }
+      }))
     }
+
   } catch (error) {
     yield memberActions.actions.updateState({
-      memberAffiliatedUnit: {
+      memberUnit: {
         items: [],
         page_index: 1,
         page_size: 40,
@@ -196,10 +200,6 @@ function* getMemberUnit_saga(action) {
 
       memberAffiliatedUnit: {
         items: [],
-        page_index: 1,
-        page_size: 40,
-        isLoading: false,
-        total: 0,
       }
     });
   }
