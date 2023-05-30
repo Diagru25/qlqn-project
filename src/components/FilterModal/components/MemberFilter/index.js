@@ -16,6 +16,7 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
   );
   const memberUnit = useSelector((state) => state.memberListReducer.memberUnit);
 
+
   const handleStatisticClear = () => {
     resetForm();
   };
@@ -82,9 +83,9 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                     : handleUpdateStatistic({ DonVi: "" });
                 }}
               >
-                {memberUnit.data.map((unit) => (
-                  <Select.Option key={unit.key} value={unit.title}>
-                    {unit.title}
+                {memberUnit?.items?.map((unit) => (
+                  <Select.Option key={unit.Id} value={unit.Ten}>
+                    {unit.Ten}
                   </Select.Option>
                 ))}
               </Select>
@@ -125,8 +126,8 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({
-                        TrinhDoNgoaiNgu: encodeURI(value),
-                      })
+                      TrinhDoNgoaiNgu: encodeURI(value),
+                    })
                     : handleUpdateStatistic({ TrinhDoNgoaiNgu: "" });
                 }}
               >
@@ -261,8 +262,8 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({
-                        ChungChiDaoTao: encodeURI(value),
-                      })
+                      ChungChiDaoTao: encodeURI(value),
+                    })
                     : handleUpdateStatistic({ ChungChiDaoTao: "" });
                 }}
               >
@@ -315,8 +316,8 @@ const MemberFilter = ({ statisticFormik, handleUpdateStatistic }) => {
                 onChange={(value) => {
                   value
                     ? handleUpdateStatistic({
-                        LoaiHinhDaoTao: encodeURI(value),
-                      })
+                      LoaiHinhDaoTao: encodeURI(value),
+                    })
                     : handleUpdateStatistic({ LoaiHinhDaoTao: "" });
                 }}
               >
